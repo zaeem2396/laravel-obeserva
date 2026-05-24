@@ -1,0 +1,20 @@
+{
+    "name": "obeserva/core",
+    "description": "Low-overhead instrumentation runtime for Laravel observability",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^8.3",
+        "obeserva/contracts": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Obeserva\\Core\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
