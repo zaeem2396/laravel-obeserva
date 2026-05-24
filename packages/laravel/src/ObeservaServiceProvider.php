@@ -18,6 +18,7 @@ use Obeserva\Laravel\Http\TraceRequestMiddleware;
 
 final class ObeservaServiceProvider extends ServiceProvider
 {
+    #[\Override]
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/obeserva.php', 'obeserva');
@@ -34,9 +35,7 @@ final class ObeservaServiceProvider extends ServiceProvider
                 : new ProbabilitySampler($rate);
         });
 
-        $this->app->singleton(TracerInterface::class, function (Application $app): TracerInterface {
-            return new Tracer($app->make(SamplerInterface::class));
-        });
+        $this->app->singleton(TracerInterface::class, fn (Application $app): TracerInterface => new Tracer($app->make(SamplerInterface::class)));
     }
 
     public function boot(): void

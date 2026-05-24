@@ -11,10 +11,10 @@ use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Core\Span\NoopSpan;
 use Obeserva\Core\Span\Span;
 
-final class Tracer implements TracerInterface
+final readonly class Tracer implements TracerInterface
 {
     public function __construct(
-        private readonly SamplerInterface $sampler,
+        private SamplerInterface $sampler,
     ) {}
 
     public function startSpan(string $name, SpanKind $kind = SpanKind::Internal): SpanInterface

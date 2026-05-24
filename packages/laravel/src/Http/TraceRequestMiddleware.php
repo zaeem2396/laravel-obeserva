@@ -12,11 +12,11 @@ use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Contracts\Trace\TraceContext;
 use Symfony\Component\HttpFoundation\Response;
 
-final class TraceRequestMiddleware
+final readonly class TraceRequestMiddleware
 {
     public function __construct(
-        private readonly TracerInterface $tracer,
-        private readonly ContextStorageInterface $contextStorage,
+        private TracerInterface $tracer,
+        private ContextStorageInterface $contextStorage,
     ) {}
 
     public function handle(Request $request, Closure $next): Response

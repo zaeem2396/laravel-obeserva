@@ -12,10 +12,10 @@ use Obeserva\Core\Tracer as CoreTracer;
 /**
  * Scout APM adapter — translates Obeserva spans into Scout transactions.
  */
-final class ScoutTracer implements TracerInterface
+final readonly class ScoutTracer implements TracerInterface
 {
     public function __construct(
-        private readonly CoreTracer $coreTracer,
+        private CoreTracer $coreTracer,
     ) {}
 
     public function startSpan(string $name, SpanKind $kind = SpanKind::Internal): SpanInterface
