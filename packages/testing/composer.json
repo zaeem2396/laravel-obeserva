@@ -1,5 +1,6 @@
 {
     "name": "obeserva/testing",
+    "version": "0.1.0",
     "description": "Testing utilities, fake tracers, and propagation assertions for Obeserva",
     "license": "MIT",
     "type": "library",

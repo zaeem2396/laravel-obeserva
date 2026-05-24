@@ -1,5 +1,6 @@
 {
     "name": "scout/laravel",
+    "version": "0.1.0",
     "description": "Laravel-native observability instrumentation for Obeserva",
     "license": "MIT",
     "type": "library",

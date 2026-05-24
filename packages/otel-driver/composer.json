@@ -1,5 +1,6 @@
 {
     "name": "obeserva/otel-driver",
+    "version": "0.1.0",
     "description": "OpenTelemetry exporter driver for Obeserva instrumentation",
     "license": "MIT",
     "type": "library",
