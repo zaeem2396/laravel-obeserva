@@ -1,0 +1,40 @@
+name: Package Install Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  fresh-install:
+    name: Fresh Laravel Install (Laravel ${{ matrix.laravel }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        laravel: ['11.*', '12.*', '13.*']
+        php: ['8.3', '8.4', '8.5']
+        exclude:
+          - laravel: '11.*'
+            php: '8.5'
+          - laravel: '13.*'
+            php: '8.3'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Create fresh Laravel app
+        run: |
+          composer create-project laravel/laravel test-app "${{ matrix.laravel }}" --prefer-dist --no-interaction
+          cd test-app
+          composer config repositories.obeserva path "../packages/*"
+          composer require scout/laravel:@dev --no-interaction
+          php artisan vendor:publish --tag=obeserva-config --no-interaction
+          php artisan about

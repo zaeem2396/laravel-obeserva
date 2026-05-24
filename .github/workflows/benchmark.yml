@@ -1,0 +1,43 @@
+name: Benchmark
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Instrumentation Overhead
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Run benchmark placeholder
+        run: |
+          echo "Benchmark suite scaffold — full benchmarks planned for v0.7.1"
+          php -r "
+            require 'vendor/autoload.php';
+            use Obeserva\Core\Sampling\AlwaysOnSampler;
+            use Obeserva\Core\Tracer;
+            use Obeserva\Contracts\Span\SpanKind;
+            \$tracer = new Tracer(new AlwaysOnSampler);
+            \$start = hrtime(true);
+            for (\$i = 0; \$i < 10000; \$i++) {
+                \$span = \$tracer->startSpan('bench', SpanKind::Internal);
+                \$span->end();
+            }
+            \$elapsed = (hrtime(true) - \$start) / 1e6;
+            echo sprintf('10k spans: %.2f ms (%.4f ms/span)', \$elapsed, \$elapsed / 10000);
+          "
