@@ -1,0 +1,21 @@
+{
+    "name": "obeserva/scout-driver",
+    "description": "Scout APM driver adapter for Obeserva instrumentation",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^8.3",
+        "obeserva/contracts": "@dev",
+        "obeserva/core": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Obeserva\\ScoutDriver\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
