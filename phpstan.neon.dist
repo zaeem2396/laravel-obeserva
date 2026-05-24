@@ -1,0 +1,11 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: max
+    paths:
+        - packages
+    excludePaths:
+        - packages/*/tests
+        - packages/laravel/config
+    reportUnmatchedIgnoredErrors: true

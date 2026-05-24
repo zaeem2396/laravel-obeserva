@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         failOnRisky="true"
+         failOnWarning="true">
+    <testsuites>
+        <testsuite name="Contracts">
+            <directory>packages/contracts/tests</directory>
+        </testsuite>
+        <testsuite name="Core">
+            <directory>packages/core/tests</directory>
+        </testsuite>
+        <testsuite name="Laravel">
+            <directory>packages/laravel/tests</directory>
+        </testsuite>
+        <testsuite name="Testing">
+            <directory>packages/testing/tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">packages/contracts/src</directory>
+            <directory suffix=".php">packages/core/src</directory>
+            <directory suffix=".php">packages/laravel/src</directory>
+            <directory suffix=".php">packages/scout-driver/src</directory>
+            <directory suffix=".php">packages/otel-driver/src</directory>
+            <directory suffix=".php">packages/testing/src</directory>
+        </include>
+    </source>
+</phpunit>
