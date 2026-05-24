@@ -18,7 +18,7 @@ jobs:
         with:
           php-version: '8.4'
           coverage: none
-          tools: composer:v2, composer-normalize
+          tools: composer:v2
 
       - name: Validate root composer.json
         run: composer validate --strict
@@ -27,7 +27,7 @@ jobs:
         run: |
           for pkg in packages/*/composer.json; do
             echo "Validating $pkg"
-            composer validate --strict --file="$pkg"
+            composer validate --strict "$pkg"
           done
 
       - name: Install and verify lock consistency

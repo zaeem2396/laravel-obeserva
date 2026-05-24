@@ -19,11 +19,13 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          coverage: xdebug
+          coverage: pcov
           tools: composer:v2
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
 
       - name: Run Infection
-        run: composer infection
+        env:
+          XDEBUG_MODE: coverage
+        run: vendor/bin/infection --threads=4 --ignore-msi-with-no-mutations --min-msi=0 --min-covered-msi=0
