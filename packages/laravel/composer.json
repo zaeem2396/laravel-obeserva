@@ -1,0 +1,40 @@
+{
+    "name": "scout/laravel",
+    "description": "Laravel-native observability instrumentation for Obeserva",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "observability",
+        "tracing",
+        "apm",
+        "opentelemetry"
+    ],
+    "require": {
+        "php": "^8.3",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "obeserva/contracts": "@dev",
+        "obeserva/core": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Obeserva\\Laravel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Obeserva\\Laravel\\ObeservaServiceProvider"
+            ],
+            "aliases": {
+                "Obeserva": "Obeserva\\Laravel\\Facades\\Obeserva"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
