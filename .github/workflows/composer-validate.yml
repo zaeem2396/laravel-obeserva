@@ -1,0 +1,34 @@
+name: Composer Validate
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  validate:
+    name: Dependency Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2, composer-normalize
+
+      - name: Validate root composer.json
+        run: composer validate --strict
+
+      - name: Validate package composer files
+        run: |
+          for pkg in packages/*/composer.json; do
+            echo "Validating $pkg"
+            composer validate --strict --file="$pkg"
+          done
+
+      - name: Install and verify lock consistency
+        run: composer install --prefer-dist --no-interaction
