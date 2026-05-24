@@ -1,0 +1,64 @@
+{
+    "name": "obeserva/monorepo",
+    "description": "Laravel-native observability and instrumentation runtime (monorepo)",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.3"
+    },
+    "require-dev": {
+        "infection/infection": "^0.29",
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.21",
+        "obeserva/contracts": "@dev",
+        "obeserva/core": "@dev",
+        "obeserva/otel-driver": "@dev",
+        "obeserva/scout-driver": "@dev",
+        "obeserva/testing": "@dev",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^11.5",
+        "rector/rector": "^2.0",
+        "scout/laravel": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Obeserva\\Contracts\\": "packages/contracts/src/",
+            "Obeserva\\Core\\": "packages/core/src/",
+            "Obeserva\\Laravel\\": "packages/laravel/src/",
+            "Obeserva\\ScoutDriver\\": "packages/scout-driver/src/",
+            "Obeserva\\OtelDriver\\": "packages/otel-driver/src/",
+            "Obeserva\\Testing\\": "packages/testing/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Obeserva\\Contracts\\Tests\\": "packages/contracts/tests/",
+            "Obeserva\\Core\\Tests\\": "packages/core/tests/",
+            "Obeserva\\Laravel\\Tests\\": "packages/laravel/tests/",
+            "Obeserva\\ScoutDriver\\Tests\\": "packages/scout-driver/tests/",
+            "Obeserva\\OtelDriver\\Tests\\": "packages/otel-driver/tests/",
+            "Obeserva\\Testing\\Tests\\": "packages/testing/tests/"
+        }
+    },
+    "repositories": [
+        { "type": "path", "url": "packages/*", "options": { "symlink": true } }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-clover coverage.xml",
+        "analyse": "phpstan analyse --memory-limit=512M",
+        "format": "pint",
+        "format:check": "pint --test",
+        "infection": "infection --threads=4",
+        "rector": "rector process",
+        "validate:deps": "composer validate --strict && composer normalize --dry-run 2>/dev/null || composer validate --strict"
+    }
+}
