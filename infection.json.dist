@@ -10,6 +10,5 @@
         "text": "infection.log"
     },
     "minMsi": 50,
-    "minCoveredMsi": 60,
-    "threads": 4
+    "minCoveredMsi": 60
 }

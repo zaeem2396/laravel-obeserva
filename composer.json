@@ -53,12 +53,25 @@
     },
     "scripts": {
         "test": "phpunit",
-        "test:coverage": "phpunit --coverage-clover coverage.xml",
+        "test:coverage": [
+            "@php scripts/require-coverage-driver.php",
+            "phpunit --coverage-clover coverage.xml"
+        ],
         "analyse": "phpstan analyse --memory-limit=512M",
         "format": "pint",
         "format:check": "pint --test",
         "infection": "infection --threads=4",
         "rector": "rector process",
-        "validate:deps": "composer validate --strict && composer normalize --dry-run 2>/dev/null || composer validate --strict"
+        "rector:check": "rector process --dry-run",
+        "validate:deps": "composer validate --strict && composer normalize --dry-run 2>/dev/null || composer validate --strict",
+        "pre-push": [
+            "@test",
+            "@test:coverage",
+            "@analyse",
+            "@format:check",
+            "@rector:check",
+            "@infection",
+            "@validate:deps"
+        ]
     }
 }
