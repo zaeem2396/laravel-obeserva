@@ -1,0 +1,17 @@
+/vendor/
+/node_modules/
+.phpunit.cache/
+.phpunit.result.cache/
+/build/
+/coverage/
+/infection.log
+/.phpunit.cache
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.phpactor.json
+/phpstan-baseline.neon
+/reports/
+ROADMAP.md
