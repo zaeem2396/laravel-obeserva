@@ -6,10 +6,10 @@ namespace Obeserva\Core\Sampling;
 
 use Obeserva\Contracts\Driver\SamplerInterface;
 
-final class ProbabilitySampler implements SamplerInterface
+final readonly class ProbabilitySampler implements SamplerInterface
 {
     public function __construct(
-        private readonly float $probability = 1.0,
+        private float $probability = 1.0,
     ) {}
 
     public function shouldSample(?string $traceId = null): bool
