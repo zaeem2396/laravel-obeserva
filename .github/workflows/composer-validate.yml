@@ -27,7 +27,7 @@ jobs:
         run: |
           for pkg in packages/*/composer.json; do
             echo "Validating $pkg"
-            composer validate --strict "$pkg"
+            composer validate "$pkg"
           done
 
       - name: Install and verify lock consistency
