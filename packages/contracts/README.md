@@ -19,7 +19,7 @@ This package is typically installed transitively via `scout/laravel`.
 
 ## Version
 
-**0.3.0** — Stable contracts for span lifecycle, trace context, and driver interfaces.
+**0.3.1** — Stable contracts for span lifecycle, trace context, and driver interfaces (monorepo release; no API changes in this patch).
 
 ## License
 

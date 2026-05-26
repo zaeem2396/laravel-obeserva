@@ -32,6 +32,16 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and path-repo
 - PHP 8.3, 8.4, or 8.5
 - Laravel 11, 12, or 13 (for `scout/laravel`)
 
+## Instrumentation (v0.3.1)
+
+| Area | What you get |
+|------|----------------|
+| HTTP | Request spans, route metadata, pipeline timing, exception correlation |
+| Database | `db.*` child spans, SQL sanitization, N+1 pattern detection |
+| Queue | W3C trace propagation in payloads, `queue.process:*` consumer spans, failed-job correlation |
+
+Horizon-specific worker tracing is planned for **v0.4.0**.
+
 ## Documentation
 
 | Document | Description |

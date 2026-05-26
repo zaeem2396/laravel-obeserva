@@ -19,7 +19,7 @@ Typically installed via `scout/laravel`.
 
 ## Version
 
-**0.3.0** — Span lifecycle engine with nested tracing and flush buffer.
+**0.3.1** — Span lifecycle engine with nested tracing and flush buffer (monorepo release; no API changes in this patch).
 
 ## License
 
