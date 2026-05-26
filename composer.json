@@ -63,7 +63,19 @@
         "infection": "infection --threads=4",
         "rector": "rector process",
         "rector:check": "rector process --dry-run",
-        "validate:deps": "composer validate --strict && composer normalize --dry-run 2>/dev/null || composer validate --strict",
+        "validate:deps": [
+            "composer validate --strict",
+            "@php scripts/validate-package-boundaries.php"
+        ],
+        "validate:packages": "bash -c 'for pkg in packages/*/composer.json; do composer validate \"$pkg\" || exit 1; done'",
+        "ci": [
+            "@test",
+            "@analyse",
+            "@format:check",
+            "@rector:check",
+            "@validate:deps",
+            "@validate:packages"
+        ],
         "pre-push": [
             "@test",
             "@test:coverage",

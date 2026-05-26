@@ -20,15 +20,11 @@ jobs:
           coverage: none
           tools: composer:v2
 
-      - name: Validate root composer.json
-        run: composer validate --strict
+      - name: Validate dependencies and package boundaries
+        run: composer validate:deps
 
       - name: Validate package composer files
-        run: |
-          for pkg in packages/*/composer.json; do
-            echo "Validating $pkg"
-            composer validate "$pkg"
-          done
+        run: composer validate:packages
 
       - name: Install and verify lock consistency
         run: composer install --prefer-dist --no-interaction
