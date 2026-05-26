@@ -41,7 +41,7 @@ Releases are cut manually from `release/vX.Y.Z` branches. See [RELEASE.md](RELEA
 
 ## Planned pipelines (post v0.3.1)
 
-- Horizon worker tests (dedicated CI job; runtime code in v0.4.0)
+- Horizon worker tests (dedicated Redis CI job; unit tests shipped `v0.4.0`)
 - Octane / RoadRunner tests
 - Docker integration (Redis, MySQL, Horizon)
 - OpenTelemetry semantic convention compliance
