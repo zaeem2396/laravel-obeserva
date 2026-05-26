@@ -7,11 +7,15 @@ namespace Obeserva\Laravel;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Obeserva\Laravel\Database\NPlusOneDetector;
+use Obeserva\Laravel\Database\QueryCounter;
+use Obeserva\Laravel\Database\QuerySanitizer;
 use Obeserva\Contracts\Driver\ActiveSpanStorageInterface;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\SamplerInterface;
@@ -24,8 +28,10 @@ use Obeserva\Laravel\Http\Middleware\TraceMiddlewareTiming;
 use Obeserva\Laravel\Http\RequestSpanEnricher;
 use Obeserva\Laravel\Http\TraceRequestMiddleware;
 use Obeserva\Laravel\Listeners\FlushTracerOnTerminate;
+use Obeserva\Laravel\Listeners\NPlusOneDetectionListener;
 use Obeserva\Laravel\Listeners\ReportExceptionListener;
 use Obeserva\Laravel\Listeners\RouteMatchedListener;
+use Obeserva\Laravel\Listeners\TraceQueryListener;
 
 final class ObeservaServiceProvider extends ServiceProvider
 {
@@ -35,6 +41,10 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/obeserva.php', 'obeserva');
 
         $this->app->singleton(RequestSpanEnricher::class);
+        $this->app->singleton(QuerySanitizer::class);
+        $this->app->singleton(QueryCounter::class);
+        $this->app->singleton(NPlusOneDetector::class);
+        $this->app->singleton(NPlusOneDetectionListener::class);
         $this->app->singleton(ContextManager::class);
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
@@ -72,8 +82,16 @@ final class ObeservaServiceProvider extends ServiceProvider
         ], 'obeserva-config');
 
         $this->registerHttpInstrumentation();
+        $this->registerDatabaseInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerTerminateHook();
+    }
+
+    private function registerDatabaseInstrumentation(): void
+    {
+        if (config('obeserva.database.query_tracing', true)) {
+            Event::listen(QueryExecuted::class, TraceQueryListener::class);
+        }
     }
 
     private function registerHttpInstrumentation(): void
