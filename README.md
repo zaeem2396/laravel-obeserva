@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with vendor-neutral architecture, OpenTelemetry-aligned abstractions, and deep Laravel runtime awareness.
 
-**Current release:** `v0.1.0` (Foundation) — monorepo structure, package split, and CI/CD infrastructure.
+**Current release:** [`v0.1.0`](docs/posts/v0.1.0-foundation.md) (Foundation) — monorepo structure, package split, and CI/CD infrastructure. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
 
 ## Installation
 
@@ -42,6 +42,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and path-repo
 | [CI/CD](docs/CI.md) | GitHub Actions workflows |
 | [Contributing](CONTRIBUTING.md) | Development workflow |
 | [Changelog](CHANGELOG.md) | Release history |
+| [Release process](docs/RELEASE.md) | Tagging, GitHub releases, checklist |
 | [Security](SECURITY.md) | Vulnerability reporting |
 
 ## Development
