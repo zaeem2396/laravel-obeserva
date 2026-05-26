@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-05-26
+
+### Added
+
+- `TraceQueryListener` — child `db.{operation}` spans for every `QueryExecuted` event
+- `QuerySanitizer` — binding-aware SQL redaction with statement length limits
+- `QueryOperation` — classifies SQL into select/insert/update/delete operations
+- `QueryCounter` — tracks `db.query_count` on the active request span
+- `NPlusOneDetector` and `NPlusOneDetectionListener` — flags repeated query patterns (lazy-load / N+1 hook)
+- Config: `obeserva.database.query_tracing`, `obeserva.database.lazy_loading_detection`
+- `illuminate/database` dependency for `scout/laravel`
+- Tests: sanitizer, operation parser, query listener, N+1 detection
+
+### Changed
+
+- `FlushTracerOnTerminate` resets query and N+1 counters per request
+
 ## [0.2.1] - 2026-05-26
 
 ### Added
@@ -67,7 +84,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/zaeem2396/laravel-obeserva/releases/tag/v0.1.0
