@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Obeserva\Laravel\Tests;
 
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Route;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Core\Tracer;
@@ -25,7 +26,7 @@ final class TraceRequestMiddlewareTest extends TestCase
 
     protected function defineRoutes($app): void
     {
-        Route::get('/traced', fn (): \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response => response('ok', 200))->name('traced');
+        Route::get('/traced', fn (): ResponseFactory|\Illuminate\Http\Response => response('ok', 200))->name('traced');
     }
 
     public function test_middleware_records_http_span(): void
