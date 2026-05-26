@@ -93,6 +93,7 @@ On `main` after tagging:
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.3.1` | [docs/posts/v0.3.1-queue.md](posts/v0.3.1-queue.md) |
 | `v0.3.0` | [docs/posts/v0.3.0-database.md](posts/v0.3.0-database.md) |
 | `v0.2.1` | [docs/posts/v0.2.1-laravel-http.md](posts/v0.2.1-laravel-http.md) |
 | `v0.2.0` | [docs/posts/v0.2.0-core-runtime.md](posts/v0.2.0-core-runtime.md) |

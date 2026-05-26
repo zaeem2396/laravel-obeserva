@@ -25,7 +25,7 @@ HTTP requests are traced when `OBESERVA_ENABLED=true` and `OBESERVA_HTTP_MIDDLEW
 
 ## Version
 
-**0.3.0** — Database query tracing (`db.*` spans), SQL sanitization, N+1 pattern detection, plus full HTTP instrumentation from v0.2.1. Queue propagation ships in v0.3.1.
+**0.3.1** — Queue trace propagation, consumer job spans, failed-job correlation, plus database and HTTP instrumentation from v0.3.0. Horizon hooks ship in v0.4.0.
 
 ## Documentation
 

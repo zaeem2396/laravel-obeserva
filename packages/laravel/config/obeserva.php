@@ -28,6 +28,8 @@ return [
 
     'queue' => [
         'propagation_enabled' => env('OBESERVA_QUEUE_PROPAGATION', true),
+        'job_tracing' => env('OBESERVA_QUEUE_JOB_TRACING', true),
+        'failed_job_correlation' => env('OBESERVA_QUEUE_FAILED_CORRELATION', true),
     ],
 
     'terminate' => [

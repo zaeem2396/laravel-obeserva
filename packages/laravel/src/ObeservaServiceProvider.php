@@ -9,6 +9,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Queue\Events\JobProcessing;
+use Illuminate\Queue\Queue;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
@@ -31,7 +35,13 @@ use Obeserva\Laravel\Listeners\FlushTracerOnTerminate;
 use Obeserva\Laravel\Listeners\NPlusOneDetectionListener;
 use Obeserva\Laravel\Listeners\ReportExceptionListener;
 use Obeserva\Laravel\Listeners\RouteMatchedListener;
+use Obeserva\Laravel\Listeners\TraceJobFailedListener;
+use Obeserva\Laravel\Listeners\TraceJobProcessedListener;
+use Obeserva\Laravel\Listeners\TraceJobProcessingListener;
 use Obeserva\Laravel\Listeners\TraceQueryListener;
+use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
+use Obeserva\Laravel\Queue\JobSpanEnricher;
+use Obeserva\Laravel\Queue\QueuePayloadHook;
 
 final class ObeservaServiceProvider extends ServiceProvider
 {
@@ -45,6 +55,9 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(QueryCounter::class);
         $this->app->singleton(NPlusOneDetector::class);
         $this->app->singleton(NPlusOneDetectionListener::class);
+        $this->app->singleton(ActiveJobSpanRegistry::class);
+        $this->app->singleton(JobSpanEnricher::class);
+        $this->app->singleton(QueuePayloadHook::class);
         $this->app->singleton(ContextManager::class);
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
@@ -83,8 +96,27 @@ final class ObeservaServiceProvider extends ServiceProvider
 
         $this->registerHttpInstrumentation();
         $this->registerDatabaseInstrumentation();
+        $this->registerQueueInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerTerminateHook();
+    }
+
+    private function registerQueueInstrumentation(): void
+    {
+        if (config('obeserva.queue.propagation_enabled', true)) {
+            Queue::createPayloadUsing($this->app->make(QueuePayloadHook::class));
+        }
+
+        if (! config('obeserva.queue.job_tracing', true)) {
+            return;
+        }
+
+        Event::listen(JobProcessing::class, TraceJobProcessingListener::class);
+        Event::listen(JobProcessed::class, TraceJobProcessedListener::class);
+
+        if (config('obeserva.queue.failed_job_correlation', true)) {
+            Event::listen(JobFailed::class, TraceJobFailedListener::class);
+        }
     }
 
     private function registerDatabaseInstrumentation(): void

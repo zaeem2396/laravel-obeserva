@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-05-26
+
+### Added
+
+- `TraceContextCarrier` — inject/extract W3C trace context in queue job payloads
+- `QueuePayloadHook` — registers `Queue::createPayloadUsing` for automatic propagation
+- `TraceJobProcessingListener` — consumer spans (`queue.process:{job}`) with queue metadata
+- `TraceJobProcessedListener` and `TraceJobFailedListener` — success/failure lifecycle and exception correlation
+- `ActiveJobSpanRegistry` and `JobSpanEnricher` — job span tracking and attributes
+- Config: `obeserva.queue.job_tracing`, `obeserva.queue.failed_job_correlation`
+- `illuminate/queue` dependency for `scout/laravel`
+- Tests: carrier round-trip, payload hook, sync queue propagation
+
+### Changed
+
+- `FlushTracerOnTerminate` clears active job span registry per request/worker cycle
+
 ## [0.3.0] - 2026-05-26
 
 ### Added
@@ -84,7 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.1.0...v0.2.0

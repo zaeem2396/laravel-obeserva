@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.3.0` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.3.0-database.md](docs/posts/v0.3.0-database.md).
+**Current release:** `v0.3.1` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.3.1-queue.md](docs/posts/v0.3.1-queue.md).
 
 ---
 
@@ -17,7 +17,8 @@
 | v0.2.0 | Core runtime | 🟢 Released (all v0.2.0 rows ✅) | `v0.2.0` |
 | v0.2.1 | Laravel HTTP | 🟢 Released (all v0.2.1 rows ✅) | `v0.2.1` |
 | v0.3.0 | Database instrumentation | 🟢 Released (all v0.3.0 rows ✅) | `v0.3.0` |
-| v0.3.1 | Queue instrumentation | 🔴 Next | — |
+| v0.3.1 | Queue instrumentation | 🟢 Released (all v0.3.1 rows ✅) | `v0.3.1` |
+| v0.4.0 | Horizon integration | 🔴 Next | — |
 
 ---
 
@@ -104,9 +105,9 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.2.1 | Laravel Integration | Exception Instrumentation | 🟢 DONE | Shipped `v0.2.1`: `ReportExceptionListener`, HTTP span correlation via `reportable()`, standalone `exception` spans outside requests. Queue/job exception correlation: see v0.3.1 Failed Job Correlation. |
 | v0.3.0 | Database Instrumentation | Query Tracing | 🟢 DONE | Shipped `v0.3.0`: `TraceQueryListener`, `QuerySanitizer`, `db.*` child spans, `db.query_count` on request spans. Eloquent model attributes on spans: v0.3.1+. |
 | v0.3.0 | Database Instrumentation | Lazy Loading Detection | 🟢 DONE | Shipped `v0.3.0`: `NPlusOneDetector` flags repeated query patterns on the active span (`db.n_plus_one_detected`). Eloquent `LazyLoadingAttempted` event not available in Laravel 12; pattern-based detection used instead. |
-| v0.3.1 | Queue Instrumentation | Queue Trace Propagation | 🔴 PLANNED | Propagate trace context seamlessly across queued jobs, delayed jobs, chained jobs, retries, and batch processing pipelines. |
-| v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🔴 PLANNED | Correlate failed jobs and queue/worker exceptions back to originating HTTP requests and parent traces (extends v0.2.1 HTTP-only exception instrumentation). |
-| v0.3.1 | Queue Instrumentation | Queue Driver Hooks | 🔴 PLANNED | Support Redis, SQS, database queues, and Horizon instrumentation with consistent propagation semantics and metadata enrichment. |
+| v0.3.1 | Queue Instrumentation | Queue Trace Propagation | 🟢 DONE | Shipped `v0.3.1`: `Queue::createPayloadUsing` + `TraceContextCarrier` injects W3C context from active HTTP/request spans into job payloads; restored on `JobProcessing`. |
+| v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🟢 DONE | Shipped `v0.3.1`: `TraceJobFailedListener` correlates exceptions to active job spans with `queue.result=failed`. |
+| v0.3.1 | Queue Instrumentation | Queue Driver Hooks | 🟢 DONE | Shipped `v0.3.1`: `JobProcessing`/`JobProcessed`/`JobFailed` listeners; driver-agnostic via Laravel queue events (sync, Redis, database, SQS). Horizon-specific hooks: v0.4.0. |
 | v0.4.0 | Horizon Integration | Worker Lifecycle Tracing | 🔴 PLANNED | Instrument Horizon worker startup, processing, restart, and shutdown lifecycles with safe long-running worker context isolation. |
 | v0.4.0 | Horizon Integration | Retry Trace Correlation | 🔴 PLANNED | Correlate retry attempts with original job traces while preserving retry history and execution causation chains. |
 | v0.4.0 | Horizon Integration | Throughput Metrics | 🔴 PLANNED | Generate queue throughput, latency, retry, and failure metrics optimized for observability dashboards and production monitoring. |
