@@ -57,6 +57,7 @@ Individual commands:
 ## Branching
 
 - `main` — stable integration branch
+- `release/vX.Y.Z` — finalize changelog, docs, and versions before tagging (see [docs/RELEASE.md](docs/RELEASE.md))
 - `feature/vX.Y.Z-*` — versioned feature work (e.g. `feature/v0.1.0-foundation`)
 - Keep commits focused; prefer conventional commit prefixes: `feat`, `fix`, `docs`, `chore`, `ci`, `test`
 
@@ -69,7 +70,7 @@ Individual commands:
 
 ## Package versioning
 
-Packages in this monorepo follow the roadmap version (currently **v0.1.0**). Path repositories use `@dev` during development; tagged releases will publish to Packagist independently per package.
+Packages in this monorepo follow the roadmap version (currently **v0.1.0**). Path repositories use `@dev` during development; tagged releases (`vX.Y.Z` on the repository) align all package `composer.json` versions. See [docs/RELEASE.md](docs/RELEASE.md) for the full release checklist.
 
 ## License
 

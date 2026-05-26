@@ -36,6 +36,10 @@ composer ci
 - **PHP** 8.3, 8.4, or 8.5
 - **Laravel** 11, 12, or 13 (for `scout/laravel`)
 
+## Releases
+
+Stable versions are tagged on GitHub as `vX.Y.Z` (e.g. `v0.1.0`). See [RELEASE.md](RELEASE.md) and the [v0.1.0 announcement](posts/v0.1.0-foundation.md).
+
 ## Path repository install (testing unreleased changes)
 
 ```bash
