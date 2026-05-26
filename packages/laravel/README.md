@@ -27,7 +27,7 @@ Database queries and queued jobs are instrumented by default (`OBESERVA_DB_QUERY
 
 ## Version
 
-**0.3.1** — Queue trace propagation, consumer job spans, failed-job correlation, plus database and HTTP instrumentation from v0.3.0. Horizon hooks ship in v0.4.0.
+**0.4.0** — Optional Horizon supervisor/worker tracing, throughput metrics, and retry correlation, plus queue, database, and HTTP instrumentation. Cache tracing ships in v0.4.1.
 
 ## Documentation
 

@@ -28,6 +28,9 @@ use Obeserva\Core\Tracer;
 use Obeserva\Laravel\Database\NPlusOneDetector;
 use Obeserva\Laravel\Database\QueryCounter;
 use Obeserva\Laravel\Database\QuerySanitizer;
+use Obeserva\Laravel\Horizon\ActiveHorizonSupervisorRegistry;
+use Obeserva\Laravel\Horizon\HorizonInstrumentation;
+use Obeserva\Laravel\Horizon\HorizonThroughputMetrics;
 use Obeserva\Laravel\Http\Middleware\TraceMiddlewareTiming;
 use Obeserva\Laravel\Http\RequestSpanEnricher;
 use Obeserva\Laravel\Http\TraceRequestMiddleware;
@@ -58,6 +61,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(ActiveJobSpanRegistry::class);
         $this->app->singleton(JobSpanEnricher::class);
         $this->app->singleton(QueuePayloadHook::class);
+        $this->app->singleton(ActiveHorizonSupervisorRegistry::class);
+        $this->app->singleton(HorizonThroughputMetrics::class);
         $this->app->singleton(ContextManager::class);
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
@@ -97,6 +102,7 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerHttpInstrumentation();
         $this->registerDatabaseInstrumentation();
         $this->registerQueueInstrumentation();
+        $this->registerHorizonInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerTerminateHook();
     }
@@ -117,6 +123,18 @@ final class ObeservaServiceProvider extends ServiceProvider
         if (config('obeserva.queue.failed_job_correlation', true)) {
             Event::listen(JobFailed::class, TraceJobFailedListener::class);
         }
+    }
+
+    private function registerHorizonInstrumentation(): void
+    {
+        if (! config('obeserva.horizon.enabled', true)) {
+            return;
+        }
+
+        HorizonInstrumentation::register(
+            workerTracing: (bool) config('obeserva.horizon.worker_tracing', true),
+            throughputMetrics: (bool) config('obeserva.horizon.throughput_metrics', true),
+        );
     }
 
     private function registerDatabaseInstrumentation(): void

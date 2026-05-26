@@ -28,6 +28,10 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_QUEUE_PROPAGATION` | `true` | Inject trace context into queue payloads |
 | `OBESERVA_QUEUE_JOB_TRACING` | `true` | Consumer spans for job processing |
 | `OBESERVA_QUEUE_FAILED_CORRELATION` | `true` | Correlate failed jobs to traces |
+| `OBESERVA_HORIZON_ENABLED` | `true` | Horizon instrumentation (requires `laravel/horizon`) |
+| `OBESERVA_HORIZON_WORKER_TRACING` | `true` | Supervisor/worker lifecycle spans |
+| `OBESERVA_HORIZON_THROUGHPUT_METRICS` | `true` | Job reserved/released counters on spans |
+| `OBESERVA_HORIZON_RETRY_CORRELATION` | `true` | Root trace + retry attempt attributes |
 
 ## Monorepo development
 
@@ -45,7 +49,7 @@ composer ci
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.3.1`). See [RELEASE.md](RELEASE.md) and the [v0.3.1 announcement](posts/v0.3.1-queue.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.4.0`). See [RELEASE.md](RELEASE.md) and the [v0.4.0 announcement](posts/v0.4.0-horizon.md).
 
 ### Manual spans in application code
 
