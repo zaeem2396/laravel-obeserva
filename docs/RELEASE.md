@@ -88,12 +88,14 @@ On `main` after tagging:
 | v0.2.1 | Obeserva v0.2.1 — Laravel HTTP |
 | v0.3.0 | Obeserva v0.3.0 — Database Instrumentation |
 | v0.3.1 | Obeserva v0.3.1 — Queue Instrumentation |
-| v0.4.0 | Obeserva v0.4.0 — Horizon Integration (planned) |
+| v0.4.0 | Obeserva v0.4.0 — Horizon Integration |
+| v0.4.1 | Obeserva v0.4.1 — Cache Instrumentation (planned) |
 
 ## Published releases
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.4.0` | [docs/posts/v0.4.0-horizon.md](posts/v0.4.0-horizon.md) |
 | `v0.3.1` | [docs/posts/v0.3.1-queue.md](posts/v0.3.1-queue.md) |
 | `v0.3.0` | [docs/posts/v0.3.0-database.md](posts/v0.3.0-database.md) |
 | `v0.2.1` | [docs/posts/v0.2.1-laravel-http.md](posts/v0.2.1-laravel-http.md) |

@@ -93,6 +93,17 @@ Configuration lives under `config/obeserva.php` → `database.*` (see [INSTALLAT
 
 Configuration lives under `config/obeserva.php` → `queue.*` (see [INSTALLATION.md](INSTALLATION.md)).
 
+### Horizon instrumentation (v0.4.0)
+
+Optional integration when `laravel/horizon` is installed (`Horizon::isAvailable()`):
+
+1. `HorizonInstrumentation` registers Horizon event listeners (no hard Composer dependency)
+2. `TraceHorizonSupervisorLoopedListener` maintains `horizon.supervisor:{name}` spans with throughput attributes
+3. Restart/stop listeners record worker lifecycle events
+4. `HorizonRetryCorrelator` links retries via `root_trace_id` in queue payloads
+
+Configuration: `config/obeserva.php` → `horizon.*`
+
 ### Event propagation (planned)
 
 Laravel event, notification, and broadcast propagation is scheduled for **v0.8.0** (see [ROADMAP.md](../../ROADMAP.md)).
