@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with vendor-neutral architecture, OpenTelemetry-aligned abstractions, and deep Laravel runtime awareness.
 
-**Current release:** [`v0.3.1`](docs/posts/v0.3.1-queue.md) (Queue) — trace propagation across queued jobs, consumer spans, and failed-job correlation. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
+**Current release:** [`v0.4.0`](docs/posts/v0.4.0-horizon.md) (Horizon) — supervisor worker lifecycle tracing, throughput metrics, and retry correlation for Horizon-managed queues. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
 
 ## Installation
 
@@ -32,15 +32,14 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and path-repo
 - PHP 8.3, 8.4, or 8.5
 - Laravel 11, 12, or 13 (for `scout/laravel`)
 
-## Instrumentation (v0.3.1)
+## Instrumentation (v0.4.0)
 
 | Area | What you get |
 |------|----------------|
 | HTTP | Request spans, route metadata, pipeline timing, exception correlation |
 | Database | `db.*` child spans, SQL sanitization, N+1 pattern detection |
 | Queue | W3C trace propagation in payloads, `queue.process:*` consumer spans, failed-job correlation |
-
-Horizon-specific worker tracing is planned for **v0.4.0**.
+| Horizon | Supervisor/worker lifecycle spans, throughput counters, retry trace correlation (requires `laravel/horizon`) |
 
 ## Documentation
 
@@ -66,7 +65,7 @@ composer pre-push    # Full gate (+ coverage & infection, needs pcov/xdebug)
 
 ## Roadmap
 
-v0.1.0 delivered the **foundation**; **v0.2.x** added core runtime and HTTP instrumentation; **v0.3.0** added database tracing; **v0.3.1** adds queue propagation and job spans. Upcoming **v0.4.0** adds Horizon instrumentation, then production drivers through v1.0.0.
+v0.1.0 delivered the **foundation**; **v0.2.x** added core runtime and HTTP instrumentation; **v0.3.x** added database and queue tracing; **v0.4.0** adds Horizon instrumentation. Upcoming **v0.4.1** adds cache/Redis tracing, then production drivers through v1.0.0.
 
 ## License
 

@@ -32,6 +32,13 @@ return [
         'failed_job_correlation' => env('OBESERVA_QUEUE_FAILED_CORRELATION', true),
     ],
 
+    'horizon' => [
+        'enabled' => env('OBESERVA_HORIZON_ENABLED', true),
+        'worker_tracing' => env('OBESERVA_HORIZON_WORKER_TRACING', true),
+        'throughput_metrics' => env('OBESERVA_HORIZON_THROUGHPUT_METRICS', true),
+        'retry_correlation' => env('OBESERVA_HORIZON_RETRY_CORRELATION', true),
+    ],
+
     'terminate' => [
         'flush_tracer' => env('OBESERVA_FLUSH_ON_TERMINATE', true),
     ],
