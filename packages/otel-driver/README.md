@@ -4,7 +4,7 @@ OpenTelemetry exporter driver for Obeserva instrumentation.
 
 ## Status
 
-**v0.3.0 scaffold** — OTLP export is planned for v0.6.0.
+**v0.3.1 scaffold** — OTLP export is planned for v0.6.0.
 
 ## Installation
 
