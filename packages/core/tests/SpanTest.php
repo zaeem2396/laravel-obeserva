@@ -34,11 +34,13 @@ final class SpanTest extends TestCase
         $span->end();
 
         $data = $span->toArray();
+        $attributes = $data['attributes'];
+        $this->assertIsArray($attributes);
 
         $this->assertSame('http', $data['name']);
         $this->assertSame('abc', $data['trace_id']);
         $this->assertSame('def', $data['span_id']);
         $this->assertSame('parent', $data['parent_span_id']);
-        $this->assertSame('GET', $data['attributes']['http.method']);
+        $this->assertSame('GET', $attributes['http.method']);
     }
 }
