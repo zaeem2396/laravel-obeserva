@@ -25,6 +25,9 @@
             "Obeserva\\Laravel\\": "src/"
         }
     },
+    "suggest": {
+        "laravel/horizon": "Required for Horizon worker instrumentation (v0.4.0+)."
+    },
     "extra": {
         "laravel": {
             "providers": [
