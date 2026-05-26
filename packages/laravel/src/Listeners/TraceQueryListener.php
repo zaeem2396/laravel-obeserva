@@ -12,6 +12,7 @@ use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Laravel\Database\QueryCounter;
 use Obeserva\Laravel\Database\QueryOperation;
 use Obeserva\Laravel\Database\QuerySanitizer;
+
 final readonly class TraceQueryListener
 {
     public function __construct(
@@ -30,7 +31,9 @@ final readonly class TraceQueryListener
         $span->setAttribute('db.system', $event->connection->getDriverName());
         $span->setAttribute('db.connection', $event->connectionName);
         $span->setAttribute('db.operation', $operation);
-        $span->setAttribute('db.statement', $this->sanitizer->sanitize($event->sql, $event->bindings));
+        /** @var array<int, mixed> $bindings */
+        $bindings = $event->bindings;
+        $span->setAttribute('db.statement', $this->sanitizer->sanitize($event->sql, $bindings));
         $span->setAttribute('db.duration_ms', $event->time);
 
         $span->end();

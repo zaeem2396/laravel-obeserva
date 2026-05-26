@@ -21,7 +21,7 @@ final class NPlusOneDetector
         $pattern = $this->normalize($sql);
         $this->patterns[$pattern] = ($this->patterns[$pattern] ?? 0) + 1;
 
-        if ($this->patterns[$pattern] === $this->threshold) {
+        if ($this->patterns[$pattern] === $this->threshold && $pattern !== '') {
             return $pattern;
         }
 
@@ -38,8 +38,7 @@ final class NPlusOneDetector
         $normalized = strtolower($sql);
         $normalized = preg_replace("/'[^']*'/", '?', $normalized) ?? $normalized;
         $normalized = preg_replace('/\b\d+\b/', '?', $normalized) ?? $normalized;
-        $normalized = preg_replace('/\s+/', ' ', trim($normalized)) ?? $normalized;
 
-        return $normalized;
+        return preg_replace('/\s+/', ' ', trim($normalized)) ?? $normalized;
     }
 }
