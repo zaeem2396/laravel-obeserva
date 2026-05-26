@@ -38,7 +38,29 @@ composer ci
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (e.g. `v0.1.0`). See [RELEASE.md](RELEASE.md) and the [v0.1.0 announcement](posts/v0.1.0-foundation.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.2.0`). See [RELEASE.md](RELEASE.md) and the [v0.2.0 announcement](posts/v0.2.0-core-runtime.md).
+
+### Manual spans in application code
+
+```php
+use Obeserva\Laravel\Facades\Obeserva;
+use Obeserva\Contracts\Span\SpanKind;
+
+$span = Obeserva::startSpan('process-order', SpanKind::Internal);
+$span->setAttribute('order.id', $orderId);
+
+// ... work ...
+
+$span->end();
+```
+
+Or use a scope for automatic completion:
+
+```php
+$scope = Obeserva::trace('process-order');
+$scope->span->setAttribute('order.id', $orderId);
+// span ends when $scope goes out of scope
+```
 
 ## Path repository install (testing unreleased changes)
 
