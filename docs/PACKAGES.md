@@ -4,12 +4,12 @@
 
 | Directory | Composer name | Version | Role |
 |-----------|---------------|---------|------|
-| `packages/contracts` | `obeserva/contracts` | 0.1.0 | Interfaces and value objects |
-| `packages/core` | `obeserva/core` | 0.1.0 | Runtime implementation |
-| `packages/laravel` | `scout/laravel` | 0.1.0 | Laravel integration |
-| `packages/scout-driver` | `obeserva/scout-driver` | 0.1.0 | Scout APM adapter (scaffold) |
-| `packages/otel-driver` | `obeserva/otel-driver` | 0.1.0 | OTel exporter (scaffold) |
-| `packages/testing` | `obeserva/testing` | 0.1.0 | Test doubles and assertions |
+| `packages/contracts` | `obeserva/contracts` | 0.2.0 | Interfaces and value objects |
+| `packages/core` | `obeserva/core` | 0.2.0 | Runtime implementation |
+| `packages/laravel` | `scout/laravel` | 0.2.0 | Laravel integration |
+| `packages/scout-driver` | `obeserva/scout-driver` | 0.2.0 | Scout APM adapter (scaffold) |
+| `packages/otel-driver` | `obeserva/otel-driver` | 0.2.0 | OTel exporter (scaffold) |
+| `packages/testing` | `obeserva/testing` | 0.2.0 | Test doubles and assertions |
 
 ## Installation matrix
 
@@ -40,28 +40,30 @@ composer config prefer-stable true
 composer require scout/laravel:@dev
 ```
 
-## Package boundaries (v0.1.0)
+## Package boundaries (v0.2.0)
 
 ### obeserva/contracts
 
 - `SpanInterface`, `SpanKind`
-- `TraceContextInterface`, `TraceContext`
-- `TracerInterface`, `ContextStorageInterface`, `PropagationInterface`, `SamplerInterface`, `ExporterInterface`
+- `TraceContextInterface`, `TraceContext`, `SpanIds`
+- `TracerInterface`, `ContextStorageInterface`, `ActiveSpanStorageInterface`
+- `PropagationInterface`, `SamplerInterface`, `ExporterInterface`
 
 No framework or driver dependencies.
 
 ### obeserva/core
 
-- `Tracer`, `Span`, `NoopSpan`
-- `ContextManager`
+- `Tracer` (nesting, flush buffer, `trace()` scopes)
+- `Span`, `NoopSpan`, `SpanScope`
+- `ContextManager` (trace context + active span stack)
 - `AlwaysOnSampler`, `ProbabilitySampler`
 
 ### scout/laravel
 
-- `ObeservaServiceProvider`
-- `TraceRequestMiddleware`
+- `ObeservaServiceProvider` (request-scoped context + deferred middleware)
+- `TraceRequestMiddleware` (duration, route name, user id, exceptions)
 - `config/obeserva.php`
-- `Obeserva` facade
+- `Obeserva` facade (`startSpan`, `trace`)
 
 Auto-discovered via Laravel package discovery.
 
@@ -77,4 +79,4 @@ Dev dependency for package consumers writing tests.
 
 ## Releases
 
-All packages share the monorepo version (currently **0.1.0**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.1.0-foundation.md](posts/v0.1.0-foundation.md).
+All packages share the monorepo version (currently **0.2.0**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.2.0-core-runtime.md](posts/v0.2.0-core-runtime.md).
