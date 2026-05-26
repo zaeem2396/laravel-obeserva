@@ -88,6 +88,7 @@ On `main` after tagging:
 | v0.2.1 | Obeserva v0.2.1 — Laravel HTTP |
 | v0.3.0 | Obeserva v0.3.0 — Database Instrumentation |
 | v0.3.1 | Obeserva v0.3.1 — Queue Instrumentation |
+| v0.4.0 | Obeserva v0.4.0 — Horizon Integration (planned) |
 
 ## Published releases
 
