@@ -69,7 +69,9 @@ The `Tracer` coordinates span creation with `ContextManager`:
 
 Use `Tracer::trace()` / `SpanScope` when you want automatic span completion at the end of a scope.
 
-Queue and event propagation are planned for v0.3.1–v0.8.x.
+### HTTP instrumentation (v0.2.1)
+
+Request middleware creates root spans; `RequestSpanEnricher` adds route, user, and response metadata. Exceptions reported via Laravel's `reportable()` hook are correlated to the active HTTP span.
 
 ### Database instrumentation (v0.3.0)
 
@@ -88,6 +90,12 @@ Configuration lives under `config/obeserva.php` → `database.*` (see [INSTALLAT
 2. `TraceJobProcessingListener` restores context and opens a `queue.process:*` consumer span
 3. `TraceJobProcessedListener` / `TraceJobFailedListener` close spans and clear worker context
 4. Works across queue drivers that use Laravel's standard payload format (sync, Redis, database, SQS)
+
+Configuration lives under `config/obeserva.php` → `queue.*` (see [INSTALLATION.md](INSTALLATION.md)).
+
+### Event propagation (planned)
+
+Laravel event, notification, and broadcast propagation is scheduled for **v0.8.0** (see [ROADMAP.md](../../ROADMAP.md)).
 
 ## CI/CD
 
