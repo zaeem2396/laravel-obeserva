@@ -10,7 +10,7 @@ Obeserva uses GitHub Actions for all quality gates. Workflows live in `.github/w
 | Laravel Pint | `pint.yml` | push, PR | Code style |
 | Tests | `tests.yml` | push, PR | PHPUnit + Laravel compatibility matrix (includes queue propagation tests as of v0.3.1) |
 | Composer Validate | `composer-validate.yml` | push, PR | `composer.json` validation |
-| Security Audit | `security.yml` | push, PR, daily | `composer audit` |
+| Security Audit | `security.yml` | push, PR, daily | `composer audit --locked` (fails on advisories; known abandoned PHPUnit transitive deps are ignored in `composer.json`) |
 | Code Coverage | `coverage.yml` | push to main, PR | Clover report artifact |
 | Infection | `infection.yml` | push to main, PR, weekly | Mutation testing |
 | Rector | `rector.yml` | push, PR | Refactor dry-run |
