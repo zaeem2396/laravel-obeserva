@@ -12,6 +12,7 @@ use Obeserva\Contracts\Span\SpanInterface;
 use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Contracts\Trace\SpanIds;
 use Obeserva\Contracts\Trace\TraceContext;
+use Obeserva\Contracts\Trace\TraceContextInterface;
 use Obeserva\Core\Span\NoopSpan;
 use Obeserva\Core\Span\Span;
 use Obeserva\Core\Span\SpanScope;
@@ -80,7 +81,7 @@ final class Tracer implements TracerInterface
     {
         $context = $this->contextStorage?->get();
 
-        if ($context instanceof \Obeserva\Contracts\Trace\TraceContextInterface) {
+        if ($context instanceof TraceContextInterface) {
             return $context->getTraceId();
         }
 
@@ -91,7 +92,7 @@ final class Tracer implements TracerInterface
     {
         $active = $this->activeSpanStorage?->current();
 
-        if ($active instanceof \Obeserva\Contracts\Span\SpanInterface && $active->getSpanId() !== '') {
+        if ($active instanceof SpanInterface && $active->getSpanId() !== '') {
             return $active->getSpanId();
         }
 
