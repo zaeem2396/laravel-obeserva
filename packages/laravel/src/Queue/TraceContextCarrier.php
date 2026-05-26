@@ -58,10 +58,12 @@ final class TraceContextCarrier
             return null;
         }
 
+        $parentSpanId = self::stringOrNull($carrier['parent_span_id'] ?? null);
+
         return new TraceContext(
             traceId: $traceId,
-            spanId: self::stringOrNull($carrier['span_id'] ?? '') ?? '',
-            parentSpanId: self::stringOrNull($carrier['parent_span_id'] ?? null),
+            spanId: $parentSpanId ?? '',
+            parentSpanId: $parentSpanId,
         );
     }
 
