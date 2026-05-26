@@ -49,6 +49,13 @@
         "sort-packages": true,
         "allow-plugins": {
             "infection/extension-installer": true
+        },
+        "audit": {
+            "abandoned": "report",
+            "ignore-abandoned": {
+                "sebastian/code-unit": "Transitive PHPUnit 11 dependency; abandoned with no replacement until upstream updates.",
+                "sebastian/code-unit-reverse-lookup": "Transitive phpunit/php-code-coverage dependency; abandoned with no replacement until upstream updates."
+            }
         }
     },
     "scripts": {
