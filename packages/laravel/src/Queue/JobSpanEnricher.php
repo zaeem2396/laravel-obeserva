@@ -6,6 +6,8 @@ namespace Obeserva\Laravel\Queue;
 
 use Illuminate\Contracts\Queue\Job;
 use Obeserva\Contracts\Span\SpanInterface;
+use Obeserva\Laravel\Horizon\HorizonJobPayloadReader;
+use Obeserva\Laravel\Horizon\HorizonRetryCorrelator;
 
 final class JobSpanEnricher
 {
@@ -20,9 +22,12 @@ final class JobSpanEnricher
         $span->setAttribute('messaging.system', 'laravel');
         $span->setAttribute('messaging.operation', 'process');
 
-        if (isset($payload['attempts']) && is_numeric($payload['attempts'])) {
-            $span->setAttribute('queue.attempts', (int) $payload['attempts']);
-        }
+        $attempt = HorizonJobPayloadReader::retryAttempt($payload);
+        $span->setAttribute('queue.attempts', $attempt);
+        $span->setAttribute('queue.retry_attempt', $attempt);
+
+        HorizonJobPayloadReader::enrichSpan($span, $payload);
+        HorizonRetryCorrelator::enrichSpan($span, $payload);
 
         $carrier = $payload[TraceContextCarrier::PAYLOAD_KEY] ?? null;
 
