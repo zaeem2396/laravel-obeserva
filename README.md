@@ -43,6 +43,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and path-repo
 | [Contributing](CONTRIBUTING.md) | Development workflow |
 | [Changelog](CHANGELOG.md) | Release history |
 | [Release process](docs/RELEASE.md) | Tagging, GitHub releases, checklist |
+| [Roadmap](ROADMAP.md) | Development status and milestones |
 | [Security](SECURITY.md) | Vulnerability reporting |
 
 ## Development
