@@ -1,6 +1,6 @@
 {
     "name": "obeserva/contracts",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Vendor-neutral observability contracts for Laravel instrumentation",
     "license": "MIT",
     "type": "library",
