@@ -25,7 +25,9 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_FLUSH_ON_TERMINATE` | `true` | Flush tracer completed spans on terminate |
 | `OBESERVA_DB_QUERY_TRACING` | `true` | Record `db.*` spans for SQL queries |
 | `OBESERVA_DB_LAZY_LOADING_DETECTION` | `true` | Detect repeated query patterns (N+1) |
-| `OBESERVA_QUEUE_PROPAGATION` | `true` | Queue propagation (v0.3.1+) |
+| `OBESERVA_QUEUE_PROPAGATION` | `true` | Inject trace context into queue payloads |
+| `OBESERVA_QUEUE_JOB_TRACING` | `true` | Consumer spans for job processing |
+| `OBESERVA_QUEUE_FAILED_CORRELATION` | `true` | Correlate failed jobs to traces |
 
 ## Monorepo development
 
@@ -43,7 +45,7 @@ composer ci
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.3.0`). See [RELEASE.md](RELEASE.md) and the [v0.3.0 announcement](posts/v0.3.0-database.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.3.1`). See [RELEASE.md](RELEASE.md) and the [v0.3.1 announcement](posts/v0.3.1-queue.md).
 
 ### Manual spans in application code
 
