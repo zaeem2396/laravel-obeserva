@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.2.1` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.2.1-laravel-http.md](docs/posts/v0.2.1-laravel-http.md).
+**Current release:** `v0.3.0` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.3.0-database.md](docs/posts/v0.3.0-database.md).
 
 ---
 
@@ -16,7 +16,8 @@
 | v0.1.1 | Core contracts | 🟢 Released (bundled in v0.1.0+) | — |
 | v0.2.0 | Core runtime | 🟢 Released (all v0.2.0 rows ✅) | `v0.2.0` |
 | v0.2.1 | Laravel HTTP | 🟢 Released (all v0.2.1 rows ✅) | `v0.2.1` |
-| v0.3.0 | Database instrumentation | 🔴 Next | — |
+| v0.3.0 | Database instrumentation | 🟢 Released (all v0.3.0 rows ✅) | `v0.3.0` |
+| v0.3.1 | Queue instrumentation | 🔴 Next | — |
 
 ---
 
@@ -101,8 +102,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.2.1 | Laravel Integration | Service Provider | 🟢 DONE | Shipped `v0.2.1`: auto-discovery, config publish, deferred middleware, listeners, terminate flush. |
 | v0.2.1 | Laravel Integration | HTTP Middleware Instrumentation | 🟢 DONE | Shipped `v0.2.0`–`v0.2.1`: request spans, `RequestSpanEnricher`, route/middleware metadata, response attrs, `obeserva.timing:{segment}` pipeline timing, user context. Auto-instrumentation of every global middleware: not planned (use `obeserva.timing`). |
 | v0.2.1 | Laravel Integration | Exception Instrumentation | 🟢 DONE | Shipped `v0.2.1`: `ReportExceptionListener`, HTTP span correlation via `reportable()`, standalone `exception` spans outside requests. Queue/job exception correlation: see v0.3.1 Failed Job Correlation. |
-| v0.3.0 | Database Instrumentation | Query Tracing | 🔴 PLANNED | Instrument Eloquent and query builder execution with query timing, connection metadata, query sanitization, model awareness, and N+1 detection hooks. |
-| v0.3.0 | Database Instrumentation | Lazy Loading Detection | 🔴 PLANNED | Detect and annotate lazy loading behavior within traces to improve database performance visibility and debugging. |
+| v0.3.0 | Database Instrumentation | Query Tracing | 🟢 DONE | Shipped `v0.3.0`: `TraceQueryListener`, `QuerySanitizer`, `db.*` child spans, `db.query_count` on request spans. Eloquent model attributes on spans: v0.3.1+. |
+| v0.3.0 | Database Instrumentation | Lazy Loading Detection | 🟢 DONE | Shipped `v0.3.0`: `NPlusOneDetector` flags repeated query patterns on the active span (`db.n_plus_one_detected`). Eloquent `LazyLoadingAttempted` event not available in Laravel 12; pattern-based detection used instead. |
 | v0.3.1 | Queue Instrumentation | Queue Trace Propagation | 🔴 PLANNED | Propagate trace context seamlessly across queued jobs, delayed jobs, chained jobs, retries, and batch processing pipelines. |
 | v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🔴 PLANNED | Correlate failed jobs and queue/worker exceptions back to originating HTTP requests and parent traces (extends v0.2.1 HTTP-only exception instrumentation). |
 | v0.3.1 | Queue Instrumentation | Queue Driver Hooks | 🔴 PLANNED | Support Redis, SQS, database queues, and Horizon instrumentation with consistent propagation semantics and metadata enrichment. |

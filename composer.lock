@@ -4120,11 +4120,11 @@
         },
         {
             "name": "obeserva/contracts",
-            "version": "dev-main",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "packages/contracts",
-                "reference": "17402802b7d3551ee702cd2ebcfd43fe23967e95"
+                "reference": "1068459ae9494bcfd58e06145967eb1663c70e4e"
             },
             "require": {
                 "php": "^8.3"
@@ -4146,11 +4146,11 @@
         },
         {
             "name": "obeserva/core",
-            "version": "dev-main",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "packages/core",
-                "reference": "4b96679862679bd007fca05fa8b2b28d2f133873"
+                "reference": "c4587ea2244d4ca235325e6667d622a06d281bb6"
             },
             "require": {
                 "obeserva/contracts": "@dev",
@@ -4173,11 +4173,11 @@
         },
         {
             "name": "obeserva/otel-driver",
-            "version": "dev-main",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "packages/otel-driver",
-                "reference": "474305bc55d8dd3df5c77d85fa913b3b9061a9a8"
+                "reference": "0380da93ebf679c87a52f399f655a9e1d37baab0"
             },
             "require": {
                 "obeserva/contracts": "@dev",
@@ -4201,11 +4201,11 @@
         },
         {
             "name": "obeserva/scout-driver",
-            "version": "dev-main",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "packages/scout-driver",
-                "reference": "e699b9be36330a739941926f67be8577e8a75066"
+                "reference": "541d3ae27ff902fbaf434fa2811f8e71bde58760"
             },
             "require": {
                 "obeserva/contracts": "@dev",
@@ -4229,11 +4229,11 @@
         },
         {
             "name": "obeserva/testing",
-            "version": "dev-main",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "packages/testing",
-                "reference": "a351d1237fd418a8588125fdc3e60a2be03faed2"
+                "reference": "6024b74ceaaf89d631962d64ea6c2ee7534a19e7"
             },
             "require": {
                 "obeserva/contracts": "@dev",
@@ -6330,14 +6330,15 @@
         },
         {
             "name": "scout/laravel",
-            "version": "dev-main",
+            "version": "0.2.1",
             "dist": {
                 "type": "path",
                 "url": "packages/laravel",
-                "reference": "95191d15b5be7e804407c19275f830ddd9c23a62"
+                "reference": "37f453f3685740ad308c91d5791bb18085562b46"
             },
             "require": {
                 "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
                 "illuminate/support": "^11.0|^12.0|^13.0",
                 "obeserva/contracts": "@dev",
                 "obeserva/core": "@dev",
