@@ -74,3 +74,7 @@ Scaffold adapters for v0.5.0 and v0.6.0 roadmap work. Not required for basic HTT
 - `FakeTracer` with `assertSpanRecorded()` and `recordedSpans()`
 
 Dev dependency for package consumers writing tests.
+
+## Releases
+
+All packages share the monorepo version (currently **0.1.0**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.1.0-foundation.md](posts/v0.1.0-foundation.md).
