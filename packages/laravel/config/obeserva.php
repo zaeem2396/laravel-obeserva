@@ -21,6 +21,11 @@ return [
         'enabled' => env('OBESERVA_EXCEPTION_INSTRUMENTATION', true),
     ],
 
+    'database' => [
+        'query_tracing' => env('OBESERVA_DB_QUERY_TRACING', true),
+        'lazy_loading_detection' => env('OBESERVA_DB_LAZY_LOADING_DETECTION', true),
+    ],
+
     'queue' => [
         'propagation_enabled' => env('OBESERVA_QUEUE_PROPAGATION', true),
     ],

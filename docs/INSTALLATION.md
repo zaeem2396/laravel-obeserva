@@ -23,6 +23,8 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_HTTP_MIDDLEWARE_TIMING` | `true` | Register `obeserva.timing` middleware alias |
 | `OBESERVA_EXCEPTION_INSTRUMENTATION` | `true` | Hook Laravel reportable exceptions |
 | `OBESERVA_FLUSH_ON_TERMINATE` | `true` | Flush tracer completed spans on terminate |
+| `OBESERVA_DB_QUERY_TRACING` | `true` | Record `db.*` spans for SQL queries |
+| `OBESERVA_DB_LAZY_LOADING_DETECTION` | `true` | Detect repeated query patterns (N+1) |
 | `OBESERVA_QUEUE_PROPAGATION` | `true` | Queue propagation (v0.3.1+) |
 
 ## Monorepo development
@@ -41,7 +43,7 @@ composer ci
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.2.1`). See [RELEASE.md](RELEASE.md) and the [v0.2.1 announcement](posts/v0.2.1-laravel-http.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.3.0`). See [RELEASE.md](RELEASE.md) and the [v0.3.0 announcement](posts/v0.3.0-database.md).
 
 ### Manual spans in application code
 

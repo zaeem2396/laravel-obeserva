@@ -87,6 +87,7 @@ On `main` after tagging:
 | v0.2.0 | Obeserva v0.2.0 — Core Runtime |
 | v0.2.1 | Obeserva v0.2.1 — Laravel HTTP |
 | v0.3.0 | Obeserva v0.3.0 — Database Instrumentation |
+| v0.3.1 | Obeserva v0.3.1 — Queue Instrumentation |
 
 ## Checklist (copy per release)
 
