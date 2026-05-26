@@ -35,6 +35,10 @@ composer ci
 composer pre-push
 ```
 
+## Release workflow
+
+Releases are cut manually from `release/vX.Y.Z` branches. See [RELEASE.md](RELEASE.md) for tagging, GitHub releases, and the post-release checklist. Automated changelog/tagging is planned for a future version.
+
 ## Planned pipelines (post v0.1.0)
 
 - Queue runtime tests
@@ -44,4 +48,4 @@ composer pre-push
 - OpenTelemetry semantic convention compliance
 - Documentation example validation
 - Parallel testing
-- Release automation
+- Release automation (changelog + tag from CI)
