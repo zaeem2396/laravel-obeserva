@@ -7,11 +7,12 @@ namespace Obeserva\Laravel\Tests;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Route;
 use Obeserva\Contracts\Driver\TracerInterface;
+use Obeserva\Core\Span\Span;
 use Obeserva\Core\Tracer;
 use Obeserva\Laravel\ObeservaServiceProvider;
 use Orchestra\Testbench\TestCase;
 
-final class TraceRequestMiddlewareTest extends TestCase
+final class TraceMiddlewareTimingTest extends TestCase
 {
     protected function getPackageProviders($app): array
     {
@@ -27,13 +28,21 @@ final class TraceRequestMiddlewareTest extends TestCase
 
     protected function defineRoutes($app): void
     {
-        Route::get('/traced', fn (): ResponseFactory|\Illuminate\Http\Response => response('ok', 200))->name('traced');
+        Route::middleware('obeserva.timing:api')->get('/timed', fn (): ResponseFactory|\Illuminate\Http\Response => response('ok'));
     }
 
-    public function test_middleware_records_http_span(): void
+    public function test_middleware_timing_alias_is_registered(): void
     {
-        $response = $this->get('/traced');
+        $app = $this->app;
+        $this->assertNotNull($app);
 
+        $router = $app->make('router');
+        $this->assertArrayHasKey('obeserva.timing', $router->getMiddleware());
+    }
+
+    public function test_timing_middleware_records_child_span(): void
+    {
+        $response = $this->get('/timed');
         $response->assertOk();
 
         $app = $this->app;
@@ -41,15 +50,8 @@ final class TraceRequestMiddlewareTest extends TestCase
 
         $tracer = $app->make(TracerInterface::class);
         $this->assertInstanceOf(Tracer::class, $tracer);
-        $completed = $tracer->completedSpans();
 
-        $this->assertCount(1, $completed);
-        $this->assertSame('traced', $completed[0]->getName());
-
-        $attributes = $completed[0]->toArray()['attributes'];
-        $this->assertIsArray($attributes);
-        $this->assertSame('GET', $attributes['http.method']);
-        $this->assertSame(200, $attributes['http.status_code']);
-        $this->assertArrayHasKey('http.duration_ms', $attributes);
+        $names = array_map(fn (Span $span): string => $span->getName(), $tracer->completedSpans());
+        $this->assertContains('middleware.api', $names);
     }
 }
