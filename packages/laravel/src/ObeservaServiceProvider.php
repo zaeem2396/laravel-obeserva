@@ -46,6 +46,8 @@ final class ObeservaServiceProvider extends ServiceProvider
                 $context,
             );
         });
+
+        $this->app->alias(TracerInterface::class, Tracer::class);
     }
 
     public function boot(): void
@@ -58,9 +60,16 @@ final class ObeservaServiceProvider extends ServiceProvider
             __DIR__.'/../config/obeserva.php' => config_path('obeserva.php'),
         ], 'obeserva-config');
 
-        if (config('obeserva.http.middleware_enabled', true) && $this->app->bound(Kernel::class)) {
-            $kernel = $this->app->make(Kernel::class);
-            $kernel->prependMiddleware(TraceRequestMiddleware::class);
+        if (! config('obeserva.http.middleware_enabled', true)) {
+            return;
         }
+
+        $this->app->booted(function (): void {
+            if (! $this->app->bound(Kernel::class)) {
+                return;
+            }
+
+            $this->app->make(Kernel::class)->prependMiddleware(TraceRequestMiddleware::class);
+        });
     }
 }
