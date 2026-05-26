@@ -14,8 +14,8 @@
 |---------|-------|--------|------|
 | v0.1.0 | Foundation (monorepo, CI) | 🟢 Released | `v0.1.0` |
 | v0.1.1 | Core contracts | 🟢 Released (bundled in v0.1.0+) | — |
-| v0.2.0 | Core runtime | 🟢 Released | `v0.2.0` |
-| v0.2.1 | Laravel HTTP | 🟢 Released | `v0.2.1` |
+| v0.2.0 | Core runtime | 🟢 Released (all v0.2.0 rows ✅) | `v0.2.0` |
+| v0.2.1 | Laravel HTTP | 🟢 Released (all v0.2.1 rows ✅) | `v0.2.1` |
 | v0.3.0 | Database instrumentation | 🔴 Next | — |
 
 ---
@@ -39,9 +39,9 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 
 | Label | Meaning |
 |-------|---------|
-| 🟢 DONE | Completed |
-| 🟡 IN-PROGRESS | Currently being developed |
-| 🔴 PLANNED | Planned for future release |
+| 🟢 DONE | Completed and shipped (or fully delivered for that version row) |
+| 🟡 IN-PROGRESS | Actively being built on an **unreleased** version |
+| 🔴 PLANNED | Scheduled for a future version, not started |
 
 ---
 
@@ -96,15 +96,15 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.1.1 | Core Contracts | Trace Context API | 🟢 DONE | Build immutable trace context objects capable of safely propagating distributed trace metadata across HTTP requests, queues, events, notifications, and async workers. |
 | v0.1.1 | Core Contracts | Driver Interfaces | 🟢 DONE | Create pluggable interfaces for tracing drivers, exporters, samplers, context storage, and propagation mechanisms following strict dependency inversion principles. |
 | v0.2.0 | Core Runtime | Span Lifecycle Engine | 🟢 DONE | Shipped `v0.2.0`: nesting, active span stack, `SpanScope`, completed-span flush buffer, `Tracer::trace()`. Driver export & worker-runtime hardening deferred to v0.5.x–v0.8.x. |
-| v0.2.0 | Core Runtime | Context Manager | 🟡 IN-PROGRESS | Shipped `v0.2.0` for HTTP requests (`ContextManager` + active span stack). Queue, Horizon, Octane, and CLI isolation: v0.3.1–v0.6.1. |
+| v0.2.0 | Core Runtime | Context Manager | 🟢 DONE | Shipped `v0.2.0`: `ContextManager` with trace context + active span stack for HTTP requests. Multi-runtime isolation (queue, Horizon, Octane, long-lived CLI) is scoped to v0.3.1–v0.6.1 rows below—not part of the v0.2.0 release. |
 | v0.2.0 | Core Runtime | Sampling Engine | 🟢 DONE | Shipped `v0.2.0`: `AlwaysOnSampler`, `ProbabilitySampler`, config via `OBESERVA_SAMPLE_RATE`. |
 | v0.2.1 | Laravel Integration | Service Provider | 🟢 DONE | Shipped `v0.2.1`: auto-discovery, config publish, deferred middleware, listeners, terminate flush. |
 | v0.2.1 | Laravel Integration | HTTP Middleware Instrumentation | 🟢 DONE | Shipped `v0.2.0`–`v0.2.1`: request spans, `RequestSpanEnricher`, route/middleware metadata, response attrs, `obeserva.timing:{segment}` pipeline timing, user context. Auto-instrumentation of every global middleware: not planned (use `obeserva.timing`). |
-| v0.2.1 | Laravel Integration | Exception Instrumentation | 🟡 IN-PROGRESS | Shipped `v0.2.1`: `ReportExceptionListener` via Laravel `reportable()` on HTTP spans. Queue-aware exceptions, failed-job correlation, rich diagnostics: v0.3.1+. |
+| v0.2.1 | Laravel Integration | Exception Instrumentation | 🟢 DONE | Shipped `v0.2.1`: `ReportExceptionListener`, HTTP span correlation via `reportable()`, standalone `exception` spans outside requests. Queue/job exception correlation: see v0.3.1 Failed Job Correlation. |
 | v0.3.0 | Database Instrumentation | Query Tracing | 🔴 PLANNED | Instrument Eloquent and query builder execution with query timing, connection metadata, query sanitization, model awareness, and N+1 detection hooks. |
 | v0.3.0 | Database Instrumentation | Lazy Loading Detection | 🔴 PLANNED | Detect and annotate lazy loading behavior within traces to improve database performance visibility and debugging. |
 | v0.3.1 | Queue Instrumentation | Queue Trace Propagation | 🔴 PLANNED | Propagate trace context seamlessly across queued jobs, delayed jobs, chained jobs, retries, and batch processing pipelines. |
-| v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🔴 PLANNED | Correlate failed jobs back to originating HTTP requests and parent traces for complete causation visibility. |
+| v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🔴 PLANNED | Correlate failed jobs and queue/worker exceptions back to originating HTTP requests and parent traces (extends v0.2.1 HTTP-only exception instrumentation). |
 | v0.3.1 | Queue Instrumentation | Queue Driver Hooks | 🔴 PLANNED | Support Redis, SQS, database queues, and Horizon instrumentation with consistent propagation semantics and metadata enrichment. |
 | v0.4.0 | Horizon Integration | Worker Lifecycle Tracing | 🔴 PLANNED | Instrument Horizon worker startup, processing, restart, and shutdown lifecycles with safe long-running worker context isolation. |
 | v0.4.0 | Horizon Integration | Retry Trace Correlation | 🔴 PLANNED | Correlate retry attempts with original job traces while preserving retry history and execution causation chains. |
@@ -117,6 +117,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.5.1 | Scout Driver | Advanced Scout Metadata | 🔴 PLANNED | Add Laravel-aware metadata enrichment including route names, queue names, deployment versions, Horizon worker IDs, tenant identifiers, and environment diagnostics. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Semantic Conventions | 🔴 PLANNED | Align internal span naming and metadata structure with OpenTelemetry semantic conventions for future exporter compatibility and vendor neutrality. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Export Adapter | 🔴 PLANNED | Create experimental OpenTelemetry exporter support without requiring changes to Laravel instrumentation architecture. |
+| v0.6.1 | Runtime Support | Worker Context Isolation | 🔴 PLANNED | Extend `ContextManager` for queue workers, Horizon, Octane, RoadRunner, and Swoole with safe context cleanup and long-running worker isolation (beyond HTTP-scoped v0.2.0 context). |
 | v0.6.1 | Runtime Support | Octane Compatibility | 🔴 PLANNED | Ensure safe instrumentation lifecycle handling for Laravel Octane workers including context cleanup and long-running worker isolation. |
 | v0.6.1 | Runtime Support | RoadRunner Compatibility | 🔴 PLANNED | Add runtime-safe instrumentation support for RoadRunner-powered Laravel applications. |
 | v0.6.1 | Runtime Support | Swoole Awareness | 🔴 PLANNED | Handle persistent memory/runtime behavior safely for Swoole-based execution environments. |
