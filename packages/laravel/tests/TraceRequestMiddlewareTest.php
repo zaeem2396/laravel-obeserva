@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Obeserva\Laravel\Tests;
 
 use Illuminate\Support\Facades\Route;
+use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Core\Tracer;
 use Obeserva\Laravel\ObeservaServiceProvider;
 use Orchestra\Testbench\TestCase;
@@ -16,6 +17,12 @@ final class TraceRequestMiddlewareTest extends TestCase
         return [ObeservaServiceProvider::class];
     }
 
+    protected function defineEnvironment($app): void
+    {
+        $app['config']->set('obeserva.enabled', true);
+        $app['config']->set('obeserva.http.middleware_enabled', true);
+    }
+
     protected function defineRoutes($app): void
     {
         Route::get('/traced', fn () => response('ok', 200))->name('traced');
@@ -23,13 +30,12 @@ final class TraceRequestMiddlewareTest extends TestCase
 
     public function test_middleware_records_http_span(): void
     {
-        config(['obeserva.enabled' => true, 'obeserva.http.middleware_enabled' => true]);
-
         $response = $this->get('/traced');
 
         $response->assertOk();
 
-        $tracer = $this->app->make(Tracer::class);
+        $tracer = $this->app->make(TracerInterface::class);
+        $this->assertInstanceOf(Tracer::class, $tracer);
         $completed = $tracer->completedSpans();
 
         $this->assertCount(1, $completed);
