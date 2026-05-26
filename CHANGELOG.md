@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Nothing yet.
+
 ## [0.4.0] - 2026-05-26
 
 ### Added
@@ -27,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TraceContextCarrier::inject()` stores `root_trace_id` for retry causation chains
 - `JobSpanEnricher` adds Horizon job metadata and retry correlation attributes
 - `FlushTracerOnTerminate` clears Horizon supervisor registry and metrics
+- Documentation: package READMEs, ROADMAP, CI, architecture, and release posts aligned for v0.4.0
 
 ## [0.3.1] - 2026-05-26
 
@@ -123,7 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
 [Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.0...HEAD
-[0.4.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.1...v0.4.0
+[0.4.0]: https://github.com/zaeem2396/laravel-obeserva/releases/tag/v0.4.0
 [0.3.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.0...v0.2.1
