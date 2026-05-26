@@ -80,7 +80,7 @@ final class Tracer implements TracerInterface
     {
         $context = $this->contextStorage?->get();
 
-        if ($context !== null) {
+        if ($context instanceof \Obeserva\Contracts\Trace\TraceContextInterface) {
             return $context->getTraceId();
         }
 
@@ -91,7 +91,7 @@ final class Tracer implements TracerInterface
     {
         $active = $this->activeSpanStorage?->current();
 
-        if ($active !== null && $active->getSpanId() !== '') {
+        if ($active instanceof \Obeserva\Contracts\Span\SpanInterface && $active->getSpanId() !== '') {
             return $active->getSpanId();
         }
 

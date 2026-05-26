@@ -25,7 +25,7 @@ final class TraceRequestMiddlewareTest extends TestCase
 
     protected function defineRoutes($app): void
     {
-        Route::get('/traced', fn () => response('ok', 200))->name('traced');
+        Route::get('/traced', fn (): \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response => response('ok', 200))->name('traced');
     }
 
     public function test_middleware_records_http_span(): void
