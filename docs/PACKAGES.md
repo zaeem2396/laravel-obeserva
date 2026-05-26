@@ -4,12 +4,12 @@
 
 | Directory | Composer name | Version | Role |
 |-----------|---------------|---------|------|
-| `packages/contracts` | `obeserva/contracts` | 0.3.0 | Interfaces and value objects |
-| `packages/core` | `obeserva/core` | 0.3.0 | Runtime implementation |
-| `packages/laravel` | `scout/laravel` | 0.3.0 | Laravel integration |
-| `packages/scout-driver` | `obeserva/scout-driver` | 0.3.0 | Scout APM adapter (scaffold) |
-| `packages/otel-driver` | `obeserva/otel-driver` | 0.3.0 | OTel exporter (scaffold) |
-| `packages/testing` | `obeserva/testing` | 0.3.0 | Test doubles and assertions |
+| `packages/contracts` | `obeserva/contracts` | 0.3.1 | Interfaces and value objects |
+| `packages/core` | `obeserva/core` | 0.3.1 | Runtime implementation |
+| `packages/laravel` | `scout/laravel` | 0.3.1 | Laravel integration |
+| `packages/scout-driver` | `obeserva/scout-driver` | 0.3.1 | Scout APM adapter (scaffold) |
+| `packages/otel-driver` | `obeserva/otel-driver` | 0.3.1 | OTel exporter (scaffold) |
+| `packages/testing` | `obeserva/testing` | 0.3.1 | Test doubles and assertions |
 
 ## Installation matrix
 
@@ -40,7 +40,7 @@ composer config prefer-stable true
 composer require scout/laravel:@dev
 ```
 
-## Package boundaries (v0.3.0)
+## Package boundaries (v0.3.1)
 
 ### obeserva/contracts
 
@@ -75,6 +75,12 @@ Auto-discovered via Laravel package discovery.
 - `QuerySanitizer`, `QueryOperation`, `QueryCounter`
 - `NPlusOneDetector`, `NPlusOneDetectionListener`
 
+### Queue instrumentation (v0.3.1)
+
+- `TraceContextCarrier`, `QueuePayloadHook`
+- `TraceJobProcessingListener`, `TraceJobProcessedListener`, `TraceJobFailedListener`
+- `ActiveJobSpanRegistry`, `JobSpanEnricher`
+
 ### obeserva/scout-driver & obeserva/otel-driver
 
 Scaffold adapters for v0.5.0 and v0.6.0 roadmap work. Not required for basic HTTP instrumentation in v0.1.0.
@@ -87,4 +93,4 @@ Dev dependency for package consumers writing tests.
 
 ## Releases
 
-All packages share the monorepo version (currently **0.3.0**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.3.0-database.md](posts/v0.3.0-database.md).
+All packages share the monorepo version (currently **0.3.1**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.3.1-queue.md](posts/v0.3.1-queue.md).

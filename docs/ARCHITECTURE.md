@@ -82,6 +82,13 @@ Laravel database observability hooks into `Illuminate\Database\Events\QueryExecu
 
 Configuration lives under `config/obeserva.php` → `database.*` (see [INSTALLATION.md](INSTALLATION.md)).
 
+### Queue instrumentation (v0.3.1)
+
+1. `QueuePayloadHook` registers with `Queue::createPayloadUsing` to embed trace context in payloads
+2. `TraceJobProcessingListener` restores context and opens a `queue.process:*` consumer span
+3. `TraceJobProcessedListener` / `TraceJobFailedListener` close spans and clear worker context
+4. Works across queue drivers that use Laravel's standard payload format (sync, Redis, database, SQS)
+
 ## CI/CD
 
 All packages are validated together from the monorepo root. See [CI.md](CI.md).

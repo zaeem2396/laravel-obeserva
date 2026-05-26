@@ -70,7 +70,7 @@ Individual commands:
 
 ## Package versioning
 
-Packages in this monorepo follow the roadmap version (currently **v0.3.0**). Path repositories use `@dev` during development; tagged releases (`vX.Y.Z` on the repository) align all package `composer.json` versions. See [docs/RELEASE.md](docs/RELEASE.md) for the full release checklist.
+Packages in this monorepo follow the roadmap version (currently **v0.3.1**). Path repositories use `@dev` during development; tagged releases (`vX.Y.Z` on the repository) align all package `composer.json` versions. See [docs/RELEASE.md](docs/RELEASE.md) for the full release checklist.
 
 ## License
 
