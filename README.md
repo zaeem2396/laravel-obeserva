@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with vendor-neutral architecture, OpenTelemetry-aligned abstractions, and deep Laravel runtime awareness.
 
-**Current release:** [`v0.3.0`](docs/posts/v0.3.0-database.md) (Database) — query tracing, SQL sanitization, and N+1 pattern detection. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
+**Current release:** [`v0.3.1`](docs/posts/v0.3.1-queue.md) (Queue) — trace propagation across queued jobs, consumer spans, and failed-job correlation. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
 
 ## Installation
 
@@ -56,7 +56,7 @@ composer pre-push    # Full gate (+ coverage & infection, needs pcov/xdebug)
 
 ## Roadmap
 
-v0.1.0 delivered the **foundation**; **v0.2.x** added core runtime and HTTP instrumentation; **v0.3.0** adds database query spans and N+1 detection. Upcoming **v0.3.1** adds queue propagation, then production drivers through v1.0.0.
+v0.1.0 delivered the **foundation**; **v0.2.x** added core runtime and HTTP instrumentation; **v0.3.0** added database tracing; **v0.3.1** adds queue propagation and job spans. Upcoming **v0.4.0** adds Horizon instrumentation, then production drivers through v1.0.0.
 
 ## License
 
