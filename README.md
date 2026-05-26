@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with vendor-neutral architecture, OpenTelemetry-aligned abstractions, and deep Laravel runtime awareness.
 
-**Current release:** [`v0.2.0`](docs/posts/v0.2.0-core-runtime.md) (Core Runtime) — span lifecycle engine, nested tracing, and enriched HTTP instrumentation. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
+**Current release:** [`v0.2.1`](docs/posts/v0.2.1-laravel-http.md) (Laravel HTTP) — full HTTP middleware instrumentation, exception correlation, and pipeline timing. See [docs/RELEASE.md](docs/RELEASE.md) for maintainers cutting the next release.
 
 ## Installation
 
@@ -55,7 +55,7 @@ composer pre-push    # Full gate (+ coverage & infection, needs pcov/xdebug)
 
 ## Roadmap
 
-v0.1.0 delivered the **foundation** (monorepo, package split, CI). **v0.2.0** adds the core runtime: nested spans, active span stack, flush buffer, and production-oriented HTTP middleware attributes. Upcoming releases add database instrumentation, queue propagation, Horizon/Octane support, Scout and OpenTelemetry drivers, and production hardening through v1.0.0.
+v0.1.0 delivered the **foundation**; **v0.2.0** added the core runtime; **v0.2.1** completes Laravel HTTP instrumentation (route enrichment, exception reporting, `obeserva.timing` middleware). Upcoming **v0.3.0** adds database query tracing, then queue propagation and production drivers through v1.0.0.
 
 ## License
 
