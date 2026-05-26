@@ -24,4 +24,24 @@ final class TraceContextCarrierTest extends TestCase
         $this->assertSame($context->getTraceId(), $restored->getTraceId());
         $this->assertSame($context->getSpanId(), $restored->getParentSpanId());
     }
+
+    public function test_extract_fallback_uses_parent_span_id_when_traceparent_invalid(): void
+    {
+        $traceId = 'a'.str_repeat('b', 31);
+        $parentSpanId = str_repeat('c', 16);
+
+        $payload = [
+            TraceContextCarrier::PAYLOAD_KEY => [
+                'trace_id' => $traceId,
+                'parent_span_id' => $parentSpanId,
+            ],
+        ];
+
+        $restored = TraceContextCarrier::extract($payload);
+
+        $this->assertNotNull($restored);
+        $this->assertSame($traceId, $restored->getTraceId());
+        $this->assertSame($parentSpanId, $restored->getSpanId());
+        $this->assertSame($parentSpanId, $restored->getParentSpanId());
+    }
 }
