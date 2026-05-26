@@ -6,7 +6,6 @@ namespace Obeserva\Laravel\Http;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Contracts\Span\SpanKind;
@@ -20,6 +19,7 @@ final readonly class TraceRequestMiddleware
     public function __construct(
         private TracerInterface $tracer,
         private ContextStorageInterface $contextStorage,
+        private RequestSpanEnricher $enricher,
     ) {}
 
     public function handle(Request $request, Closure $next): Response
@@ -32,17 +32,9 @@ final readonly class TraceRequestMiddleware
             SpanKind::Server,
         );
 
-        $span->setAttribute('http.method', $request->method());
-        $span->setAttribute('http.route', $request->route()?->uri() ?? $request->path());
-        $span->setAttribute('http.url', $request->fullUrl());
-
-        if ($request->route()?->getName() !== null) {
-            $span->setAttribute('laravel.route.name', (string) $request->route()->getName());
-        }
-
-        if (Auth::check()) {
-            $span->setAttribute('user.id', (string) Auth::id());
-        }
+        $this->enricher->enrichRequest($span, $request);
+        $this->enricher->enrichUser($span, $request);
+        $span->addEvent('request.received');
 
         $startedAt = microtime(true);
 
@@ -53,12 +45,12 @@ final readonly class TraceRequestMiddleware
                 throw new \RuntimeException('Middleware must return a Response instance.');
             }
 
-            $span->setAttribute('http.status_code', $response->getStatusCode());
+            $this->enricher->enrichResponse($span, $response);
+            $span->addEvent('response.sent');
 
             return $response;
         } catch (Throwable $exception) {
-            $span->setAttribute('exception.type', $exception::class);
-            $span->setAttribute('exception.message', $exception->getMessage());
+            $this->enricher->enrichException($span, $exception);
 
             throw $exception;
         } finally {

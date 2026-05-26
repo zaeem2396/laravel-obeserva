@@ -4,12 +4,12 @@
 
 | Directory | Composer name | Version | Role |
 |-----------|---------------|---------|------|
-| `packages/contracts` | `obeserva/contracts` | 0.2.0 | Interfaces and value objects |
-| `packages/core` | `obeserva/core` | 0.2.0 | Runtime implementation |
-| `packages/laravel` | `scout/laravel` | 0.2.0 | Laravel integration |
-| `packages/scout-driver` | `obeserva/scout-driver` | 0.2.0 | Scout APM adapter (scaffold) |
-| `packages/otel-driver` | `obeserva/otel-driver` | 0.2.0 | OTel exporter (scaffold) |
-| `packages/testing` | `obeserva/testing` | 0.2.0 | Test doubles and assertions |
+| `packages/contracts` | `obeserva/contracts` | 0.2.1 | Interfaces and value objects |
+| `packages/core` | `obeserva/core` | 0.2.1 | Runtime implementation |
+| `packages/laravel` | `scout/laravel` | 0.2.1 | Laravel integration |
+| `packages/scout-driver` | `obeserva/scout-driver` | 0.2.1 | Scout APM adapter (scaffold) |
+| `packages/otel-driver` | `obeserva/otel-driver` | 0.2.1 | OTel exporter (scaffold) |
+| `packages/testing` | `obeserva/testing` | 0.2.1 | Test doubles and assertions |
 
 ## Installation matrix
 
@@ -40,7 +40,7 @@ composer config prefer-stable true
 composer require scout/laravel:@dev
 ```
 
-## Package boundaries (v0.2.0)
+## Package boundaries (v0.2.1)
 
 ### obeserva/contracts
 
@@ -60,8 +60,10 @@ No framework or driver dependencies.
 
 ### scout/laravel
 
-- `ObeservaServiceProvider` (request-scoped context + deferred middleware)
-- `TraceRequestMiddleware` (duration, route name, user id, exceptions)
+- `ObeservaServiceProvider` (listeners, exception hooks, terminate flush)
+- `TraceRequestMiddleware`, `RequestSpanEnricher`
+- `TraceMiddlewareTiming` (`obeserva.timing:{segment}` alias)
+- `RouteMatchedListener`, `ReportExceptionListener`
 - `config/obeserva.php`
 - `Obeserva` facade (`startSpan`, `trace`)
 
@@ -79,4 +81,4 @@ Dev dependency for package consumers writing tests.
 
 ## Releases
 
-All packages share the monorepo version (currently **0.2.0**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.2.0-core-runtime.md](posts/v0.2.0-core-runtime.md).
+All packages share the monorepo version (currently **0.2.1**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.2.1-laravel-http.md](posts/v0.2.1-laravel-http.md).

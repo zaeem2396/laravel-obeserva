@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-05-26
+
+### Added
+
+- `RequestSpanEnricher` — centralized HTTP, route, response, user, and exception attribute enrichment
+- `RouteMatchedListener` — route action, middleware stack, and `route.matched` span events
+- `ReportExceptionListener` — correlates reported exceptions to the active request span or creates an `exception` span
+- `TraceMiddlewareTiming` — `obeserva.timing:{name}` middleware alias for pipeline segment child spans
+- `FlushTracerOnTerminate` — clears completed spans at end of request lifecycle (configurable)
+- Config: `obeserva.exceptions.enabled`, `obeserva.terminate.flush_tracer`, `obeserva.http.middleware_timing_alias`
+- HTTP attributes: `http.scheme`, `http.host`, `http.client_ip`, `http.user_agent`, response content type/length
+- Span events: `request.received`, `response.sent`, `exception`
+
+### Changed
+
+- `TraceRequestMiddleware` delegates enrichment to `RequestSpanEnricher`
+- Exception handler hooks via Laravel `reportable()` when using the foundation exception handler
+
 ## [0.2.0] - 2026-05-26
 
 ### Added
@@ -49,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/zaeem2396/laravel-obeserva/releases/tag/v0.1.0

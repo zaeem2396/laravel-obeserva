@@ -14,10 +14,19 @@ return [
 
     'http' => [
         'middleware_enabled' => env('OBESERVA_HTTP_MIDDLEWARE', true),
+        'middleware_timing_alias' => env('OBESERVA_HTTP_MIDDLEWARE_TIMING', true),
+    ],
+
+    'exceptions' => [
+        'enabled' => env('OBESERVA_EXCEPTION_INSTRUMENTATION', true),
     ],
 
     'queue' => [
         'propagation_enabled' => env('OBESERVA_QUEUE_PROPAGATION', true),
+    ],
+
+    'terminate' => [
+        'flush_tracer' => env('OBESERVA_FLUSH_ON_TERMINATE', true),
     ],
 
 ];
