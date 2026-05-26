@@ -85,6 +85,7 @@ On `main` after tagging:
 | v0.1.0 | Obeserva v0.1.0 — Foundation |
 | v0.1.1 | Obeserva v0.1.1 — Core Contracts |
 | v0.2.0 | Obeserva v0.2.0 — Core Runtime |
+| v0.2.1 | Obeserva v0.2.1 — Laravel HTTP |
 
 ## Checklist (copy per release)
 
