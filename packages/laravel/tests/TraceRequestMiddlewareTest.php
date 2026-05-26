@@ -22,6 +22,7 @@ final class TraceRequestMiddlewareTest extends TestCase
     {
         $app['config']->set('obeserva.enabled', true);
         $app['config']->set('obeserva.http.middleware_enabled', true);
+        $app['config']->set('obeserva.terminate.flush_tracer', false);
     }
 
     protected function defineRoutes($app): void
