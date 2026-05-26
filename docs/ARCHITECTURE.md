@@ -7,7 +7,7 @@ Obeserva is a **modular monorepo** for Laravel observability. Each package has a
 1. **Vendor neutrality** — Application code depends on `obeserva/contracts`, not Scout or OpenTelemetry directly.
 2. **Dependency inversion** — Drivers implement contract interfaces; Laravel integration consumes the core runtime.
 3. **Low overhead** — Spans use noop paths when sampling rejects a trace; hot paths avoid unnecessary allocation.
-4. **Runtime awareness** — Context storage is designed for HTTP, queue, Horizon, Octane, and CLI (full support rolls out across roadmap versions).
+4. **Runtime awareness** — Context storage supports HTTP, queue, and Horizon workers (v0.4.0); Octane/RoadRunner/CLI hardening rolls out in v0.6.x.
 
 ## Layer diagram
 
