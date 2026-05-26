@@ -13,6 +13,31 @@ final class NoopSpan implements SpanInterface
         return '';
     }
 
+    public function getTraceId(): string
+    {
+        return '';
+    }
+
+    public function getSpanId(): string
+    {
+        return '';
+    }
+
+    public function getParentSpanId(): ?string
+    {
+        return null;
+    }
+
+    public function isEnded(): bool
+    {
+        return false;
+    }
+
+    public function getDuration(): ?float
+    {
+        return null;
+    }
+
     public function setAttribute(string $key, mixed $value): void {}
 
     /**

@@ -7,6 +7,7 @@ namespace Obeserva\Laravel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
+use Obeserva\Contracts\Driver\ActiveSpanStorageInterface;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\SamplerInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
@@ -23,8 +24,9 @@ final class ObeservaServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/obeserva.php', 'obeserva');
 
-        $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ContextManager::class);
+        $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
+        $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
 
         $this->app->singleton(SamplerInterface::class, function (): SamplerInterface {
             $probability = config('obeserva.sampling.probability', 1.0);
@@ -35,7 +37,17 @@ final class ObeservaServiceProvider extends ServiceProvider
                 : new ProbabilitySampler($rate);
         });
 
-        $this->app->singleton(TracerInterface::class, fn (Application $app): TracerInterface => new Tracer($app->make(SamplerInterface::class)));
+        $this->app->singleton(TracerInterface::class, function (Application $app): TracerInterface {
+            $context = $app->make(ContextManager::class);
+
+            return new Tracer(
+                $app->make(SamplerInterface::class),
+                $context,
+                $context,
+            );
+        });
+
+        $this->app->alias(TracerInterface::class, Tracer::class);
     }
 
     public function boot(): void
@@ -48,9 +60,16 @@ final class ObeservaServiceProvider extends ServiceProvider
             __DIR__.'/../config/obeserva.php' => config_path('obeserva.php'),
         ], 'obeserva-config');
 
-        if (config('obeserva.http.middleware_enabled', true) && $this->app->bound(Kernel::class)) {
-            $kernel = $this->app->make(Kernel::class);
-            $kernel->prependMiddleware(TraceRequestMiddleware::class);
+        if (! config('obeserva.http.middleware_enabled', true)) {
+            return;
         }
+
+        $this->app->booted(function (): void {
+            if (! $this->app->bound(Kernel::class)) {
+                return;
+            }
+
+            $this->app->make(Kernel::class)->prependMiddleware(TraceRequestMiddleware::class);
+        });
     }
 }
