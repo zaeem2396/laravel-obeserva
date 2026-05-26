@@ -54,9 +54,22 @@ Obeserva is a **modular monorepo** for Laravel observability. Each package has a
 
 **Forbidden:** `contracts` must not depend on any other Obeserva package. Drivers must not depend on `scout/laravel`.
 
-## Trace propagation (v0.1.0)
+## Trace propagation
 
-v0.1.0 establishes the **W3C Trace Context** `traceparent` header format via `TraceContext::toPropagationHeaders()` and `fromPropagationHeaders()`. Queue, event, and cross-service propagation are planned for v0.3.x–v0.8.x.
+**W3C Trace Context** `traceparent` headers are supported via `TraceContext::toPropagationHeaders()` and `fromPropagationHeaders()`.
+
+### Span lifecycle (v0.2.0)
+
+The `Tracer` coordinates span creation with `ContextManager`:
+
+1. Resolve `trace_id` from incoming context or generate a new one (`SpanIds`)
+2. Resolve `parent_span_id` from the active span stack or incoming context
+3. Push the new span onto the active stack and update trace context
+4. On `end()`, pop the stack and move the span into the completed-span buffer for `flush()`
+
+Use `Tracer::trace()` / `SpanScope` when you want automatic span completion at the end of a scope.
+
+Queue, event, and cross-service propagation are planned for v0.3.x–v0.8.x.
 
 ## CI/CD
 
