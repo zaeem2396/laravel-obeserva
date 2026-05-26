@@ -7,6 +7,7 @@ namespace Obeserva\Laravel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
+use Obeserva\Contracts\Driver\ActiveSpanStorageInterface;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\SamplerInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
@@ -23,8 +24,9 @@ final class ObeservaServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/obeserva.php', 'obeserva');
 
-        $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ContextManager::class);
+        $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
+        $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
 
         $this->app->singleton(SamplerInterface::class, function (): SamplerInterface {
             $probability = config('obeserva.sampling.probability', 1.0);
@@ -35,7 +37,15 @@ final class ObeservaServiceProvider extends ServiceProvider
                 : new ProbabilitySampler($rate);
         });
 
-        $this->app->singleton(TracerInterface::class, fn (Application $app): TracerInterface => new Tracer($app->make(SamplerInterface::class)));
+        $this->app->singleton(TracerInterface::class, function (Application $app): TracerInterface {
+            $context = $app->make(ContextManager::class);
+
+            return new Tracer(
+                $app->make(SamplerInterface::class),
+                $context,
+                $context,
+            );
+        });
     }
 
     public function boot(): void
