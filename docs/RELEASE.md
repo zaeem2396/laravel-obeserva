@@ -89,6 +89,15 @@ On `main` after tagging:
 | v0.3.0 | Obeserva v0.3.0 — Database Instrumentation |
 | v0.3.1 | Obeserva v0.3.1 — Queue Instrumentation |
 
+## Published releases
+
+| Tag | Announcement |
+|-----|--------------|
+| `v0.3.0` | [docs/posts/v0.3.0-database.md](posts/v0.3.0-database.md) |
+| `v0.2.1` | [docs/posts/v0.2.1-laravel-http.md](posts/v0.2.1-laravel-http.md) |
+| `v0.2.0` | [docs/posts/v0.2.0-core-runtime.md](posts/v0.2.0-core-runtime.md) |
+| `v0.1.0` | [docs/posts/v0.1.0-foundation.md](posts/v0.1.0-foundation.md) |
+
 ## Checklist (copy per release)
 
 - [ ] `release/vX.Y.Z` branch created from `main`
