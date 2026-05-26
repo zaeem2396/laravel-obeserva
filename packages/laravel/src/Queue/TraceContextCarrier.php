@@ -17,13 +17,16 @@ final class TraceContextCarrier
      */
     public static function inject(TraceContextInterface $context, array $payload): array
     {
-        $payload[self::PAYLOAD_KEY] = array_merge(
+        $carrier = array_merge(
             $context->toPropagationHeaders(),
             [
                 'trace_id' => $context->getTraceId(),
                 'parent_span_id' => $context->getSpanId(),
+                'root_trace_id' => $context->getTraceId(),
             ],
         );
+
+        $payload[self::PAYLOAD_KEY] = $carrier;
 
         return $payload;
     }
