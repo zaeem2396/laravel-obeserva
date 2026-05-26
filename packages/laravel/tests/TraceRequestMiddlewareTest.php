@@ -34,14 +34,20 @@ final class TraceRequestMiddlewareTest extends TestCase
 
         $response->assertOk();
 
-        $tracer = $this->app->make(TracerInterface::class);
+        $app = $this->app;
+        $this->assertNotNull($app);
+
+        $tracer = $app->make(TracerInterface::class);
         $this->assertInstanceOf(Tracer::class, $tracer);
         $completed = $tracer->completedSpans();
 
         $this->assertCount(1, $completed);
         $this->assertSame('traced', $completed[0]->getName());
-        $this->assertSame('GET', $completed[0]->toArray()['attributes']['http.method']);
-        $this->assertSame(200, $completed[0]->toArray()['attributes']['http.status_code']);
-        $this->assertArrayHasKey('http.duration_ms', $completed[0]->toArray()['attributes']);
+
+        $attributes = $completed[0]->toArray()['attributes'];
+        $this->assertIsArray($attributes);
+        $this->assertSame('GET', $attributes['http.method']);
+        $this->assertSame(200, $attributes['http.status_code']);
+        $this->assertArrayHasKey('http.duration_ms', $attributes);
     }
 }

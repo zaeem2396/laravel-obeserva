@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
-use Obeserva\Core\Context\ContextManager;
 use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Contracts\Trace\TraceContext;
+use Obeserva\Core\Context\ContextManager;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
