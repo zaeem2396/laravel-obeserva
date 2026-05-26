@@ -21,7 +21,7 @@ $tracer->assertSpanRecorded('database.query');
 
 ## Version
 
-**0.3.1** — `FakeTracer` with nested span support and assertions (monorepo release; no API changes in this patch).
+**0.4.0** — `FakeTracer` with nested span support and assertions (monorepo release; no API changes in this patch).
 
 ## License
 
