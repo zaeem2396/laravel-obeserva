@@ -4,7 +4,7 @@ Scout APM driver adapter for Obeserva instrumentation.
 
 ## Status
 
-**v0.1.0 scaffold** — Full Scout transaction bridging is planned for v0.5.0.
+**v0.2.0 scaffold** — Full Scout transaction bridging is planned for v0.5.0.
 
 ## Installation
 
