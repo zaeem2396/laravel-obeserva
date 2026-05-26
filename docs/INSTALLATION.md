@@ -20,6 +20,9 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_DRIVER` | `noop` | Driver identifier (Scout/OTel drivers in future releases) |
 | `OBESERVA_SAMPLE_RATE` | `1.0` | Sampling probability (0.0–1.0) |
 | `OBESERVA_HTTP_MIDDLEWARE` | `true` | Register HTTP trace middleware |
+| `OBESERVA_HTTP_MIDDLEWARE_TIMING` | `true` | Register `obeserva.timing` middleware alias |
+| `OBESERVA_EXCEPTION_INSTRUMENTATION` | `true` | Hook Laravel reportable exceptions |
+| `OBESERVA_FLUSH_ON_TERMINATE` | `true` | Flush tracer completed spans on terminate |
 | `OBESERVA_QUEUE_PROPAGATION` | `true` | Queue propagation (v0.3.1+) |
 
 ## Monorepo development
@@ -38,7 +41,7 @@ composer ci
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.2.0`). See [RELEASE.md](RELEASE.md) and the [v0.2.0 announcement](posts/v0.2.0-core-runtime.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.2.1`). See [RELEASE.md](RELEASE.md) and the [v0.2.1 announcement](posts/v0.2.1-laravel-http.md).
 
 ### Manual spans in application code
 
@@ -60,6 +63,16 @@ Or use a scope for automatic completion:
 $scope = Obeserva::trace('process-order');
 $scope->span->setAttribute('order.id', $orderId);
 // span ends when $scope goes out of scope
+```
+
+### Middleware pipeline timing
+
+Time a route group's downstream pipeline with the `obeserva.timing` alias:
+
+```php
+Route::middleware('obeserva.timing:api')->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
 ```
 
 ## Path repository install (testing unreleased changes)
