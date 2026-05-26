@@ -60,7 +60,7 @@ No framework or driver dependencies.
 
 ### scout/laravel
 
-- `ObeservaServiceProvider` (listeners, exception hooks, terminate flush)
+- `ObeservaServiceProvider` (HTTP, database, queue listeners, exception hooks, terminate flush)
 - `TraceRequestMiddleware`, `RequestSpanEnricher`
 - `TraceMiddlewareTiming` (`obeserva.timing:{segment}` alias)
 - `RouteMatchedListener`, `ReportExceptionListener`
