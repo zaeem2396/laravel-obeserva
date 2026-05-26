@@ -21,7 +21,7 @@ $tracer->assertSpanRecorded('database.query');
 
 ## Version
 
-**0.2.0** — `FakeTracer` with nested span support and assertions.
+**0.3.0** — `FakeTracer` with nested span support and assertions.
 
 ## License
 
