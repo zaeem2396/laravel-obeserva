@@ -19,7 +19,7 @@ Obeserva is a **modular monorepo** for Laravel observability. Each package has a
                              │
 ┌────────────────────────────▼────────────────────────────────┐
 │  scout/laravel (Obeserva\Laravel)                            │
-│  Service provider · HTTP middleware · config · facades       │
+│  Service provider · HTTP/DB listeners · config · facades    │
 └────────────────────────────┬────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────┐
@@ -69,7 +69,18 @@ The `Tracer` coordinates span creation with `ContextManager`:
 
 Use `Tracer::trace()` / `SpanScope` when you want automatic span completion at the end of a scope.
 
-Queue, event, and cross-service propagation are planned for v0.3.x–v0.8.x.
+Queue and event propagation are planned for v0.3.1–v0.8.x.
+
+### Database instrumentation (v0.3.0)
+
+Laravel database observability hooks into `Illuminate\Database\Events\QueryExecuted`:
+
+1. `TraceQueryListener` creates a child `db.{operation}` span per query
+2. `QuerySanitizer` redacts bindings into a safe `db.statement` attribute
+3. `QueryCounter` increments `db.query_count` on the active request span
+4. `NPlusOneDetector` flags repeated query patterns and annotates the request span
+
+Configuration lives under `config/obeserva.php` → `database.*` (see [INSTALLATION.md](INSTALLATION.md)).
 
 ## CI/CD
 
