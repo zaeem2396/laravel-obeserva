@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.3.1` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.3.1-queue.md](docs/posts/v0.3.1-queue.md).
+**Current release:** `v0.4.0` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.4.0-horizon.md](docs/posts/v0.4.0-horizon.md).
 
 ---
 
@@ -18,7 +18,8 @@
 | v0.2.1 | Laravel HTTP | 🟢 Released (all v0.2.1 rows ✅) | `v0.2.1` |
 | v0.3.0 | Database instrumentation | 🟢 Released (all v0.3.0 rows ✅) | `v0.3.0` |
 | v0.3.1 | Queue instrumentation | 🟢 Released (all v0.3.1 rows ✅) | `v0.3.1` |
-| v0.4.0 | Horizon integration | 🔴 Next | — |
+| v0.4.0 | Horizon integration | 🟢 Released (all v0.4.0 rows ✅) | `v0.4.0` |
+| v0.4.1 | Cache instrumentation | 🔴 Next | — |
 
 ---
 
@@ -59,7 +60,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | Composer Dependency Validation | Dependency conflict prevention | High | 🟢 DONE |
 | Compatibility Matrix | Laravel + PHP version testing | Critical | 🟢 DONE |
 | Queue Runtime Tests | Queue propagation validation | Critical | 🟢 DONE (sync queue propagation tests shipped `v0.3.1`) |
-| Horizon Runtime Tests | Horizon worker lifecycle validation | High | 🔴 PLANNED |
+| Horizon Runtime Tests | Horizon worker lifecycle validation | High | 🟢 DONE (supervisor loop + metrics tests shipped `v0.4.0`; full Redis/Horizon CI job: v0.6.x) |
 | Octane Runtime Tests | Long-running worker validation | High | 🔴 PLANNED |
 | Benchmark Pipeline | Instrumentation overhead testing | Critical | 🟢 DONE |
 | Memory Leak Detection | Long-running process safety | High | 🔴 PLANNED |
@@ -108,9 +109,9 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.3.1 | Queue Instrumentation | Queue Trace Propagation | 🟢 DONE | Shipped `v0.3.1`: `Queue::createPayloadUsing` + `TraceContextCarrier` injects W3C context from active HTTP/request spans into job payloads; restored on `JobProcessing`. |
 | v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🟢 DONE | Shipped `v0.3.1`: `TraceJobFailedListener` correlates exceptions to active job spans with `queue.result=failed`. |
 | v0.3.1 | Queue Instrumentation | Queue Driver Hooks | 🟢 DONE | Shipped `v0.3.1`: `JobProcessing`/`JobProcessed`/`JobFailed` listeners; driver-agnostic via Laravel queue events (sync, Redis, database, SQS). Horizon-specific hooks: v0.4.0. |
-| v0.4.0 | Horizon Integration | Worker Lifecycle Tracing | 🔴 PLANNED | Instrument Horizon worker startup, processing, restart, and shutdown lifecycles with safe long-running worker context isolation. |
-| v0.4.0 | Horizon Integration | Retry Trace Correlation | 🔴 PLANNED | Correlate retry attempts with original job traces while preserving retry history and execution causation chains. |
-| v0.4.0 | Horizon Integration | Throughput Metrics | 🔴 PLANNED | Generate queue throughput, latency, retry, and failure metrics optimized for observability dashboards and production monitoring. |
+| v0.4.0 | Horizon Integration | Worker Lifecycle Tracing | 🟢 DONE | Shipped `v0.4.0`: `SupervisorLooped`, `WorkerProcessRestarting`, `SupervisorProcessRestarting`, `WorkerStopping` listeners; `horizon.supervisor:*` spans. |
+| v0.4.0 | Horizon Integration | Retry Trace Correlation | 🟢 DONE | Shipped `v0.4.0`: `root_trace_id` in carrier, `HorizonRetryCorrelator`, `horizon.retry_of` + `queue.retry_attempt` on job spans. |
+| v0.4.0 | Horizon Integration | Throughput Metrics | 🟢 DONE | Shipped `v0.4.0`: `HorizonThroughputMetrics` via `JobReserved`/`JobReleased`; attributes on supervisor spans. |
 | v0.4.1 | Cache Instrumentation | Redis Tracing | 🔴 PLANNED | Instrument Redis commands with latency tracking, connection metadata, operation categorization, and distributed trace correlation. |
 | v0.4.1 | Cache Instrumentation | Cache Store Hooks | 🔴 PLANNED | Instrument Laravel cache stores with hit/miss visibility, operation timing, and cache backend awareness. |
 | v0.5.0 | Scout Driver | Scout Span Adapter | 🔴 PLANNED | Translate internal instrumentation spans into Scout-compatible transactions while preserving nested trace fidelity and metadata structure. |
