@@ -18,6 +18,8 @@ php artisan vendor:publish --tag=obeserva-config
 
 HTTP requests are traced when `OBESERVA_ENABLED=true` and `OBESERVA_HTTP_MIDDLEWARE=true` (defaults).
 
+Database queries and queued jobs are instrumented by default (`OBESERVA_DB_QUERY_TRACING`, `OBESERVA_QUEUE_PROPAGATION`). See [INSTALLATION.md](../../docs/INSTALLATION.md) for all environment variables.
+
 ## Requirements
 
 - PHP ^8.3

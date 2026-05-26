@@ -58,7 +58,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | Rector | Automated upgrades and refactors | High | 🟢 DONE |
 | Composer Dependency Validation | Dependency conflict prevention | High | 🟢 DONE |
 | Compatibility Matrix | Laravel + PHP version testing | Critical | 🟢 DONE |
-| Queue Runtime Tests | Queue propagation validation | Critical | 🔴 PLANNED |
+| Queue Runtime Tests | Queue propagation validation | Critical | 🟢 DONE (sync queue propagation tests shipped `v0.3.1`) |
 | Horizon Runtime Tests | Horizon worker lifecycle validation | High | 🔴 PLANNED |
 | Octane Runtime Tests | Long-running worker validation | High | 🔴 PLANNED |
 | Benchmark Pipeline | Instrumentation overhead testing | Critical | 🟢 DONE |
@@ -98,12 +98,12 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.1.1 | Core Contracts | Trace Context API | 🟢 DONE | Build immutable trace context objects capable of safely propagating distributed trace metadata across HTTP requests, queues, events, notifications, and async workers. |
 | v0.1.1 | Core Contracts | Driver Interfaces | 🟢 DONE | Create pluggable interfaces for tracing drivers, exporters, samplers, context storage, and propagation mechanisms following strict dependency inversion principles. |
 | v0.2.0 | Core Runtime | Span Lifecycle Engine | 🟢 DONE | Shipped `v0.2.0`: nesting, active span stack, `SpanScope`, completed-span flush buffer, `Tracer::trace()`. Driver export & worker-runtime hardening deferred to v0.5.x–v0.8.x. |
-| v0.2.0 | Core Runtime | Context Manager | 🟢 DONE | Shipped `v0.2.0`: `ContextManager` with trace context + active span stack for HTTP requests. Multi-runtime isolation (queue, Horizon, Octane, long-lived CLI) is scoped to v0.3.1–v0.6.1 rows below—not part of the v0.2.0 release. |
+| v0.2.0 | Core Runtime | Context Manager | 🟢 DONE | Shipped `v0.2.0`: `ContextManager` with trace context + active span stack for HTTP requests. Queue worker context restore shipped `v0.3.1`; Horizon/Octane/long-lived CLI isolation: v0.4.0–v0.6.1. |
 | v0.2.0 | Core Runtime | Sampling Engine | 🟢 DONE | Shipped `v0.2.0`: `AlwaysOnSampler`, `ProbabilitySampler`, config via `OBESERVA_SAMPLE_RATE`. |
 | v0.2.1 | Laravel Integration | Service Provider | 🟢 DONE | Shipped `v0.2.1`: auto-discovery, config publish, deferred middleware, listeners, terminate flush. |
 | v0.2.1 | Laravel Integration | HTTP Middleware Instrumentation | 🟢 DONE | Shipped `v0.2.0`–`v0.2.1`: request spans, `RequestSpanEnricher`, route/middleware metadata, response attrs, `obeserva.timing:{segment}` pipeline timing, user context. Auto-instrumentation of every global middleware: not planned (use `obeserva.timing`). |
-| v0.2.1 | Laravel Integration | Exception Instrumentation | 🟢 DONE | Shipped `v0.2.1`: `ReportExceptionListener`, HTTP span correlation via `reportable()`, standalone `exception` spans outside requests. Queue/job exception correlation: see v0.3.1 Failed Job Correlation. |
-| v0.3.0 | Database Instrumentation | Query Tracing | 🟢 DONE | Shipped `v0.3.0`: `TraceQueryListener`, `QuerySanitizer`, `db.*` child spans, `db.query_count` on request spans. Eloquent model attributes on spans: v0.3.1+. |
+| v0.2.1 | Laravel Integration | Exception Instrumentation | 🟢 DONE | Shipped `v0.2.1`: `ReportExceptionListener`, HTTP span correlation via `reportable()`, standalone `exception` spans outside requests. Queue/job exception correlation shipped `v0.3.1` (`TraceJobFailedListener`). |
+| v0.3.0 | Database Instrumentation | Query Tracing | 🟢 DONE | Shipped `v0.3.0`: `TraceQueryListener`, `QuerySanitizer`, `db.*` child spans, `db.query_count` on request spans. Eloquent model attributes on spans: deferred (v0.4.1+). |
 | v0.3.0 | Database Instrumentation | Lazy Loading Detection | 🟢 DONE | Shipped `v0.3.0`: `NPlusOneDetector` flags repeated query patterns on the active span (`db.n_plus_one_detected`). Eloquent `LazyLoadingAttempted` event not available in Laravel 12; pattern-based detection used instead. |
 | v0.3.1 | Queue Instrumentation | Queue Trace Propagation | 🟢 DONE | Shipped `v0.3.1`: `Queue::createPayloadUsing` + `TraceContextCarrier` injects W3C context from active HTTP/request spans into job payloads; restored on `JobProcessing`. |
 | v0.3.1 | Queue Instrumentation | Failed Job Correlation | 🟢 DONE | Shipped `v0.3.1`: `TraceJobFailedListener` correlates exceptions to active job spans with `queue.result=failed`. |
