@@ -19,7 +19,7 @@ This package is typically installed transitively via `scout/laravel`.
 
 ## Version
 
-**0.2.0** — Active span storage interface and extended span contract.
+**0.3.0** — Stable contracts for span lifecycle, trace context, and driver interfaces.
 
 ## License
 
