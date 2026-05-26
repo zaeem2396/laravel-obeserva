@@ -1,6 +1,6 @@
 {
     "name": "obeserva/scout-driver",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "description": "Scout APM driver adapter for Obeserva instrumentation",
     "license": "MIT",
     "type": "library",

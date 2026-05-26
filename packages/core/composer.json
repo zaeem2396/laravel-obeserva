@@ -1,6 +1,6 @@
 {
     "name": "obeserva/core",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "description": "Low-overhead instrumentation runtime for Laravel observability",
     "license": "MIT",
     "type": "library",
