@@ -25,7 +25,7 @@ HTTP requests are traced when `OBESERVA_ENABLED=true` and `OBESERVA_HTTP_MIDDLEW
 
 ## Version
 
-**0.1.0** — Service provider, config, HTTP middleware scaffold. Queue, database, and exception instrumentation ship in later roadmap versions.
+**0.2.0** — Request-scoped tracer, enriched HTTP middleware (duration, user, exceptions), `trace()` facade helper. Queue and database instrumentation ship in v0.3.x.
 
 ## Documentation
 
