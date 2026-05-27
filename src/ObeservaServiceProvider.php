@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace Obeserva\Laravel;
 
+use Illuminate\Cache\Events\CacheHit;
+use Illuminate\Cache\Events\CacheMissed;
+use Illuminate\Cache\Events\KeyForgotten;
+use Illuminate\Cache\Events\KeyWritten;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Exceptions\Handler;
-use Illuminate\Redis\Events\CommandExecuted;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Queue;
+use Illuminate\Redis\Events\CommandExecuted;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
@@ -39,10 +43,10 @@ use Obeserva\Laravel\Listeners\FlushTracerOnTerminate;
 use Obeserva\Laravel\Listeners\NPlusOneDetectionListener;
 use Obeserva\Laravel\Listeners\ReportExceptionListener;
 use Obeserva\Laravel\Listeners\RouteMatchedListener;
+use Obeserva\Laravel\Listeners\TraceCacheEventListener;
 use Obeserva\Laravel\Listeners\TraceJobFailedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessingListener;
-use Obeserva\Laravel\Listeners\TraceCacheEventListener;
 use Obeserva\Laravel\Listeners\TraceQueryListener;
 use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
@@ -155,10 +159,10 @@ final class ObeservaServiceProvider extends ServiceProvider
             return;
         }
 
-        Event::listen(\Illuminate\Cache\Events\CacheHit::class, TraceCacheEventListener::class);
-        Event::listen(\Illuminate\Cache\Events\CacheMissed::class, TraceCacheEventListener::class);
-        Event::listen(\Illuminate\Cache\Events\KeyWritten::class, TraceCacheEventListener::class);
-        Event::listen(\Illuminate\Cache\Events\KeyForgotten::class, TraceCacheEventListener::class);
+        Event::listen(CacheHit::class, TraceCacheEventListener::class);
+        Event::listen(CacheMissed::class, TraceCacheEventListener::class);
+        Event::listen(KeyWritten::class, TraceCacheEventListener::class);
+        Event::listen(KeyForgotten::class, TraceCacheEventListener::class);
     }
 
     private function registerRedisInstrumentation(): void

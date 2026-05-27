@@ -29,7 +29,8 @@ final class TraceRedisCommandExecutedListenerTest extends TestCase
     {
         $listener = $this->app->make(TraceRedisCommandExecutedListener::class);
 
-        $fakeConnection = new class {
+        $fakeConnection = new class
+        {
             public function getName(): string
             {
                 return 'default';
@@ -52,4 +53,3 @@ final class TraceRedisCommandExecutedListenerTest extends TestCase
         $this->assertSame(12.5, $attributes['db.duration_ms']);
     }
 }
-

@@ -46,4 +46,3 @@ final readonly class TraceCacheEventListener
         $span->end();
     }
 }
-
