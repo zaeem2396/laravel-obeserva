@@ -35,6 +35,10 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_CACHE_ENABLED` | `true` | Cache instrumentation (Cache hit/miss/write/forget) |
 | `OBESERVA_REDIS_COMMAND_TRACING` | `true` | Redis command spans via `CommandExecuted` events |
 
+## Releases
+
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.4.1`). See [RELEASE.md](RELEASE.md) and the [v0.4.1 announcement](posts/v0.4.1-cache.md).
+
 ## Local development
 
 ```bash

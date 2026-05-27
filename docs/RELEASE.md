@@ -32,3 +32,45 @@ git pull origin main
 git tag -a vX.Y.Z -m "Release vX.Y.Z"
 git push origin vX.Y.Z
 ```
+
+## GitHub release
+
+1. Open [Releases](https://github.com/zaeem2396/laravel-obeserva/releases) → **Draft a new release**.
+2. Choose tag `vX.Y.Z`.
+3. Paste the body from `docs/posts/vX.Y.Z-*.md` or the matching `CHANGELOG.md` section.
+4. Publish the release (not pre-release for stable milestones).
+
+## Release titles
+
+| Version | Suggested GitHub release title |
+|---------|-------------------------------|
+| v0.4.1 | Obeserva v0.4.1 — Cache & Redis Instrumentation |
+| v0.4.0 | Obeserva v0.4.0 — Horizon Integration |
+| v0.3.1 | Obeserva v0.3.1 — Queue Instrumentation |
+| v0.3.0 | Obeserva v0.3.0 — Database Instrumentation |
+| v0.2.1 | Obeserva v0.2.1 — Laravel HTTP |
+| v0.2.0 | Obeserva v0.2.0 — Core Runtime |
+| v0.1.0 | Obeserva v0.1.0 — Foundation |
+
+## Published releases
+
+| Tag | Announcement |
+|-----|--------------|
+| `v0.4.1` | [docs/posts/v0.4.1-cache.md](posts/v0.4.1-cache.md) |
+| `v0.4.0` | [docs/posts/v0.4.0-horizon.md](posts/v0.4.0-horizon.md) |
+| `v0.3.1` | [docs/posts/v0.3.1-queue.md](posts/v0.3.1-queue.md) |
+| `v0.3.0` | [docs/posts/v0.3.0-database.md](posts/v0.3.0-database.md) |
+| `v0.2.1` | [docs/posts/v0.2.1-laravel-http.md](posts/v0.2.1-laravel-http.md) |
+| `v0.2.0` | [docs/posts/v0.2.0-core-runtime.md](posts/v0.2.0-core-runtime.md) |
+| `v0.1.0` | [docs/posts/v0.1.0-foundation.md](posts/v0.1.0-foundation.md) |
+
+## Checklist (copy per release)
+
+- [ ] `release/vX.Y.Z` branch created from `main`
+- [ ] `CHANGELOG.md` finalized with date
+- [ ] Docs and `docs/posts/` updated
+- [ ] `composer ci` passes locally
+- [ ] PR merged to `main`
+- [ ] Annotated tag `vX.Y.Z` pushed
+- [ ] GitHub release published
+- [ ] `[Unreleased]` section opened on `main`
