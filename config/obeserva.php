@@ -39,6 +39,14 @@ return [
         'retry_correlation' => env('OBESERVA_HORIZON_RETRY_CORRELATION', true),
     ],
 
+    'cache' => [
+        'enabled' => env('OBESERVA_CACHE_ENABLED', true),
+    ],
+
+    'redis' => [
+        'command_tracing' => env('OBESERVA_REDIS_COMMAND_TRACING', true),
+    ],
+
     'terminate' => [
         'flush_tracer' => env('OBESERVA_FLUSH_ON_TERMINATE', true),
     ],
