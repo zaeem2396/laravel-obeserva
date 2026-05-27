@@ -8,13 +8,47 @@ Laravel-native observability and instrumentation runtime with OpenTelemetry-alig
 
 **Current release:** [`v0.4.0`](docs/posts/v0.4.0-horizon.md) (Horizon).
 
+## Table of contents
+
+- [Installation](#installation)
+- [What you get](#what-you-get)
+- [Configuration](#configuration)
+- [Instrumentation areas](#instrumentation-areas)
+- [Modules](#modules)
+- [Documentation index](#documentation-index)
+- [Development](#development)
+- [License](#license)
+
 ## Installation
 
 ```bash
 composer require scout/laravel
 ```
 
-See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration.
+See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environment variables.
+
+## What you get
+
+- **HTTP**: request spans, route metadata, middleware timing, exception correlation
+- **Database**: `db.*` child spans, SQL sanitization, N+1 detection
+- **Queue**: W3C trace propagation in payloads, consumer spans, failed-job correlation
+- **Horizon**: supervisor/worker lifecycle spans, throughput metrics, retry correlation
+- **Cache**: cache hit/miss/write/forget spans
+- **Redis**: per-command spans via `CommandExecuted` events
+
+## Configuration
+
+- **Config file**: publish `config/obeserva.php` via `php artisan vendor:publish --tag=obeserva-config`
+- **Environment variables**: documented in [docs/INSTALLATION.md](docs/INSTALLATION.md)
+
+## Instrumentation areas
+
+- **HTTP**: enabled by `OBESERVA_HTTP_MIDDLEWARE`
+- **Database**: enabled by `OBESERVA_DB_QUERY_TRACING`
+- **Queue**: enabled by `OBESERVA_QUEUE_JOB_TRACING` and propagation by `OBESERVA_QUEUE_PROPAGATION`
+- **Horizon**: enabled by `OBESERVA_HORIZON_ENABLED` (requires `laravel/horizon`)
+- **Cache**: enabled by `OBESERVA_CACHE_ENABLED`
+- **Redis**: enabled by `OBESERVA_REDIS_COMMAND_TRACING`
 
 ## Modules
 
@@ -30,7 +64,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration.
 - PHP 8.3, 8.4, or 8.5
 - Laravel 11, 12, or 13
 
-## Documentation
+## Documentation index
 
 | Document | Description |
 |----------|-------------|
