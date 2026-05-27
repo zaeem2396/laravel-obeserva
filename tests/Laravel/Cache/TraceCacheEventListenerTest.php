@@ -93,4 +93,3 @@ final class TraceCacheEventListenerTest extends TestCase
         $this->assertSame('cache.forget', $spans[0]->getName());
     }
 }
-

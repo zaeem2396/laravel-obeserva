@@ -27,4 +27,3 @@ final readonly class TraceRedisCommandExecutedListener
         $span->end();
     }
 }
-
