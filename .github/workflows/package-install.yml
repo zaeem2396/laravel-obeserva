@@ -34,7 +34,9 @@ jobs:
         run: |
           composer create-project laravel/laravel test-app "${{ matrix.laravel }}" --prefer-dist --no-interaction
           cd test-app
-          composer config repositories.obeserva vcs "file://${{ github.workspace }}"
+          # Use a path repository because the consolidated package lives in the repo root.
+          # VCS/file:// installs require git metadata + revision resolution and can fail in CI.
+          composer config repositories.obeserva path "../"
           composer config minimum-stability dev
           composer config prefer-stable true
           composer require scout/laravel:@dev --no-interaction --prefer-source
