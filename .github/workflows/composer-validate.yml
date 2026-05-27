@@ -23,8 +23,6 @@ jobs:
       - name: Validate dependencies and package boundaries
         run: composer validate:deps
 
-      - name: Validate package composer files
-        run: composer validate:packages
 
       - name: Install and verify lock consistency
         run: composer install --prefer-dist --no-interaction

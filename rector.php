@@ -7,7 +7,7 @@ use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/packages',
+        __DIR__.'/src',
     ])
     ->withPhpSets(php83: true)
     ->withPreparedSets(
@@ -17,6 +17,6 @@ return RectorConfig::configure()
     )
     ->withSkip([
         StringClassNameToClassConstantRector::class => [
-            __DIR__.'/packages/laravel/src/Horizon/Horizon.php',
+            __DIR__.'/src/Horizon/Horizon.php',
         ],
     ]);
