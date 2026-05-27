@@ -1,102 +1,20 @@
-# Packages
+# Modules
 
 ## Overview
 
-| Directory | Composer name | Version | Role |
-|-----------|---------------|---------|------|
-| `packages/contracts` | `obeserva/contracts` | 0.4.0 | Interfaces and value objects |
-| `packages/core` | `obeserva/core` | 0.4.0 | Runtime implementation |
-| `packages/laravel` | `scout/laravel` | 0.4.0 | Laravel integration |
-| `packages/scout-driver` | `obeserva/scout-driver` | 0.4.0 | Scout APM adapter (scaffold) |
-| `packages/otel-driver` | `obeserva/otel-driver` | 0.4.0 | OTel exporter (scaffold) |
-| `packages/testing` | `obeserva/testing` | 0.4.0 | Test doubles and assertions |
+| Directory | Namespace | Role |
+|-----------|-----------|------|
+| `src/Contracts` | `Obeserva\Contracts` | Interfaces and value objects |
+| `src/Core` | `Obeserva\Core` | Runtime implementation |
+| `src` | `Obeserva\Laravel` | Laravel integration |
+| `src/FakeTracer.php` | `Obeserva\Testing` | Test double |
 
-## Installation matrix
-
-### End users (Laravel apps)
+## Installation
 
 ```bash
 composer require scout/laravel
 ```
 
-### Monorepo development
-
-Path repositories are configured in the root `composer.json`:
-
-```json
-{
-  "repositories": [
-    { "type": "path", "url": "packages/*", "options": { "symlink": true } }
-  ]
-}
-```
-
-### Fresh Laravel app (path install)
-
-```bash
-composer config repositories.obeserva path "../path-to-monorepo/packages/*"
-composer config minimum-stability dev
-composer config prefer-stable true
-composer require scout/laravel:@dev
-```
-
-## Package boundaries (v0.4.0)
-
-### obeserva/contracts
-
-- `SpanInterface`, `SpanKind`
-- `TraceContextInterface`, `TraceContext`, `SpanIds`
-- `TracerInterface`, `ContextStorageInterface`, `ActiveSpanStorageInterface`
-- `PropagationInterface`, `SamplerInterface`, `ExporterInterface`
-
-No framework or driver dependencies.
-
-### obeserva/core
-
-- `Tracer` (nesting, flush buffer, `trace()` scopes)
-- `Span`, `NoopSpan`, `SpanScope`
-- `ContextManager` (trace context + active span stack)
-- `AlwaysOnSampler`, `ProbabilitySampler`
-
-### scout/laravel
-
-- `ObeservaServiceProvider` (HTTP, database, queue, Horizon listeners, exception hooks, terminate flush)
-- `TraceRequestMiddleware`, `RequestSpanEnricher`
-- `TraceMiddlewareTiming` (`obeserva.timing:{segment}` alias)
-- `RouteMatchedListener`, `ReportExceptionListener`
-- `config/obeserva.php`
-- `Obeserva` facade (`startSpan`, `trace`)
-
-Auto-discovered via Laravel package discovery.
-
-### Database instrumentation (v0.3.0)
-
-- `TraceQueryListener` — `QueryExecuted` → `db.{operation}` spans
-- `QuerySanitizer`, `QueryOperation`, `QueryCounter`
-- `NPlusOneDetector`, `NPlusOneDetectionListener`
-
-### Queue instrumentation (v0.3.1)
-
-- `TraceContextCarrier`, `QueuePayloadHook`
-- `TraceJobProcessingListener`, `TraceJobProcessedListener`, `TraceJobFailedListener`
-- `ActiveJobSpanRegistry`, `JobSpanEnricher`
-
-### Horizon instrumentation (v0.4.0)
-
-- `Horizon`, `HorizonInstrumentation`
-- `TraceHorizonSupervisorLoopedListener`, restart/stop listeners
-- `HorizonThroughputMetrics`, `HorizonRetryCorrelator`, `HorizonJobPayloadReader`
-
-### obeserva/scout-driver & obeserva/otel-driver
-
-Scaffold adapters for v0.5.0 and v0.6.0 roadmap work. Not required for basic HTTP instrumentation in v0.1.0.
-
-### obeserva/testing
-
-- `FakeTracer` with `assertSpanRecorded()` and `recordedSpans()`
-
-Dev dependency for package consumers writing tests.
-
 ## Releases
 
-All packages share the monorepo version (currently **0.4.0**). Release process, tagging, and announcements: [RELEASE.md](RELEASE.md), [posts/v0.4.0-horizon.md](posts/v0.4.0-horizon.md).
+A single package tag (`vX.Y.Z`) is published for each release.
