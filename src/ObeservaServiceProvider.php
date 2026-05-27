@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Redis\Events\CommandExecuted;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
@@ -41,7 +42,9 @@ use Obeserva\Laravel\Listeners\RouteMatchedListener;
 use Obeserva\Laravel\Listeners\TraceJobFailedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessingListener;
+use Obeserva\Laravel\Listeners\TraceCacheEventListener;
 use Obeserva\Laravel\Listeners\TraceQueryListener;
+use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
@@ -103,6 +106,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerDatabaseInstrumentation();
         $this->registerQueueInstrumentation();
         $this->registerHorizonInstrumentation();
+        $this->registerCacheInstrumentation();
+        $this->registerRedisInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerTerminateHook();
     }
@@ -142,6 +147,27 @@ final class ObeservaServiceProvider extends ServiceProvider
         if (config('obeserva.database.query_tracing', true)) {
             Event::listen(QueryExecuted::class, TraceQueryListener::class);
         }
+    }
+
+    private function registerCacheInstrumentation(): void
+    {
+        if (! config('obeserva.cache.enabled', true)) {
+            return;
+        }
+
+        Event::listen(\Illuminate\Cache\Events\CacheHit::class, TraceCacheEventListener::class);
+        Event::listen(\Illuminate\Cache\Events\CacheMissed::class, TraceCacheEventListener::class);
+        Event::listen(\Illuminate\Cache\Events\KeyWritten::class, TraceCacheEventListener::class);
+        Event::listen(\Illuminate\Cache\Events\KeyForgotten::class, TraceCacheEventListener::class);
+    }
+
+    private function registerRedisInstrumentation(): void
+    {
+        if (! config('obeserva.redis.command_tracing', true)) {
+            return;
+        }
+
+        Event::listen(CommandExecuted::class, TraceRedisCommandExecutedListener::class);
     }
 
     private function registerHttpInstrumentation(): void
