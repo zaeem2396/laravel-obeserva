@@ -32,6 +32,8 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_HORIZON_WORKER_TRACING` | `true` | Supervisor/worker lifecycle spans |
 | `OBESERVA_HORIZON_THROUGHPUT_METRICS` | `true` | Job reserved/released counters on spans |
 | `OBESERVA_HORIZON_RETRY_CORRELATION` | `true` | Root trace + retry attempt attributes |
+| `OBESERVA_CACHE_ENABLED` | `true` | Cache instrumentation (Cache hit/miss/write/forget) |
+| `OBESERVA_REDIS_COMMAND_TRACING` | `true` | Redis command spans via `CommandExecuted` events |
 
 ## Local development
 
