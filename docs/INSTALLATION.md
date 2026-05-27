@@ -33,61 +33,11 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_HORIZON_THROUGHPUT_METRICS` | `true` | Job reserved/released counters on spans |
 | `OBESERVA_HORIZON_RETRY_CORRELATION` | `true` | Root trace + retry attempt attributes |
 
-## Monorepo development
+## Local development
 
 ```bash
 git clone git@github.com:zaeem2396/laravel-obeserva.git
 cd laravel-obeserva
 composer install
 composer ci
-```
-
-## Requirements
-
-- **PHP** 8.3, 8.4, or 8.5
-- **Laravel** 11, 12, or 13 (for `scout/laravel`)
-
-## Releases
-
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.4.0`). See [RELEASE.md](RELEASE.md) and the [v0.4.0 announcement](posts/v0.4.0-horizon.md).
-
-### Manual spans in application code
-
-```php
-use Obeserva\Laravel\Facades\Obeserva;
-use Obeserva\Contracts\Span\SpanKind;
-
-$span = Obeserva::startSpan('process-order', SpanKind::Internal);
-$span->setAttribute('order.id', $orderId);
-
-// ... work ...
-
-$span->end();
-```
-
-Or use a scope for automatic completion:
-
-```php
-$scope = Obeserva::trace('process-order');
-$scope->span->setAttribute('order.id', $orderId);
-// span ends when $scope goes out of scope
-```
-
-### Middleware pipeline timing
-
-Time a route group's downstream pipeline with the `obeserva.timing` alias:
-
-```php
-Route::middleware('obeserva.timing:api')->group(function () {
-    Route::get('/users', [UserController::class, 'index']);
-});
-```
-
-## Path repository install (testing unreleased changes)
-
-```bash
-composer config repositories.obeserva path "/absolute/path/to/laravel-obeserva/packages/*"
-composer config minimum-stability dev
-composer config prefer-stable true
-composer require scout/laravel:@dev
 ```
