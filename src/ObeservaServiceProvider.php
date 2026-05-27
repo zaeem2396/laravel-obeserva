@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Obeserva\Laravel;
 
+use Illuminate\Cache\Events\CacheHit;
+use Illuminate\Cache\Events\CacheMissed;
+use Illuminate\Cache\Events\KeyForgotten;
+use Illuminate\Cache\Events\KeyWritten;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
@@ -13,6 +17,7 @@ use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\Queue;
+use Illuminate\Redis\Events\CommandExecuted;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
@@ -38,10 +43,12 @@ use Obeserva\Laravel\Listeners\FlushTracerOnTerminate;
 use Obeserva\Laravel\Listeners\NPlusOneDetectionListener;
 use Obeserva\Laravel\Listeners\ReportExceptionListener;
 use Obeserva\Laravel\Listeners\RouteMatchedListener;
+use Obeserva\Laravel\Listeners\TraceCacheEventListener;
 use Obeserva\Laravel\Listeners\TraceJobFailedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessingListener;
 use Obeserva\Laravel\Listeners\TraceQueryListener;
+use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
@@ -103,6 +110,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerDatabaseInstrumentation();
         $this->registerQueueInstrumentation();
         $this->registerHorizonInstrumentation();
+        $this->registerCacheInstrumentation();
+        $this->registerRedisInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerTerminateHook();
     }
@@ -142,6 +151,27 @@ final class ObeservaServiceProvider extends ServiceProvider
         if (config('obeserva.database.query_tracing', true)) {
             Event::listen(QueryExecuted::class, TraceQueryListener::class);
         }
+    }
+
+    private function registerCacheInstrumentation(): void
+    {
+        if (! config('obeserva.cache.enabled', true)) {
+            return;
+        }
+
+        Event::listen(CacheHit::class, TraceCacheEventListener::class);
+        Event::listen(CacheMissed::class, TraceCacheEventListener::class);
+        Event::listen(KeyWritten::class, TraceCacheEventListener::class);
+        Event::listen(KeyForgotten::class, TraceCacheEventListener::class);
+    }
+
+    private function registerRedisInstrumentation(): void
+    {
+        if (! config('obeserva.redis.command_tracing', true)) {
+            return;
+        }
+
+        Event::listen(CommandExecuted::class, TraceRedisCommandExecutedListener::class);
     }
 
     private function registerHttpInstrumentation(): void
