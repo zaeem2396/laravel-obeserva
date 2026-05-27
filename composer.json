@@ -1,49 +1,60 @@
 {
-    "name": "obeserva/monorepo",
-    "description": "Laravel-native observability and instrumentation runtime (monorepo)",
+    "name": "scout/laravel",
+    "description": "Laravel-native observability instrumentation runtime",
     "license": "MIT",
-    "type": "project",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "observability",
+        "tracing",
+        "apm",
+        "opentelemetry"
+    ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.3",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/database": "^11.0|^12.0|^13.0",
+        "illuminate/queue": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0"
     },
     "require-dev": {
         "infection/infection": "^0.29",
         "larastan/larastan": "^3.0",
         "laravel/horizon": "^5.30",
         "laravel/pint": "^1.21",
-        "obeserva/contracts": "@dev",
-        "obeserva/core": "@dev",
-        "obeserva/otel-driver": "@dev",
-        "obeserva/scout-driver": "@dev",
-        "obeserva/testing": "@dev",
         "orchestra/testbench": "^9.0|^10.0|^11.0",
         "phpunit/phpunit": "^11.5",
-        "rector/rector": "^2.0",
-        "scout/laravel": "@dev"
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "Obeserva\\Contracts\\": "packages/contracts/src/",
-            "Obeserva\\Core\\": "packages/core/src/",
-            "Obeserva\\Laravel\\": "packages/laravel/src/",
-            "Obeserva\\ScoutDriver\\": "packages/scout-driver/src/",
-            "Obeserva\\OtelDriver\\": "packages/otel-driver/src/",
-            "Obeserva\\Testing\\": "packages/testing/src/"
+            "Obeserva\\Contracts\\": "src/Contracts/",
+            "Obeserva\\Core\\": "src/Core/",
+            "Obeserva\\Laravel\\": "src/",
+            "Obeserva\\Testing\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Obeserva\\Contracts\\Tests\\": "packages/contracts/tests/",
-            "Obeserva\\Core\\Tests\\": "packages/core/tests/",
-            "Obeserva\\Laravel\\Tests\\": "packages/laravel/tests/",
-            "Obeserva\\ScoutDriver\\Tests\\": "packages/scout-driver/tests/",
-            "Obeserva\\OtelDriver\\Tests\\": "packages/otel-driver/tests/",
-            "Obeserva\\Testing\\Tests\\": "packages/testing/tests/"
+            "Obeserva\\Contracts\\Tests\\": "tests/Contracts/",
+            "Obeserva\\Core\\Tests\\": "tests/Core/",
+            "Obeserva\\Laravel\\Tests\\": "tests/Laravel/",
+            "Obeserva\\Testing\\Tests\\": "tests/Testing/"
         }
     },
-    "repositories": [
-        { "type": "path", "url": "packages/*", "options": { "symlink": true } }
-    ],
+    "suggest": {
+        "laravel/horizon": "Required for Horizon worker instrumentation (v0.4.0+)."
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Obeserva\\Laravel\\ObeservaServiceProvider"
+            ],
+            "aliases": {
+                "Obeserva": "Obeserva\\Laravel\\Facades\\Obeserva"
+            }
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
@@ -71,18 +82,13 @@
         "infection": "infection --threads=4",
         "rector": "rector process",
         "rector:check": "rector process --dry-run",
-        "validate:deps": [
-            "composer validate --strict",
-            "@php scripts/validate-package-boundaries.php"
-        ],
-        "validate:packages": "bash -c 'for pkg in packages/*/composer.json; do composer validate \"$pkg\" || exit 1; done'",
+        "validate:deps": "composer validate --strict",
         "ci": [
             "@test",
             "@analyse",
             "@format:check",
             "@rector:check",
-            "@validate:deps",
-            "@validate:packages"
+            "@validate:deps"
         ],
         "pre-push": [
             "@test",
