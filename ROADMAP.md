@@ -20,8 +20,7 @@
 | v0.3.1 | Queue instrumentation | 🟢 Released (all v0.3.1 rows ✅) | `v0.3.1` |
 | v0.4.0 | Horizon integration | 🟢 Released (all v0.4.0 rows ✅) | `v0.4.0` |
 | v0.4.1 | Cache instrumentation | 🟢 Released (all v0.4.1 rows ✅) | `v0.4.1` |
-
----
+| v0.5.0 | Scout driver | 🟡 In progress | — |
 
 ## Project Vision
 
@@ -114,9 +113,9 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.4.0 | Horizon Integration | Throughput Metrics | 🟢 DONE | Shipped `v0.4.0`: `HorizonThroughputMetrics` via `JobReserved`/`JobReleased`; attributes on supervisor spans. |
 | v0.4.1 | Cache Instrumentation | Redis Tracing | 🟢 DONE | Shipped `v0.4.1`: `TraceRedisCommandExecutedListener` records `redis.{command}` spans with connection, operation, and `db.duration_ms` from `CommandExecuted` events. |
 | v0.4.1 | Cache Instrumentation | Cache Store Hooks | 🟢 DONE | Shipped `v0.4.1`: `TraceCacheEventListener` records `cache.get`/`cache.miss`/`cache.put`/`cache.forget` spans with store, key, hit/miss, and TTL metadata. |
-| v0.5.0 | Scout Driver | Scout Span Adapter | 🔴 PLANNED | Translate internal instrumentation spans into Scout-compatible transactions while preserving nested trace fidelity and metadata structure. |
-| v0.5.0 | Scout Driver | Scout Context Bridge | 🔴 PLANNED | Synchronize internal trace context with Scout's tracing model while maintaining runtime consistency and propagation integrity. |
-| v0.5.0 | Scout Driver | Scout Configuration Layer | 🔴 PLANNED | Provide Laravel-first configuration ergonomics for Scout integration including tagging, environment handling, deployment metadata, and runtime customization. |
+| v0.5.0 | Scout Driver | Scout Span Adapter | 🟡 IN-PROGRESS | `ScoutSpanExporter` maps Obeserva spans to Scout operations via `ScoutSpanMapper`; lifecycle export on span start/end/flush. |
+| v0.5.0 | Scout Driver | Scout Context Bridge | 🟡 IN-PROGRESS | `ScoutContextBridge` propagates trace/span IDs and attributes as Scout context and request tags. |
+| v0.5.0 | Scout Driver | Scout Configuration Layer | 🟡 IN-PROGRESS | `obeserva.scout.*` config with application name, key, monitoring toggle, and default tags. |
 | v0.5.1 | Scout Driver | Advanced Scout Metadata | 🔴 PLANNED | Add Laravel-aware metadata enrichment including route names, queue names, deployment versions, Horizon worker IDs, tenant identifiers, and environment diagnostics. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Semantic Conventions | 🔴 PLANNED | Align internal span naming and metadata structure with OpenTelemetry semantic conventions for future exporter compatibility and vendor neutrality. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Export Adapter | 🔴 PLANNED | Create experimental OpenTelemetry exporter support without requiring changes to Laravel instrumentation architecture. |

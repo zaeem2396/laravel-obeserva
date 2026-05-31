@@ -8,6 +8,8 @@ interface SpanInterface
 {
     public function getName(): string;
 
+    public function getKind(): SpanKind;
+
     public function getTraceId(): string;
 
     public function getSpanId(): string;
@@ -19,6 +21,11 @@ interface SpanInterface
     public function getDuration(): ?float;
 
     public function setAttribute(string $key, mixed $value): void;
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getAttributes(): array;
 
     /**
      * @param  array<string, mixed>  $attributes
