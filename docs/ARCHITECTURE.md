@@ -41,7 +41,7 @@ Configuration: `config/obeserva.php` → `cache.*` (see [INSTALLATION.md](INSTAL
 
 Configuration: `config/obeserva.php` → `redis.*` (see [INSTALLATION.md](INSTALLATION.md)).
 
-### Scout driver (v0.5.0)
+### Scout driver
 
 When `OBESERVA_DRIVER=scout`, completed spans are forwarded to Scout APM in real time:
 
