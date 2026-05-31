@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Nothing yet.
+
+## [0.5.0] - 2026-05-28
+
+### Added
+
 - Scout APM driver (`OBESERVA_DRIVER=scout`) with span lifecycle export via `ScoutSpanExporter`
 - `SpanLifecycleExporterInterface` and core tracer hooks for driver export on span start/end/flush
 - `ScoutSpanMapper`, `ScoutContextBridge`, `ScoutApmClientInterface`, and `ContainerScoutApmClient` adapter
@@ -18,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `SpanInterface` exposes `getKind()` and `getAttributes()` for driver mapping
+- Documentation aligned for v0.5.0 release (installation, roadmap, architecture, release post)
 
 ## [0.4.1] - 2026-05-28
 
@@ -151,7 +158,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/zaeem2396/laravel-obeserva/releases/tag/v0.4.0
 [0.3.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.0...v0.3.1
