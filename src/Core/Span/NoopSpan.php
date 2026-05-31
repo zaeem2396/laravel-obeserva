@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace Obeserva\Core\Span;
 
 use Obeserva\Contracts\Span\SpanInterface;
+use Obeserva\Contracts\Span\SpanKind;
 
 final class NoopSpan implements SpanInterface
 {
     public function getName(): string
     {
         return '';
+    }
+
+    public function getKind(): SpanKind
+    {
+        return SpanKind::Internal;
     }
 
     public function getTraceId(): string

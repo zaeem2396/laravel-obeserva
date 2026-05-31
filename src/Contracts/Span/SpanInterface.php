@@ -8,6 +8,8 @@ interface SpanInterface
 {
     public function getName(): string;
 
+    public function getKind(): SpanKind;
+
     public function getTraceId(): string;
 
     public function getSpanId(): string;

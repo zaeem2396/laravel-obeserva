@@ -46,6 +46,11 @@ final class Span implements SpanInterface
         return $this->name;
     }
 
+    public function getKind(): SpanKind
+    {
+        return $this->kind;
+    }
+
     public function getTraceId(): string
     {
         return $this->traceId;
