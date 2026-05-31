@@ -46,6 +46,11 @@ final class Span implements SpanInterface
         return $this->name;
     }
 
+    public function getKind(): SpanKind
+    {
+        return $this->kind;
+    }
+
     public function getTraceId(): string
     {
         return $this->traceId;
@@ -78,6 +83,14 @@ final class Span implements SpanInterface
     public function setAttribute(string $key, mixed $value): void
     {
         $this->attributes[$key] = $value;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 
     /**

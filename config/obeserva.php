@@ -8,6 +8,16 @@ return [
 
     'driver' => env('OBESERVA_DRIVER', 'noop'),
 
+    'scout' => [
+        'enabled' => env('OBESERVA_SCOUT_ENABLED', true),
+        'application_name' => env('OBESERVA_SCOUT_APPLICATION_NAME', env('APP_NAME', 'laravel')),
+        'key' => env('OBESERVA_SCOUT_KEY', env('SCOUT_KEY', '')),
+        'monitoring_enabled' => env('OBESERVA_SCOUT_MONITORING_ENABLED', env('SCOUT_MONITORING_ENABLED', false)),
+        'default_tags' => [
+            'laravel.env' => env('APP_ENV', 'production'),
+        ],
+    ],
+
     'sampling' => [
         'probability' => (float) env('OBESERVA_SAMPLE_RATE', 1.0),
     ],
