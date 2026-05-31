@@ -35,6 +35,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Horizon**: supervisor/worker lifecycle spans, throughput metrics, retry correlation
 - **Cache**: cache hit/miss/write/forget spans
 - **Redis**: per-command spans via `CommandExecuted` events
+- **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`
 
 ## Configuration
 
@@ -49,6 +50,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Horizon**: enabled by `OBESERVA_HORIZON_ENABLED` (requires `laravel/horizon`)
 - **Cache**: enabled by `OBESERVA_CACHE_ENABLED`
 - **Redis**: enabled by `OBESERVA_REDIS_COMMAND_TRACING`
+- **Scout**: enabled by `OBESERVA_DRIVER=scout` (requires `scoutapp/scout-apm-laravel`)
 
 ## Modules
 
@@ -57,6 +59,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Contracts | `Obeserva\Contracts` | Vendor-neutral span, trace context, and driver interfaces |
 | Core | `Obeserva\Core` | Instrumentation runtime (spans, context, sampling) |
 | Laravel | `Obeserva\Laravel` | Service provider, middleware, listeners, and config integration |
+| Scout Driver | `Obeserva\ScoutDriver` | Scout APM span adapter and context bridge (v0.5.0) |
 | Testing | `Obeserva\Testing` | `FakeTracer` for test assertions |
 
 ## Requirements
