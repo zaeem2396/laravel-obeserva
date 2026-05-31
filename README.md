@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.4.1`](docs/posts/v0.4.1-cache.md) (Cache & Redis).
+**Current release:** [`v0.5.0`](docs/posts/v0.5.0-scout.md) (Scout APM Driver).
 
 ## Table of contents
 
@@ -59,7 +59,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Contracts | `Obeserva\Contracts` | Vendor-neutral span, trace context, and driver interfaces |
 | Core | `Obeserva\Core` | Instrumentation runtime (spans, context, sampling) |
 | Laravel | `Obeserva\Laravel` | Service provider, middleware, listeners, and config integration |
-| Scout Driver | `Obeserva\ScoutDriver` | Scout APM span adapter and context bridge (v0.5.0) |
+| Scout Driver | `Obeserva\ScoutDriver` | Scout APM span adapter and context bridge |
 | Testing | `Obeserva\Testing` | `FakeTracer` for test assertions |
 
 ## Requirements
