@@ -25,6 +25,22 @@ Obeserva\Contracts (interfaces and value objects)
 
 W3C Trace Context `traceparent` headers are supported via `TraceContext::toPropagationHeaders()` and `fromPropagationHeaders()`.
 
+### Cache instrumentation (v0.4.1)
+
+Laravel cache events drive client spans via `TraceCacheEventListener`:
+
+1. `CacheHit` / `CacheMissed` → `cache.get` / `cache.miss` with `cache.hit` attribute
+2. `KeyWritten` → `cache.put` with optional `cache.ttl_seconds`
+3. `KeyForgotten` → `cache.forget`
+
+Configuration: `config/obeserva.php` → `cache.*` (see [INSTALLATION.md](INSTALLATION.md)).
+
+### Redis instrumentation (v0.4.1)
+
+`TraceRedisCommandExecutedListener` listens to `CommandExecuted` and records `redis.{command}` spans with connection name and duration.
+
+Configuration: `config/obeserva.php` → `redis.*` (see [INSTALLATION.md](INSTALLATION.md)).
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).

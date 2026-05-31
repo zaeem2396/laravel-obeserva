@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.4.0`](docs/posts/v0.4.0-horizon.md) (Horizon).
+**Current release:** [`v0.4.1`](docs/posts/v0.4.1-cache.md) (Cache & Redis).
 
 ## Table of contents
 

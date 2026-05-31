@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.4.0` (2026-05-26) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.4.0-horizon.md](docs/posts/v0.4.0-horizon.md).
+**Current release:** `v0.4.1` (2026-05-28) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.4.1-cache.md](docs/posts/v0.4.1-cache.md).
 
 ---
 
@@ -19,7 +19,7 @@
 | v0.3.0 | Database instrumentation | 🟢 Released (all v0.3.0 rows ✅) | `v0.3.0` |
 | v0.3.1 | Queue instrumentation | 🟢 Released (all v0.3.1 rows ✅) | `v0.3.1` |
 | v0.4.0 | Horizon integration | 🟢 Released (all v0.4.0 rows ✅) | `v0.4.0` |
-| v0.4.1 | Cache instrumentation | 🔴 Next | — |
+| v0.4.1 | Cache instrumentation | 🟢 Released (all v0.4.1 rows ✅) | `v0.4.1` |
 
 ---
 
@@ -112,8 +112,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.4.0 | Horizon Integration | Worker Lifecycle Tracing | 🟢 DONE | Shipped `v0.4.0`: `SupervisorLooped`, `WorkerProcessRestarting`, `SupervisorProcessRestarting`, `WorkerStopping` listeners; `horizon.supervisor:*` spans. |
 | v0.4.0 | Horizon Integration | Retry Trace Correlation | 🟢 DONE | Shipped `v0.4.0`: `root_trace_id` in carrier, `HorizonRetryCorrelator`, `horizon.retry_of` + `queue.retry_attempt` on job spans. |
 | v0.4.0 | Horizon Integration | Throughput Metrics | 🟢 DONE | Shipped `v0.4.0`: `HorizonThroughputMetrics` via `JobReserved`/`JobReleased`; attributes on supervisor spans. |
-| v0.4.1 | Cache Instrumentation | Redis Tracing | 🔴 PLANNED | Instrument Redis commands with latency tracking, connection metadata, operation categorization, and distributed trace correlation. |
-| v0.4.1 | Cache Instrumentation | Cache Store Hooks | 🔴 PLANNED | Instrument Laravel cache stores with hit/miss visibility, operation timing, and cache backend awareness. |
+| v0.4.1 | Cache Instrumentation | Redis Tracing | 🟢 DONE | Shipped `v0.4.1`: `TraceRedisCommandExecutedListener` records `redis.{command}` spans with connection, operation, and `db.duration_ms` from `CommandExecuted` events. |
+| v0.4.1 | Cache Instrumentation | Cache Store Hooks | 🟢 DONE | Shipped `v0.4.1`: `TraceCacheEventListener` records `cache.get`/`cache.miss`/`cache.put`/`cache.forget` spans with store, key, hit/miss, and TTL metadata. |
 | v0.5.0 | Scout Driver | Scout Span Adapter | 🔴 PLANNED | Translate internal instrumentation spans into Scout-compatible transactions while preserving nested trace fidelity and metadata structure. |
 | v0.5.0 | Scout Driver | Scout Context Bridge | 🔴 PLANNED | Synchronize internal trace context with Scout's tracing model while maintaining runtime consistency and propagation integrity. |
 | v0.5.0 | Scout Driver | Scout Configuration Layer | 🔴 PLANNED | Provide Laravel-first configuration ergonomics for Scout integration including tagging, environment handling, deployment metadata, and runtime customization. |

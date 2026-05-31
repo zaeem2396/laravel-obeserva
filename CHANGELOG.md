@@ -9,7 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Converted repository from multi-package monorepo to a single `scout/laravel` package layout.
+- Nothing yet.
+
+## [0.4.1] - 2026-05-28
+
+### Added
+
+- Cache instrumentation via `TraceCacheEventListener` — `cache.get`, `cache.miss`, `cache.put`, `cache.forget` spans with store/key metadata
+- Redis command instrumentation via `TraceRedisCommandExecutedListener` — `redis.{command}` spans from `CommandExecuted` events
+- Config: `obeserva.cache.enabled`, `obeserva.redis.command_tracing`
+- Environment variables: `OBESERVA_CACHE_ENABLED`, `OBESERVA_REDIS_COMMAND_TRACING`
+- Tests: cache event listener and Redis command listener coverage
+
+### Changed
+
+- Consolidated repository from multi-package monorepo to a single `scout/laravel` package layout
+- README reorganized with table of contents and documentation index
+- Documentation aligned for v0.4.1 release (installation, roadmap, architecture, release post)
 
 ## [0.4.0] - 2026-05-26
 
@@ -127,7 +143,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/zaeem2396/laravel-obeserva/releases/tag/v0.4.0
 [0.3.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.2.1...v0.3.0
