@@ -25,6 +25,7 @@ use Illuminate\Support\ServiceProvider;
 use Obeserva\Contracts\Driver\ActiveSpanStorageInterface;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\SamplerInterface;
+use Obeserva\Contracts\Driver\SpanLifecycleExporterInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Core\Context\ContextManager;
 use Obeserva\Core\Sampling\AlwaysOnSampler;
@@ -52,6 +53,9 @@ use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
+use Obeserva\ScoutDriver\ContainerScoutApmClient;
+use Obeserva\ScoutDriver\ScoutApmClientInterface;
+use Obeserva\ScoutDriver\ScoutDriverFactory;
 
 final class ObeservaServiceProvider extends ServiceProvider
 {
@@ -74,6 +78,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
 
+        $this->registerScoutDriver();
+
         $this->app->singleton(SamplerInterface::class, function (): SamplerInterface {
             $probability = config('obeserva.sampling.probability', 1.0);
             $rate = is_numeric($probability) ? (float) $probability : 1.0;
@@ -90,6 +96,7 @@ final class ObeservaServiceProvider extends ServiceProvider
                 $app->make(SamplerInterface::class),
                 $context,
                 $context,
+                $app->make(SpanLifecycleExporterInterface::class),
             );
         });
 
@@ -114,6 +121,19 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerRedisInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerTerminateHook();
+    }
+
+    private function registerScoutDriver(): void
+    {
+        $this->app->singleton(ScoutDriverFactory::class);
+
+        $this->app->singleton(SpanLifecycleExporterInterface::class, function (Application $app): SpanLifecycleExporterInterface {
+            return $app->make(ScoutDriverFactory::class)->makeLifecycleExporter();
+        });
+
+        $this->app->singleton(ScoutApmClientInterface::class, function (Application $app): ScoutApmClientInterface {
+            return new ContainerScoutApmClient($app);
+        });
     }
 
     private function registerQueueInstrumentation(): void
