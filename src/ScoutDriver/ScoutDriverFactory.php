@@ -8,10 +8,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Obeserva\Contracts\Driver\SpanLifecycleExporterInterface;
 use Obeserva\Core\Export\NoopSpanLifecycleExporter;
 
-final class ScoutDriverFactory
+final readonly class ScoutDriverFactory
 {
     public function __construct(
-        private readonly Application $app,
+        private Application $app,
     ) {}
 
     public function makeLifecycleExporter(): SpanLifecycleExporterInterface
@@ -20,7 +20,10 @@ final class ScoutDriverFactory
             return new NoopSpanLifecycleExporter;
         }
 
-        $config = ScoutConfig::fromArray(config('obeserva.scout', []));
+        /** @var array<string, mixed> $scoutConfig */
+        $scoutConfig = is_array(config('obeserva.scout')) ? config('obeserva.scout') : [];
+
+        $config = ScoutConfig::fromArray($scoutConfig);
 
         if (! $config->enabled) {
             return new NoopSpanLifecycleExporter;

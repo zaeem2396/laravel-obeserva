@@ -127,13 +127,9 @@ final class ObeservaServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ScoutDriverFactory::class);
 
-        $this->app->singleton(SpanLifecycleExporterInterface::class, function (Application $app): SpanLifecycleExporterInterface {
-            return $app->make(ScoutDriverFactory::class)->makeLifecycleExporter();
-        });
+        $this->app->singleton(SpanLifecycleExporterInterface::class, fn (Application $app): SpanLifecycleExporterInterface => $app->make(ScoutDriverFactory::class)->makeLifecycleExporter());
 
-        $this->app->singleton(ScoutApmClientInterface::class, function (Application $app): ScoutApmClientInterface {
-            return new ContainerScoutApmClient($app);
-        });
+        $this->app->singleton(ScoutApmClientInterface::class, fn (Application $app): ScoutApmClientInterface => new ContainerScoutApmClient($app));
     }
 
     private function registerQueueInstrumentation(): void

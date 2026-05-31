@@ -10,7 +10,7 @@ final class RecordingScoutApmClient implements ScoutApmClientInterface
     public array $actions = [];
 
     public function __construct(
-        private bool $enabled = true,
+        private readonly bool $enabled = true,
     ) {}
 
     public function enabled(): bool

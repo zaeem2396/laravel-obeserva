@@ -45,7 +45,7 @@ final readonly class ScoutContextBridge
             $this->client->addContext((string) $key, (string) $value);
         }
 
-        if ($this->shouldTagRequest($span, $span->getKind())) {
+        if ($this->shouldTagRequest($span)) {
             foreach ($span->getAttributes() as $key => $value) {
                 if (! is_scalar($value) && $value !== null) {
                     continue;
