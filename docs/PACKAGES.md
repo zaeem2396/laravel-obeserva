@@ -20,6 +20,12 @@ composer require scout/laravel
 - `TraceCacheEventListener` — cache hit/miss/write/forget spans
 - `TraceRedisCommandExecutedListener` — Redis command spans
 
+### Scout driver (v0.5.0)
+
+- `ScoutSpanExporter` — span lifecycle export to Scout APM
+- `ScoutSpanMapper`, `ScoutContextBridge`, `ScoutDriverFactory`
+- `ContainerScoutApmClient` — resolves `Scoutapm\ScoutApmAgent` from the container
+
 ### Horizon instrumentation (v0.4.0)
 
 - `Horizon`, `HorizonInstrumentation`
