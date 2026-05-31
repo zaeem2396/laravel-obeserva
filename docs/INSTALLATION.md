@@ -41,9 +41,9 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.4.1`). See [RELEASE.md](RELEASE.md) and the [v0.4.1 announcement](posts/v0.4.1-cache.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.5.0`). See [RELEASE.md](RELEASE.md) and the [v0.5.0 announcement](posts/v0.5.0-scout.md).
 
-### Scout driver (v0.5.0)
+### Scout driver
 
 Set `OBESERVA_DRIVER=scout` and install the optional Scout agent:
 
