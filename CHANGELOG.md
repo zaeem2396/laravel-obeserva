@@ -9,7 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- Scout APM driver (`OBESERVA_DRIVER=scout`) with span lifecycle export via `ScoutSpanExporter`
+- `SpanLifecycleExporterInterface` and core tracer hooks for driver export on span start/end/flush
+- `ScoutSpanMapper`, `ScoutContextBridge`, `ScoutApmClientInterface`, and `ContainerScoutApmClient` adapter
+- Scout configuration: `obeserva.scout.*` and env vars `OBESERVA_SCOUT_*`
+- Tests: scout driver unit and Laravel integration coverage (51 tests total)
+
+### Changed
+
+- `SpanInterface` exposes `getKind()` and `getAttributes()` for driver mapping
 
 ## [0.4.1] - 2026-05-28
 
