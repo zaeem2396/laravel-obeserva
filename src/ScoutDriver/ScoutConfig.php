@@ -27,8 +27,8 @@ final readonly class ScoutConfig
 
         return new self(
             enabled: (bool) ($config['enabled'] ?? true),
-            applicationName: (string) ($config['application_name'] ?? ''),
-            key: (string) ($config['key'] ?? ''),
+            applicationName: is_string($config['application_name'] ?? null) ? $config['application_name'] : '',
+            key: is_string($config['key'] ?? null) ? $config['key'] : '',
             monitoringEnabled: (bool) ($config['monitoring_enabled'] ?? false),
             defaultTags: $defaultTags,
         );

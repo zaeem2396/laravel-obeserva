@@ -16,6 +16,9 @@
         <testsuite name="Laravel">
             <directory>tests/Laravel</directory>
         </testsuite>
+        <testsuite name="ScoutDriver">
+            <directory>tests/ScoutDriver</directory>
+        </testsuite>
         <testsuite name="Testing">
             <directory>tests/Testing</directory>
         </testsuite>
@@ -24,6 +27,7 @@
         <include>
             <directory suffix=".php">src/Contracts</directory>
             <directory suffix=".php">src/Core</directory>
+            <directory suffix=".php">src/ScoutDriver</directory>
             <directory suffix=".php">src</directory>
         </include>
     </source>

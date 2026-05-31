@@ -5,83 +5,57 @@ declare(strict_types=1);
 namespace Obeserva\ScoutDriver;
 
 use Illuminate\Contracts\Foundation\Application;
-use Obeserva\Contracts\Driver\SpanLifecycleExporterInterface;
-use Obeserva\Core\Export\NoopSpanLifecycleExporter;
 
-final class ContainerScoutApmClient implements ScoutApmClientInterface
+final readonly class ContainerScoutApmClient implements ScoutApmClientInterface
 {
     public function __construct(
-        private readonly Application $app,
+        private Application $app,
     ) {}
 
     public function enabled(): bool
     {
         $agent = $this->resolveAgent();
 
-        return $agent !== null && $agent->enabled();
+        return $agent?->enabled() ?? false;
     }
 
     public function startSpan(string $operation, ?float $overrideTimestamp = null): void
     {
-        $agent = $this->resolveAgent();
-
-        if ($agent === null) {
-            return;
-        }
-
-        $agent->startSpan($operation, $overrideTimestamp);
+        $this->resolveAgent()?->startSpan($operation, $overrideTimestamp);
     }
 
     public function stopSpan(): void
     {
-        $agent = $this->resolveAgent();
-
-        if ($agent === null) {
-            return;
-        }
-
-        $agent->stopSpan();
+        $this->resolveAgent()?->stopSpan();
     }
 
     public function addContext(string $tag, string $value): void
     {
-        $agent = $this->resolveAgent();
-
-        if ($agent === null) {
-            return;
-        }
-
-        $agent->addContext($tag, $value);
+        $this->resolveAgent()?->addContext($tag, $value);
     }
 
     public function tagRequest(string $tag, string $value): void
     {
-        $agent = $this->resolveAgent();
-
-        if ($agent === null) {
-            return;
-        }
-
-        $agent->tagRequest($tag, $value);
+        $this->resolveAgent()?->tagRequest($tag, $value);
     }
 
     public function send(): bool
     {
-        $agent = $this->resolveAgent();
-
-        if ($agent === null) {
-            return false;
-        }
-
-        return $agent->send();
+        return $this->resolveAgent()?->send() ?? false;
     }
 
-    private function resolveAgent(): ?object
+    private function resolveAgent(): ?ScoutApmAgentAdapter
     {
         if (! interface_exists('Scoutapm\\ScoutApmAgent') || ! $this->app->bound('Scoutapm\\ScoutApmAgent')) {
             return null;
         }
 
-        return $this->app->make('Scoutapm\\ScoutApmAgent');
+        $agent = $this->app->make('Scoutapm\\ScoutApmAgent');
+
+        if (! is_object($agent)) {
+            return null;
+        }
+
+        return new ScoutApmAgentAdapter($agent);
     }
 }
