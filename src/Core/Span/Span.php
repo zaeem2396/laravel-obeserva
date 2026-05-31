@@ -81,6 +81,14 @@ final class Span implements SpanInterface
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
      * @param  array<string, mixed>  $attributes
      */
     public function addEvent(string $name, array $attributes = []): void
