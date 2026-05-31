@@ -44,6 +44,7 @@ git push origin vX.Y.Z
 
 | Version | Suggested GitHub release title |
 |---------|-------------------------------|
+| v0.5.0 | Obeserva v0.5.0 — Scout APM Driver |
 | v0.4.1 | Obeserva v0.4.1 — Cache & Redis Instrumentation |
 | v0.4.0 | Obeserva v0.4.0 — Horizon Integration |
 | v0.3.1 | Obeserva v0.3.1 — Queue Instrumentation |
@@ -56,6 +57,7 @@ git push origin vX.Y.Z
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.5.0` | [docs/posts/v0.5.0-scout.md](posts/v0.5.0-scout.md) |
 | `v0.4.1` | [docs/posts/v0.4.1-cache.md](posts/v0.4.1-cache.md) |
 | `v0.4.0` | [docs/posts/v0.4.0-horizon.md](posts/v0.4.0-horizon.md) |
 | `v0.3.1` | [docs/posts/v0.3.1-queue.md](posts/v0.3.1-queue.md) |

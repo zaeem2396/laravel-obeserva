@@ -20,7 +20,7 @@ composer require scout/laravel
 - `TraceCacheEventListener` — cache hit/miss/write/forget spans
 - `TraceRedisCommandExecutedListener` — Redis command spans
 
-### Scout driver (v0.5.0)
+### Scout driver
 
 - `ScoutSpanExporter` — span lifecycle export to Scout APM
 - `ScoutSpanMapper`, `ScoutContextBridge`, `ScoutDriverFactory`
@@ -42,4 +42,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.4.1**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.4.1-cache.md](posts/v0.4.1-cache.md).
+Current version: **0.5.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.5.0-scout.md](posts/v0.5.0-scout.md).
