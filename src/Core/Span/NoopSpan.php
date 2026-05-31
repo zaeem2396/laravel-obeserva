@@ -40,6 +40,11 @@ final class NoopSpan implements SpanInterface
 
     public function setAttribute(string $key, mixed $value): void {}
 
+    public function getAttributes(): array
+    {
+        return [];
+    }
+
     /**
      * @param  array<string, mixed>  $attributes
      */
