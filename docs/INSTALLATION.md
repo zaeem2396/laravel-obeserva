@@ -17,7 +17,11 @@ php artisan vendor:publish --tag=obeserva-config
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `OBESERVA_ENABLED` | `true` | Master switch |
-| `OBESERVA_DRIVER` | `noop` | Driver identifier (Scout/OTel drivers in future releases) |
+| `OBESERVA_DRIVER` | `noop` | Driver identifier (`noop` or `scout`) |
+| `OBESERVA_SCOUT_ENABLED` | `true` | Enable Scout export when driver is `scout` |
+| `OBESERVA_SCOUT_APPLICATION_NAME` | `APP_NAME` | Scout application name |
+| `OBESERVA_SCOUT_KEY` | `SCOUT_KEY` | Scout application key |
+| `OBESERVA_SCOUT_MONITORING_ENABLED` | `SCOUT_MONITORING_ENABLED` | Scout monitoring toggle |
 | `OBESERVA_SAMPLE_RATE` | `1.0` | Sampling probability (0.0–1.0) |
 | `OBESERVA_HTTP_MIDDLEWARE` | `true` | Register HTTP trace middleware |
 | `OBESERVA_HTTP_MIDDLEWARE_TIMING` | `true` | Register `obeserva.timing` middleware alias |
@@ -38,6 +42,18 @@ php artisan vendor:publish --tag=obeserva-config
 ## Releases
 
 Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.4.1`). See [RELEASE.md](RELEASE.md) and the [v0.4.1 announcement](posts/v0.4.1-cache.md).
+
+### Scout driver (v0.5.0)
+
+Set `OBESERVA_DRIVER=scout` and install the optional Scout agent:
+
+```bash
+composer require scoutapp/scout-apm-laravel
+```
+
+Obeserva forwards span lifecycle events to Scout via `ScoutSpanExporter`. When the Scout agent is bound in the container (`Scoutapm\ScoutApmAgent`), spans are exported on flush; otherwise export is skipped safely.
+
+Configuration: `config/obeserva.php` → `scout.*` (see environment variables above).
 
 ## Local development
 
