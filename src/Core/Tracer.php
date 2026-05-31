@@ -7,6 +7,7 @@ namespace Obeserva\Core;
 use Obeserva\Contracts\Driver\ActiveSpanStorageInterface;
 use Obeserva\Contracts\Driver\ContextStorageInterface;
 use Obeserva\Contracts\Driver\SamplerInterface;
+use Obeserva\Contracts\Driver\SpanLifecycleExporterInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Contracts\Span\SpanInterface;
 use Obeserva\Contracts\Span\SpanKind;
@@ -26,6 +27,7 @@ final class Tracer implements TracerInterface
         private readonly SamplerInterface $sampler,
         private readonly ?ContextStorageInterface $contextStorage = null,
         private readonly ?ActiveSpanStorageInterface $activeSpanStorage = null,
+        private readonly ?SpanLifecycleExporterInterface $lifecycleExporter = null,
     ) {}
 
     public function startSpan(string $name, SpanKind $kind = SpanKind::Internal): SpanInterface
@@ -42,6 +44,7 @@ final class Tracer implements TracerInterface
 
         $span->whenEnded(function (Span $ended): void {
             $this->activeSpanStorage?->pop();
+            $this->lifecycleExporter?->onSpanEnded($ended);
             $this->completedSpans[] = $ended;
         });
 
@@ -53,6 +56,8 @@ final class Tracer implements TracerInterface
         ));
 
         $this->activeSpanStorage?->push($span);
+
+        $this->lifecycleExporter?->onSpanStarted($span);
 
         return $span;
     }
@@ -74,6 +79,7 @@ final class Tracer implements TracerInterface
 
     public function flush(): void
     {
+        $this->lifecycleExporter?->flush();
         $this->completedSpans = [];
     }
 
