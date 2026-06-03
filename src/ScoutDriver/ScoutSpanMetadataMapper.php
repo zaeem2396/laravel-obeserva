@@ -9,7 +9,7 @@ use Obeserva\Contracts\Span\SpanInterface;
 final class ScoutSpanMetadataMapper
 {
     /** @var array<string, string> */
-    private const ATTRIBUTE_TO_SCOUT_TAG = [
+    private const array ATTRIBUTE_TO_SCOUT_TAG = [
         'laravel.route.name' => 'scout.route.name',
         'laravel.route.action' => 'scout.route.action',
         'http.route' => 'scout.route.uri',
