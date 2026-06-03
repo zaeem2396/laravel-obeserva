@@ -39,7 +39,7 @@ final class ScoutSpanMetadataMapper
                 continue;
             }
 
-            if (! is_scalar($value) || $value === null || $value === '') {
+            if (! is_scalar($value) || $value === '') {
                 continue;
             }
 
