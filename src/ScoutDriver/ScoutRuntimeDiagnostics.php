@@ -17,7 +17,7 @@ final readonly class ScoutRuntimeDiagnostics
 
     public static function fromApplication(?Application $app): self
     {
-        if (!$app instanceof \Illuminate\Contracts\Foundation\Application) {
+        if (! $app instanceof Application) {
             return new self(PHP_VERSION, '', 'unknown', false);
         }
 
