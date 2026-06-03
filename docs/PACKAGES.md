@@ -24,6 +24,7 @@ composer require scout/laravel
 
 - `ScoutSpanExporter` — span lifecycle export to Scout APM
 - `ScoutSpanMapper`, `ScoutContextBridge`, `ScoutDriverFactory`
+- `ScoutMetadataEnricher`, `ScoutSpanMetadataMapper`, `ScoutRuntimeDiagnostics` (v0.5.1)
 - `ContainerScoutApmClient` — resolves `Scoutapm\ScoutApmAgent` from the container
 
 ### Horizon instrumentation (v0.4.0)

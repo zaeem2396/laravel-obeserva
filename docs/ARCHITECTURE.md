@@ -51,6 +51,8 @@ When `OBESERVA_DRIVER=scout`, completed spans are forwarded to Scout APM in real
 
 Requires optional `scoutapp/scout-apm-laravel` and a bound `Scoutapm\ScoutApmAgent`.
 
+**Advanced metadata (v0.5.1):** `ScoutMetadataEnricher` and `ScoutSpanMetadataMapper` promote Laravel span attributes (routes, queues, Horizon) plus deployment/tenant/runtime tags to Scout context and request tags.
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).
