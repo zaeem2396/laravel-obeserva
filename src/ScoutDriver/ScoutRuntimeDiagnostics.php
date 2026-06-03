@@ -21,12 +21,10 @@ final readonly class ScoutRuntimeDiagnostics
             return new self(PHP_VERSION, '', 'unknown', false);
         }
 
-        $env = $app->environment();
-
         return new self(
             phpVersion: PHP_VERSION,
             laravelVersion: $app->version(),
-            appEnv: is_string($env) ? $env : 'production',
+            appEnv: $app->environment(),
             debug: (bool) $app->make('config')->get('app.debug', false),
         );
     }
