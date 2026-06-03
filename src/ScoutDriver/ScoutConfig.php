@@ -15,6 +15,9 @@ final readonly class ScoutConfig
         public string $key,
         public bool $monitoringEnabled,
         public array $defaultTags,
+        public string $deploymentVersion = '',
+        public string $tenantId = '',
+        public bool $metadataEnabled = true,
     ) {}
 
     /**
@@ -31,6 +34,9 @@ final readonly class ScoutConfig
             key: is_string($config['key'] ?? null) ? $config['key'] : '',
             monitoringEnabled: (bool) ($config['monitoring_enabled'] ?? false),
             defaultTags: $defaultTags,
+            deploymentVersion: is_string($config['deployment_version'] ?? null) ? $config['deployment_version'] : '',
+            tenantId: is_string($config['tenant_id'] ?? null) ? $config['tenant_id'] : '',
+            metadataEnabled: (bool) ($config['metadata_enabled'] ?? true),
         );
     }
 }
