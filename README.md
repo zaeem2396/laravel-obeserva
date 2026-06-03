@@ -35,7 +35,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Horizon**: supervisor/worker lifecycle spans, throughput metrics, retry correlation
 - **Cache**: cache hit/miss/write/forget spans
 - **Redis**: per-command spans via `CommandExecuted` events
-- **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`
+- **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`; advanced `scout.*` metadata when enabled (v0.5.1)
 
 ## Configuration
 
@@ -50,7 +50,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Horizon**: enabled by `OBESERVA_HORIZON_ENABLED` (requires `laravel/horizon`)
 - **Cache**: enabled by `OBESERVA_CACHE_ENABLED`
 - **Redis**: enabled by `OBESERVA_REDIS_COMMAND_TRACING`
-- **Scout**: enabled by `OBESERVA_DRIVER=scout` (requires `scoutapp/scout-apm-laravel`)
+- **Scout**: enabled by `OBESERVA_DRIVER=scout` (requires `scoutapp/scout-apm-laravel`); metadata via `OBESERVA_SCOUT_METADATA_ENABLED`
 
 ## Modules
 
