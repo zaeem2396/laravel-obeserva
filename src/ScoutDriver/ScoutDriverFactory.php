@@ -30,6 +30,12 @@ final readonly class ScoutDriverFactory
         }
 
         $client = $this->resolveClient();
+        $diagnostics = ScoutRuntimeDiagnostics::fromApplication($this->app);
+        $enricher = new ScoutMetadataEnricher(
+            config: $config,
+            mapper: new ScoutSpanMetadataMapper,
+            diagnostics: $diagnostics,
+        );
 
         return new ScoutSpanExporter(
             client: $client,
@@ -37,6 +43,7 @@ final readonly class ScoutDriverFactory
             contextBridge: new ScoutContextBridge(
                 client: $client,
                 config: $config,
+                metadataEnricher: $enricher,
             ),
             config: $config,
         );
