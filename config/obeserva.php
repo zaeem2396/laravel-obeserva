@@ -21,6 +21,13 @@ return [
         'metadata_enabled' => env('OBESERVA_SCOUT_METADATA_ENABLED', true),
     ],
 
+    'otel' => [
+        'enabled' => env('OBESERVA_OTEL_ENABLED', true),
+        'service_name' => env('OBESERVA_OTEL_SERVICE_NAME', env('APP_NAME', 'laravel')),
+        'service_version' => env('OBESERVA_OTEL_SERVICE_VERSION', env('APP_VERSION', '')),
+        'semantic_conventions' => env('OBESERVA_OTEL_SEMANTIC_CONVENTIONS', true),
+    ],
+
     'sampling' => [
         'probability' => (float) env('OBESERVA_SAMPLE_RATE', 1.0),
     ],
