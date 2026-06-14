@@ -63,7 +63,7 @@ When `OBESERVA_DRIVER=otel`, completed spans are converted to OTel-compatible pa
 
 `LifecycleExporterResolver` selects Scout, OTel, or noop exporters based on `obeserva.driver`. When development features are enabled, a `CompositeSpanLifecycleExporter` also runs `SpanSnapshotCollector` for local inspection.
 
-### Developer experience (v0.7.0)
+### Developer experience
 
 Local trace inspection runs alongside the configured driver:
 
