@@ -53,6 +53,9 @@ use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
+use Obeserva\Laravel\Driver\LifecycleExporterResolver;
+use Obeserva\OtelDriver\OtelDriverFactory;
+use Obeserva\OtelDriver\OtelExporterClientInterface;
 use Obeserva\ScoutDriver\ContainerScoutApmClient;
 use Obeserva\ScoutDriver\ScoutApmClientInterface;
 use Obeserva\ScoutDriver\ScoutDriverFactory;
@@ -78,7 +81,7 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
 
-        $this->registerScoutDriver();
+        $this->registerDrivers();
 
         $this->app->singleton(SamplerInterface::class, function (): SamplerInterface {
             $probability = config('obeserva.sampling.probability', 1.0);
@@ -123,11 +126,16 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerTerminateHook();
     }
 
-    private function registerScoutDriver(): void
+    private function registerDrivers(): void
     {
         $this->app->singleton(ScoutDriverFactory::class);
+        $this->app->singleton(OtelDriverFactory::class);
+        $this->app->singleton(LifecycleExporterResolver::class);
 
-        $this->app->singleton(SpanLifecycleExporterInterface::class, fn (Application $app): SpanLifecycleExporterInterface => $app->make(ScoutDriverFactory::class)->makeLifecycleExporter());
+        $this->app->singleton(
+            SpanLifecycleExporterInterface::class,
+            fn (Application $app): SpanLifecycleExporterInterface => $app->make(LifecycleExporterResolver::class)->resolve(),
+        );
 
         $this->app->singleton(ScoutApmClientInterface::class, fn (Application $app): ScoutApmClientInterface => new ContainerScoutApmClient($app));
     }
