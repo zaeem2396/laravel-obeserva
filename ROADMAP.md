@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.6.1` (2026-05-28) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.6.1-worker-context.md](docs/posts/v0.6.1-worker-context.md). **Next:** [v0.7.0 Developer Experience](docs/posts/v0.7.0-developer-experience.md).
+**Current release:** `v0.7.0` (2026-05-29) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.7.0-developer-experience.md](docs/posts/v0.7.0-developer-experience.md).
 
 ---
 
@@ -24,7 +24,7 @@
 | v0.5.1 | Advanced Scout metadata | 🟢 Released (all v0.5.1 rows ✅) | `v0.5.1` |
 | v0.6.0 | OpenTelemetry alignment | 🟢 Released (all v0.6.0 rows ✅) | `v0.6.0` |
 | v0.6.1 | Worker context isolation | 🟢 Released (all v0.6.1 rows ✅) | `v0.6.1` |
-| v0.7.0 | Developer experience | 🟡 IN-PROGRESS | — |
+| v0.7.0 | Developer experience | 🟢 Released (all v0.7.0 rows ✅) | `v0.7.0` |
 
 ---
 
@@ -129,8 +129,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.6.1 | Runtime Support | Octane Compatibility | 🟢 DONE | Shipped `v0.6.1`: Octane request/task/tick termination hooks reset tracer and context when `OBESERVA_OCTANE_ISOLATION` is enabled. |
 | v0.6.1 | Runtime Support | RoadRunner Compatibility | 🟢 DONE | Shipped `v0.6.1`: optional RoadRunner worker termination hooks when packages are present. |
 | v0.6.1 | Runtime Support | Swoole Awareness | 🟢 DONE | Shipped `v0.6.1`: covered via Octane Swoole backend termination hooks. |
-| v0.7.0 | Developer Experience | Telescope Integration | 🟡 IN-PROGRESS | Code merged; release follows v0.6.1. `PublishTraceToTelescope`, optional `laravel/telescope` publisher. |
-| v0.7.0 | Developer Experience | Debug Toolbar | 🟡 IN-PROGRESS | Code merged; release follows v0.6.1. `DebugToolbarMiddleware` with span tree and propagation summary. |
+| v0.7.0 | Developer Experience | Telescope Integration | 🟢 DONE | Shipped `v0.7.0`: `PublishTraceToTelescope`, `TelescopeTraceEntryFactory`, optional `laravel/telescope` publisher; span snapshots on terminate. |
+| v0.7.0 | Developer Experience | Debug Toolbar | 🟢 DONE | Shipped `v0.7.0`: `DebugToolbarMiddleware` injects local HTML trace panel with span tree, timing, and propagation flows when `OBESERVA_DEBUG_TOOLBAR` is enabled. |
 | v0.7.1 | Developer Experience | Testing Utilities | 🟡 IN-PROGRESS | Shipped: `FakeTracer`, `assertSpanRecorded()`, nested span support (`v0.2.1`). Pending: propagation assertions, snapshot helpers. |
 | v0.7.1 | Developer Experience | Benchmark Suite | 🟢 DONE | Shipped: `benchmark.yml` workflow with span overhead smoke test (`v0.1.0`). Expand with realistic Laravel workloads in future iterations. |
 | v0.8.0 | Distributed Systems | Event Propagation | 🔴 PLANNED | Propagate trace context across Laravel events, listeners, notifications, broadcasts, and asynchronous workflows. |
