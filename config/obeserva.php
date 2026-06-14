@@ -16,6 +16,9 @@ return [
         'default_tags' => [
             'laravel.env' => env('APP_ENV', 'production'),
         ],
+        'deployment_version' => env('OBESERVA_SCOUT_DEPLOYMENT_VERSION', env('APP_VERSION', '')),
+        'tenant_id' => env('OBESERVA_SCOUT_TENANT_ID', ''),
+        'metadata_enabled' => env('OBESERVA_SCOUT_METADATA_ENABLED', true),
     ],
 
     'sampling' => [

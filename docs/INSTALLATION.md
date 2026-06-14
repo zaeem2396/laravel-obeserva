@@ -22,6 +22,9 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_SCOUT_APPLICATION_NAME` | `APP_NAME` | Scout application name |
 | `OBESERVA_SCOUT_KEY` | `SCOUT_KEY` | Scout application key |
 | `OBESERVA_SCOUT_MONITORING_ENABLED` | `SCOUT_MONITORING_ENABLED` | Scout monitoring toggle |
+| `OBESERVA_SCOUT_DEPLOYMENT_VERSION` | `APP_VERSION` | Deployment/build version tag |
+| `OBESERVA_SCOUT_TENANT_ID` | _(empty)_ | Multi-tenant identifier tag |
+| `OBESERVA_SCOUT_METADATA_ENABLED` | `true` | Laravel-aware `scout.*` metadata enrichment |
 | `OBESERVA_SAMPLE_RATE` | `1.0` | Sampling probability (0.0–1.0) |
 | `OBESERVA_HTTP_MIDDLEWARE` | `true` | Register HTTP trace middleware |
 | `OBESERVA_HTTP_MIDDLEWARE_TIMING` | `true` | Register `obeserva.timing` middleware alias |
@@ -54,6 +57,8 @@ composer require scoutapp/scout-apm-laravel
 Obeserva forwards span lifecycle events to Scout via `ScoutSpanExporter`. When the Scout agent is bound in the container (`Scoutapm\ScoutApmAgent`), spans are exported on flush; otherwise export is skipped safely.
 
 Configuration: `config/obeserva.php` → `scout.*` (see environment variables above).
+
+**Advanced metadata (v0.5.1):** When `OBESERVA_SCOUT_METADATA_ENABLED=true`, Obeserva enriches Scout with `scout.route.name`, `scout.queue.*`, `scout.horizon.*`, deployment version, tenant ID, and PHP/Laravel runtime diagnostics.
 
 ## Local development
 

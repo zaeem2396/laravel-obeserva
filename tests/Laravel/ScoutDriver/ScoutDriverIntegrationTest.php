@@ -25,6 +25,8 @@ final class ScoutDriverIntegrationTest extends TestCase
         $app['config']->set('obeserva.driver', 'scout');
         $app['config']->set('obeserva.scout.enabled', true);
         $app['config']->set('obeserva.scout.monitoring_enabled', true);
+        $app['config']->set('obeserva.scout.deployment_version', 'test-build');
+        $app['config']->set('obeserva.scout.tenant_id', 'integration-tenant');
         $app['config']->set('obeserva.terminate.flush_tracer', false);
     }
 
@@ -40,6 +42,7 @@ final class ScoutDriverIntegrationTest extends TestCase
 
         $span = $tracer->startSpan('api.health');
         $span->setAttribute('http.method', 'GET');
+        $span->setAttribute('laravel.route.name', 'api.health');
         $span->end();
 
         $tracer->flush();
@@ -47,5 +50,28 @@ final class ScoutDriverIntegrationTest extends TestCase
         $this->assertNotEmpty($client->actions);
         $this->assertContains(['type' => 'startSpan', 'operation' => 'Custom/api.health'], $client->actions);
         $this->assertContains(['type' => 'send'], $client->actions);
+
+        $tagActions = array_values(array_filter(
+            $client->actions,
+            static fn (array $action): bool => $action['type'] === 'tagRequest',
+        ));
+
+        $this->assertNotEmpty($tagActions);
+        $this->assertTrue($this->hasTag($tagActions, 'scout.deployment.version', 'test-build'));
+        $this->assertTrue($this->hasTag($tagActions, 'scout.tenant.id', 'integration-tenant'));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $actions
+     */
+    private function hasTag(array $actions, string $tag, string $value): bool
+    {
+        foreach ($actions as $action) {
+            if (($action['tag'] ?? '') === $tag && ($action['value'] ?? '') === $value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
