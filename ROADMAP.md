@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.6.0` (2026-06-14) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.6.0-otel.md](docs/posts/v0.6.0-otel.md). **In development:** [v0.7.0 Developer Experience](docs/posts/v0.7.0-developer-experience.md).
+**Current release:** `v0.7.0` (2026-05-28) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.7.0-developer-experience.md](docs/posts/v0.7.0-developer-experience.md).
 
 ---
 
@@ -23,7 +23,7 @@
 | v0.5.0 | Scout driver | 🟢 Released (all v0.5.0 rows ✅) | `v0.5.0` |
 | v0.5.1 | Advanced Scout metadata | 🟢 Released (all v0.5.1 rows ✅) | `v0.5.1` |
 | v0.6.0 | OpenTelemetry alignment | 🟢 Released (all v0.6.0 rows ✅) | `v0.6.0` |
-| v0.7.0 | Developer experience | 🟡 IN-PROGRESS | — |
+| v0.7.0 | Developer experience | 🟢 Released (all v0.7.0 rows ✅) | `v0.7.0` |
 
 ---
 
@@ -128,8 +128,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.6.1 | Runtime Support | Octane Compatibility | 🔴 PLANNED | Ensure safe instrumentation lifecycle handling for Laravel Octane workers including context cleanup and long-running worker isolation. |
 | v0.6.1 | Runtime Support | RoadRunner Compatibility | 🔴 PLANNED | Add runtime-safe instrumentation support for RoadRunner-powered Laravel applications. |
 | v0.6.1 | Runtime Support | Swoole Awareness | 🔴 PLANNED | Handle persistent memory/runtime behavior safely for Swoole-based execution environments. |
-| v0.7.0 | Developer Experience | Telescope Integration | 🟡 IN-PROGRESS | Shipped on `feature/v0.7.0-developer-experience`: `PublishTraceToTelescope`, `TelescopeTraceEntryFactory`, optional `laravel/telescope` publisher; span snapshots and propagation summary on terminate. |
-| v0.7.0 | Developer Experience | Debug Toolbar | 🟡 IN-PROGRESS | Shipped on `feature/v0.7.0-developer-experience`: `DebugToolbarMiddleware` injects local HTML trace panel with span tree, timing, and propagation flows when `OBESERVA_DEBUG_TOOLBAR` is enabled. |
+| v0.7.0 | Developer Experience | Telescope Integration | 🟢 DONE | Shipped `v0.7.0`: `PublishTraceToTelescope`, `TelescopeTraceEntryFactory`, optional `laravel/telescope` publisher; span snapshots and propagation summary on terminate. |
+| v0.7.0 | Developer Experience | Debug Toolbar | 🟢 DONE | Shipped `v0.7.0`: `DebugToolbarMiddleware` injects local HTML trace panel with span tree, timing, and propagation flows when `OBESERVA_DEBUG_TOOLBAR` is enabled. |
 | v0.7.1 | Developer Experience | Testing Utilities | 🟡 IN-PROGRESS | Shipped: `FakeTracer`, `assertSpanRecorded()`, nested span support (`v0.2.1`). Pending: propagation assertions, snapshot helpers. |
 | v0.7.1 | Developer Experience | Benchmark Suite | 🟢 DONE | Shipped: `benchmark.yml` workflow with span overhead smoke test (`v0.1.0`). Expand with realistic Laravel workloads in future iterations. |
 | v0.8.0 | Distributed Systems | Event Propagation | 🔴 PLANNED | Propagate trace context across Laravel events, listeners, notifications, broadcasts, and asynchronous workflows. |
