@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.5.0` (2026-05-28) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.5.0-scout.md](docs/posts/v0.5.0-scout.md).
+**Current release:** `v0.5.1` (2026-06-14) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.5.1-scout-metadata.md](docs/posts/v0.5.1-scout-metadata.md).
 
 ---
 
@@ -21,7 +21,9 @@
 | v0.4.0 | Horizon integration | 🟢 Released (all v0.4.0 rows ✅) | `v0.4.0` |
 | v0.4.1 | Cache instrumentation | 🟢 Released (all v0.4.1 rows ✅) | `v0.4.1` |
 | v0.5.0 | Scout driver | 🟢 Released (all v0.5.0 rows ✅) | `v0.5.0` |
-| v0.5.1 | Advanced Scout metadata | 🟡 In progress | — |
+| v0.5.1 | Advanced Scout metadata | 🟢 Released (all v0.5.1 rows ✅) | `v0.5.1` |
+
+---
 
 ## Project Vision
 
@@ -117,7 +119,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.5.0 | Scout Driver | Scout Span Adapter | 🟢 DONE | Shipped `v0.5.0`: `ScoutSpanExporter` maps Obeserva spans to Scout operations via `ScoutSpanMapper`; lifecycle export on span start/end/flush. |
 | v0.5.0 | Scout Driver | Scout Context Bridge | 🟢 DONE | Shipped `v0.5.0`: `ScoutContextBridge` propagates trace/span IDs and attributes as Scout context and request tags. |
 | v0.5.0 | Scout Driver | Scout Configuration Layer | 🟢 DONE | Shipped `v0.5.0`: `obeserva.scout.*` config with application name, key, monitoring toggle, and default tags. |
-| v0.5.1 | Scout Driver | Advanced Scout Metadata | 🟡 IN-PROGRESS | `ScoutMetadataEnricher` maps route, queue, and Horizon span attributes to `scout.*` tags; runtime diagnostics and deployment/tenant config. |
+| v0.5.1 | Scout Driver | Advanced Scout Metadata | 🟢 DONE | Shipped `v0.5.1`: `ScoutMetadataEnricher` maps route, queue, and Horizon span attributes to `scout.*` tags; runtime diagnostics and deployment/tenant config. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Semantic Conventions | 🔴 PLANNED | Align internal span naming and metadata structure with OpenTelemetry semantic conventions for future exporter compatibility and vendor neutrality. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Export Adapter | 🔴 PLANNED | Create experimental OpenTelemetry exporter support without requiring changes to Laravel instrumentation architecture. |
 | v0.6.1 | Runtime Support | Worker Context Isolation | 🔴 PLANNED | Extend `ContextManager` for queue workers, Horizon, Octane, RoadRunner, and Swoole with safe context cleanup and long-running worker isolation (beyond HTTP-scoped v0.2.0 context). |

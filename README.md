@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.5.0`](docs/posts/v0.5.0-scout.md) (Scout APM Driver).
+**Current release:** [`v0.5.1`](docs/posts/v0.5.1-scout-metadata.md) (Advanced Scout Metadata).
 
 ## Table of contents
 
@@ -35,7 +35,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Horizon**: supervisor/worker lifecycle spans, throughput metrics, retry correlation
 - **Cache**: cache hit/miss/write/forget spans
 - **Redis**: per-command spans via `CommandExecuted` events
-- **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`; advanced `scout.*` metadata when enabled (v0.5.1)
+- **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`; advanced `scout.*` metadata when enabled
 
 ## Configuration
 
