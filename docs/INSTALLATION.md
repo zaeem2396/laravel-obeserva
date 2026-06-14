@@ -48,7 +48,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.5.1`). See [RELEASE.md](RELEASE.md) and the [v0.5.1 announcement](posts/v0.5.1-scout-metadata.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.0`). See [RELEASE.md](RELEASE.md) and the [v0.6.0 announcement](posts/v0.6.0-otel.md).
 
 ### Scout driver
 
@@ -64,9 +64,9 @@ Configuration: `config/obeserva.php` → `scout.*` (see environment variables ab
 
 When `OBESERVA_SCOUT_METADATA_ENABLED=true` (default), Obeserva enriches Scout with `scout.route.name`, `scout.queue.*`, `scout.horizon.*`, deployment version, tenant ID, and PHP/Laravel runtime diagnostics.
 
-### OpenTelemetry driver (v0.6.0)
+### OpenTelemetry driver
 
-Set `OBESERVA_DRIVER=otel` for experimental OTel-compatible span export. Spans are converted on end and batched on flush — no changes to Laravel instrumentation are required.
+Set `OBESERVA_DRIVER=otel` for OTel-compatible span export. Spans are converted on end and batched on flush — no changes to Laravel instrumentation are required.
 
 Optional: install `open-telemetry/opentelemetry` for OTLP export to a collector.
 

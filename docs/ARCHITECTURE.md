@@ -52,7 +52,7 @@ When `OBESERVA_DRIVER=scout`, completed spans are forwarded to Scout APM in real
 
 Requires optional `scoutapp/scout-apm-laravel` and a bound `Scoutapm\ScoutApmAgent`.
 
-### OpenTelemetry driver (v0.6.0)
+### OpenTelemetry driver
 
 When `OBESERVA_DRIVER=otel`, completed spans are converted to OTel-compatible payloads and exported on flush:
 
