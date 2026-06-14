@@ -27,6 +27,12 @@ composer require scout/laravel
 - `ScoutMetadataEnricher`, `ScoutSpanMetadataMapper`, `ScoutRuntimeDiagnostics`
 - `ContainerScoutApmClient` — resolves `Scoutapm\ScoutApmAgent` from the container
 
+### OpenTelemetry driver (v0.6.0)
+
+- `OtelSpanExporter` — batched OTel span export
+- `OtelSpanConverter`, `OtelSemanticConventionMapper`, `OtelSpanKindMapper`, `OtelSpanNameNormalizer`
+- `OtelDriverFactory`, `LifecycleExporterResolver`
+
 ### Horizon instrumentation (v0.4.0)
 
 - `Horizon`, `HorizonInstrumentation`

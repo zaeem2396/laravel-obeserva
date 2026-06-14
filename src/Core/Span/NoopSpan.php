@@ -44,6 +44,16 @@ final class NoopSpan implements SpanInterface
         return null;
     }
 
+    public function getStartedAt(): float
+    {
+        return 0.0;
+    }
+
+    public function getEndedAt(): ?float
+    {
+        return null;
+    }
+
     public function setAttribute(string $key, mixed $value): void {}
 
     public function getAttributes(): array
