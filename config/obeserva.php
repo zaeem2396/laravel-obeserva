@@ -71,6 +71,13 @@ return [
         'flush_tracer' => env('OBESERVA_FLUSH_ON_TERMINATE', true),
     ],
 
+    'worker' => [
+        'context_isolation' => env('OBESERVA_WORKER_CONTEXT_ISOLATION', true),
+        'flush_after_job' => env('OBESERVA_WORKER_FLUSH_AFTER_JOB', true),
+        'octane_isolation' => env('OBESERVA_OCTANE_ISOLATION', true),
+        'roadrunner_isolation' => env('OBESERVA_ROADRUNNER_ISOLATION', true),
+    ],
+
     'development' => [
         'telescope' => [
             'enabled' => env('OBESERVA_TELESCOPE_ENABLED', false),
