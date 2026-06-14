@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Nothing yet.
+
+## [0.6.0] - 2026-06-14
+
+### Added
+
 - OpenTelemetry driver (`OBESERVA_DRIVER=otel`) with batched span export via `OtelSpanExporter`
 - `OtelSemanticConventionMapper` aligns HTTP, database, queue, and cache attributes to OTel semantic conventions
 - `OtelSpanConverter`, `OtelSpanNameNormalizer`, and `OtelSpanKindMapper` for OTel-compatible payloads
@@ -16,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Config: `obeserva.otel.*` and env vars `OBESERVA_OTEL_*`
 - `SpanInterface` exposes `getStartedAt()` and `getEndedAt()` for driver export timestamps
 - Tests: OTel driver unit and Laravel integration coverage (70 tests total)
+
+### Changed
+
+- Documentation aligned for v0.6.0 release (installation, roadmap, architecture, release post)
 
 ## [0.5.1] - 2026-06-14
 
@@ -180,7 +190,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.0...v0.4.1
