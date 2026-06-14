@@ -52,7 +52,8 @@
         "laravel/horizon": "Required for Horizon worker instrumentation (v0.4.0+).",
         "scoutapp/scout-apm-laravel": "Required for Scout APM export when OBESERVA_DRIVER=scout (v0.5.0+).",
         "open-telemetry/opentelemetry": "Optional OTLP export when OBESERVA_DRIVER=otel (v0.6.0+).",
-        "laravel/telescope": "Optional trace inspection in Telescope when OBESERVA_TELESCOPE_ENABLED (v0.7.0+)."
+        "laravel/telescope": "Optional trace inspection in Telescope when OBESERVA_TELESCOPE_ENABLED (v0.7.0+).",
+        "laravel/octane": "Optional Octane worker context isolation when OBESERVA_OCTANE_ISOLATION (v0.6.1+)."
     },
     "extra": {
         "laravel": {

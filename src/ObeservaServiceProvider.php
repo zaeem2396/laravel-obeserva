@@ -67,6 +67,9 @@ use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
+use Obeserva\Laravel\Runtime\WorkerContextIsolation;
+use Obeserva\Laravel\Runtime\WorkerContextResetter;
+use Obeserva\Laravel\Runtime\WorkerRuntimeDetector;
 use Obeserva\OtelDriver\OtelDriverFactory;
 use Obeserva\ScoutDriver\ContainerScoutApmClient;
 use Obeserva\ScoutDriver\ScoutApmClientInterface;
@@ -89,6 +92,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(QueuePayloadHook::class);
         $this->app->singleton(ActiveHorizonSupervisorRegistry::class);
         $this->app->singleton(HorizonThroughputMetrics::class);
+        $this->app->singleton(WorkerRuntimeDetector::class);
+        $this->app->singleton(WorkerContextResetter::class);
         $this->app->singleton(ContextManager::class);
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
@@ -133,6 +138,7 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerHttpInstrumentation();
         $this->registerDatabaseInstrumentation();
         $this->registerQueueInstrumentation();
+        $this->registerWorkerContextIsolation();
         $this->registerHorizonInstrumentation();
         $this->registerCacheInstrumentation();
         $this->registerRedisInstrumentation();
@@ -203,6 +209,15 @@ final class ObeservaServiceProvider extends ServiceProvider
         if (config('obeserva.queue.failed_job_correlation', true)) {
             Event::listen(JobFailed::class, TraceJobFailedListener::class);
         }
+    }
+
+    private function registerWorkerContextIsolation(): void
+    {
+        if (! (bool) config('obeserva.worker.context_isolation', true)) {
+            return;
+        }
+
+        WorkerContextIsolation::register();
     }
 
     private function registerHorizonInstrumentation(): void
