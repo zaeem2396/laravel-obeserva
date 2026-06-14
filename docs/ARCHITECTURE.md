@@ -52,6 +52,17 @@ When `OBESERVA_DRIVER=scout`, completed spans are forwarded to Scout APM in real
 
 Requires optional `scoutapp/scout-apm-laravel` and a bound `Scoutapm\ScoutApmAgent`.
 
+### OpenTelemetry driver (v0.6.0)
+
+When `OBESERVA_DRIVER=otel`, completed spans are converted to OTel-compatible payloads and exported on flush:
+
+1. `OtelSemanticConventionMapper` normalizes attributes (`http.method` → `http.request.method`, `queue.name` → `messaging.destination.name`, etc.)
+2. `OtelSpanNameNormalizer` produces convention-friendly span names (`GET users.index`, `process App\Jobs\SendEmail`)
+3. `OtelSpanConverter` builds export payloads with trace/span IDs, timestamps, and resource attributes
+4. `OtelSpanExporter` batches spans and calls `OtelExporterClientInterface::export()` on flush
+
+`LifecycleExporterResolver` selects Scout, OTel, or noop exporters based on `obeserva.driver`.
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).
