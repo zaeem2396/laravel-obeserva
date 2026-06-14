@@ -45,13 +45,17 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_HORIZON_RETRY_CORRELATION` | `true` | Root trace + retry attempt attributes |
 | `OBESERVA_CACHE_ENABLED` | `true` | Cache instrumentation (Cache hit/miss/write/forget) |
 | `OBESERVA_REDIS_COMMAND_TRACING` | `true` | Redis command spans via `CommandExecuted` events |
-| `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Laravel Telescope on terminate |
+| `OBESERVA_WORKER_CONTEXT_ISOLATION` | `true` | Reset tracer/context after each job in dedicated queue workers |
+| `OBESERVA_WORKER_FLUSH_AFTER_JOB` | `true` | Flush completed spans after each job when worker isolation is active |
+| `OBESERVA_OCTANE_ISOLATION` | `true` | Reset tracer/context on Octane request/task/tick termination |
+| `OBESERVA_ROADRUNNER_ISOLATION` | `true` | Reset tracer/context on RoadRunner worker termination events |
+| `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Laravel Telescope on terminate *(v0.7.0)* |
 | `OBESERVA_DEBUG_TOOLBAR` | `APP_DEBUG && APP_ENV=local` | Inject local HTML trace toolbar into HTML responses |
 | `OBESERVA_DEBUG_TOOLBAR_PROPAGATION` | `true` | Show queue/HTTP propagation summary in the debug toolbar |
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.7.0`). See [RELEASE.md](RELEASE.md) and the [v0.7.0 announcement](posts/v0.7.0-developer-experience.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.0`; v0.6.1 in development). See [RELEASE.md](RELEASE.md) and the [v0.6.1 preview](posts/v0.6.1-worker-context.md).
 
 ### Scout driver
 
@@ -75,7 +79,20 @@ Optional: install `open-telemetry/opentelemetry` for OTLP export to a collector.
 
 Configuration: `config/obeserva.php` → `otel.*` (see environment variables above).
 
-### Developer experience
+### Worker context isolation (v0.6.1)
+
+Long-running queue, Horizon, Octane, and RoadRunner workers reset tracer and context state between jobs and requests so spans do not leak across worker cycles.
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OBESERVA_WORKER_CONTEXT_ISOLATION` | `true` | Enable worker context isolation |
+| `OBESERVA_WORKER_FLUSH_AFTER_JOB` | `true` | Flush tracer after each job in dedicated workers |
+| `OBESERVA_OCTANE_ISOLATION` | `true` | Reset on Octane termination events |
+| `OBESERVA_ROADRUNNER_ISOLATION` | `true` | Reset on RoadRunner termination events |
+
+Configuration: `config/obeserva.php` → `worker.*`.
+
+### Developer experience (v0.7.0, pending release)
 
 Enable local trace inspection without changing your production driver:
 

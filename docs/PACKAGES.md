@@ -7,7 +7,8 @@
 | `src/Contracts` | `Obeserva\Contracts` | Interfaces and value objects |
 | `src/Core` | `Obeserva\Core` | Runtime implementation |
 | `src` | `Obeserva\Laravel` | Laravel integration |
-| `src/DeveloperExperience` | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, debug toolbar |
+| `src/Runtime` | `Obeserva\Laravel\Runtime` | Worker runtime detection and context isolation |
+| `src/DeveloperExperience` | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, debug toolbar *(v0.7.0, pending release)* |
 | `src/FakeTracer.php` | `Obeserva\Testing` | Test double |
 
 ## Installation
@@ -34,7 +35,12 @@ composer require scout/laravel
 - `OtelSpanConverter`, `OtelSemanticConventionMapper`, `OtelSpanKindMapper`, `OtelSpanNameNormalizer`
 - `OtelDriverFactory`, `LifecycleExporterResolver`
 
-### Developer experience
+### Worker context isolation (v0.6.1)
+
+- `WorkerRuntime`, `WorkerRuntimeDetector`, `WorkerContextResetter`
+- `WorkerContextIsolation`, `IsolateWorkerContextAfterJobListener`, `IsolateLongRunningWorkerContextListener`
+
+### Developer experience (v0.7.0, pending release)
 
 - `TraceSnapshot`, `SpanSnapshotCollector`, `TraceSnapshotRegistry`
 - `TraceTreeBuilder`, `PropagationFlowInspector`
@@ -58,4 +64,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.7.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md).
+Current version: **0.6.0** (v0.6.1 in development). A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.6.1-worker-context.md](posts/v0.6.1-worker-context.md).
