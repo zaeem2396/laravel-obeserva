@@ -9,14 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Testing utilities for v0.7.1: `TraceContextAssert`, `TraceSnapshotBuilder`, `TraceSnapshotAssert`
-- Extended `FakeTracer` with span queries, attribute checks, child assertions, and `spanSnapshots()`
-- `InteractsWithObeserva` trait for Laravel package tests
-- `scripts/benchmark-instrumentation.php` with flat, nested, and snapshot benchmarks
+- Nothing yet.
 
 ### Changed
 
-- Benchmark CI workflow runs the instrumentation benchmark script instead of an inline placeholder
+- Nothing yet.
+
+## [0.7.1] - 2026-05-30
+
+### Added
+
+- Testing utilities (`Obeserva\Testing`): `TraceContextAssert` for W3C traceparent and queue payload propagation checks
+- `TraceSnapshotBuilder` and `TraceSnapshotAssert` for snapshot fixtures, hierarchy, attributes, and flow assertions
+- Extended `FakeTracer` with `findSpan()`, span count/attribute/child assertions, and `spanSnapshots()`
+- `InteractsWithObeserva` trait for Laravel Testbench package tests
+- `scripts/benchmark-instrumentation.php` — flat spans, nested span trees, and snapshot conversion benchmarks
+- Tests: testing utilities unit and Laravel integration coverage (92 tests total)
+
+### Changed
+
+- Benchmark CI workflow runs `scripts/benchmark-instrumentation.php` instead of an inline placeholder
+- Documentation aligned for v0.7.1 release (installation, roadmap, architecture, release post)
 
 ## [0.7.0] - 2026-05-29
 
