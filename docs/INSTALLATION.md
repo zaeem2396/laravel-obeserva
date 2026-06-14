@@ -55,7 +55,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.7.0`). See [RELEASE.md](RELEASE.md) and the [v0.7.0 announcement](posts/v0.7.0-developer-experience.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.7.1`). See [RELEASE.md](RELEASE.md) and the [v0.7.1 announcement](posts/v0.7.1-testing-utilities.md).
 
 ### Scout driver
 
@@ -110,6 +110,17 @@ composer require laravel/telescope --dev
 When either feature is enabled, `SpanSnapshotCollector` records completed spans via `CompositeSpanLifecycleExporter` alongside the configured driver exporter.
 
 Configuration: `config/obeserva.php` → `development.*`.
+
+### Testing utilities
+
+Obeserva includes PHPUnit helpers under `Obeserva\Testing` for asserting spans, propagation, and snapshot flows in package tests:
+
+- `FakeTracer` — in-memory tracer with span and snapshot assertions
+- `TraceContextAssert` — W3C traceparent and queue payload propagation checks
+- `TraceSnapshotBuilder` / `TraceSnapshotAssert` — snapshot fixtures and hierarchy checks
+- `InteractsWithObeserva` — Laravel Testbench trait to swap the tracer
+
+See [Modules](PACKAGES.md#testing-utilities-v071) for details.
 
 ## Local development
 

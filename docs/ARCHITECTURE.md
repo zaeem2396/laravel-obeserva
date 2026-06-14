@@ -19,7 +19,7 @@ Obeserva\Contracts (interfaces and value objects)
 - `Obeserva\Contracts` depends only on PHP.
 - `Obeserva\Core` depends on `Obeserva\Contracts`.
 - `Obeserva\Laravel` depends on `Obeserva\Core`, `Obeserva\Contracts`, and `illuminate/*`.
-- `Obeserva\Testing` provides test doubles and can depend on runtime layers.
+- `Obeserva\Testing` provides test doubles, propagation/snapshot assertions, and can depend on runtime layers.
 
 ## Trace propagation
 
@@ -77,6 +77,15 @@ Local trace inspection runs alongside the configured driver:
 4. `PublishTraceToTelescope` publishes span snapshots to Laravel Telescope on terminate when `OBESERVA_TELESCOPE_ENABLED` is enabled
 
 Requires optional `laravel/telescope` for Telescope publishing; the debug toolbar has no extra dependencies.
+
+### Testing utilities
+
+`Obeserva\Testing` ships PHPUnit-friendly helpers for package and application tests:
+
+1. `FakeTracer` records spans in memory with assertion helpers and `spanSnapshots()`
+2. `TraceContextAssert` validates W3C traceparent headers and queue payload propagation
+3. `TraceSnapshotBuilder` and `TraceSnapshotAssert` build and verify snapshot hierarchies and flows
+4. `InteractsWithObeserva` swaps the tracer during Orchestra Testbench tests
 
 ## CI/CD
 
