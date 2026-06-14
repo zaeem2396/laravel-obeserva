@@ -17,7 +17,7 @@ php artisan vendor:publish --tag=obeserva-config
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `OBESERVA_ENABLED` | `true` | Master switch |
-| `OBESERVA_DRIVER` | `noop` | Driver identifier (`noop` or `scout`) |
+| `OBESERVA_DRIVER` | `noop` | Driver identifier (`noop`, `scout`, or `otel`) |
 | `OBESERVA_SCOUT_ENABLED` | `true` | Enable Scout export when driver is `scout` |
 | `OBESERVA_SCOUT_APPLICATION_NAME` | `APP_NAME` | Scout application name |
 | `OBESERVA_SCOUT_KEY` | `SCOUT_KEY` | Scout application key |
@@ -25,6 +25,10 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_SCOUT_DEPLOYMENT_VERSION` | `APP_VERSION` | Deployment/build version tag |
 | `OBESERVA_SCOUT_TENANT_ID` | _(empty)_ | Multi-tenant identifier tag |
 | `OBESERVA_SCOUT_METADATA_ENABLED` | `true` | Laravel-aware `scout.*` metadata enrichment |
+| `OBESERVA_OTEL_ENABLED` | `true` | Enable OTel export when driver is `otel` |
+| `OBESERVA_OTEL_SERVICE_NAME` | `APP_NAME` | OTel `service.name` resource attribute |
+| `OBESERVA_OTEL_SERVICE_VERSION` | `APP_VERSION` | OTel `service.version` resource attribute |
+| `OBESERVA_OTEL_SEMANTIC_CONVENTIONS` | `true` | Normalize span attributes to OTel semantic conventions |
 | `OBESERVA_SAMPLE_RATE` | `1.0` | Sampling probability (0.0–1.0) |
 | `OBESERVA_HTTP_MIDDLEWARE` | `true` | Register HTTP trace middleware |
 | `OBESERVA_HTTP_MIDDLEWARE_TIMING` | `true` | Register `obeserva.timing` middleware alias |
@@ -59,6 +63,14 @@ Obeserva forwards span lifecycle events to Scout via `ScoutSpanExporter`. When t
 Configuration: `config/obeserva.php` → `scout.*` (see environment variables above).
 
 When `OBESERVA_SCOUT_METADATA_ENABLED=true` (default), Obeserva enriches Scout with `scout.route.name`, `scout.queue.*`, `scout.horizon.*`, deployment version, tenant ID, and PHP/Laravel runtime diagnostics.
+
+### OpenTelemetry driver (v0.6.0)
+
+Set `OBESERVA_DRIVER=otel` for experimental OTel-compatible span export. Spans are converted on end and batched on flush — no changes to Laravel instrumentation are required.
+
+Optional: install `open-telemetry/opentelemetry` for OTLP export to a collector.
+
+Configuration: `config/obeserva.php` → `otel.*` (see environment variables above).
 
 ## Local development
 
