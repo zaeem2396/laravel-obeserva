@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.6.0` (2026-06-14) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.6.0-otel.md](docs/posts/v0.6.0-otel.md). **In development:** [v0.6.1 Worker Context Isolation](docs/posts/v0.6.1-worker-context.md), then [v0.7.0 Developer Experience](docs/posts/v0.7.0-developer-experience.md).
+**Current release:** `v0.6.1` (2026-05-28) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.6.1-worker-context.md](docs/posts/v0.6.1-worker-context.md). **Next:** [v0.7.0 Developer Experience](docs/posts/v0.7.0-developer-experience.md).
 
 ---
 
@@ -23,7 +23,7 @@
 | v0.5.0 | Scout driver | 🟢 Released (all v0.5.0 rows ✅) | `v0.5.0` |
 | v0.5.1 | Advanced Scout metadata | 🟢 Released (all v0.5.1 rows ✅) | `v0.5.1` |
 | v0.6.0 | OpenTelemetry alignment | 🟢 Released (all v0.6.0 rows ✅) | `v0.6.0` |
-| v0.6.1 | Worker context isolation | 🟡 IN-PROGRESS | — |
+| v0.6.1 | Worker context isolation | 🟢 Released (all v0.6.1 rows ✅) | `v0.6.1` |
 | v0.7.0 | Developer experience | 🟡 IN-PROGRESS | — |
 
 ---
@@ -125,10 +125,10 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.5.1 | Scout Driver | Advanced Scout Metadata | 🟢 DONE | Shipped `v0.5.1`: `ScoutMetadataEnricher` maps route, queue, and Horizon span attributes to `scout.*` tags; runtime diagnostics and deployment/tenant config. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Semantic Conventions | 🟢 DONE | Shipped `v0.6.0`: `OtelSemanticConventionMapper` normalizes HTTP, DB, queue, and cache attributes to OTel semantic convention keys. |
 | v0.6.0 | OpenTelemetry Alignment | OTel Export Adapter | 🟢 DONE | Shipped `v0.6.0`: `OtelSpanExporter` batches completed spans as OTel-compatible payloads via `OtelSpanConverter`; `OBESERVA_DRIVER=otel`. |
-| v0.6.1 | Runtime Support | Worker Context Isolation | 🟡 IN-PROGRESS | Shipped on `feature/v0.6.1-worker-context-isolation`: `WorkerContextResetter`, `WorkerRuntimeDetector`, job-level flush in dedicated queue/Horizon workers. |
-| v0.6.1 | Runtime Support | Octane Compatibility | 🟡 IN-PROGRESS | Shipped on `feature/v0.6.1-worker-context-isolation`: Octane request/task/tick termination hooks reset tracer and context when `OBESERVA_OCTANE_ISOLATION` is enabled. |
-| v0.6.1 | Runtime Support | RoadRunner Compatibility | 🟡 IN-PROGRESS | Shipped on `feature/v0.6.1-worker-context-isolation`: optional RoadRunner worker termination hooks when packages are present. |
-| v0.6.1 | Runtime Support | Swoole Awareness | 🟡 IN-PROGRESS | Covered via Octane Swoole backend termination hooks in v0.6.1. |
+| v0.6.1 | Runtime Support | Worker Context Isolation | 🟢 DONE | Shipped `v0.6.1`: `WorkerContextResetter`, `WorkerRuntimeDetector`, job-level flush in dedicated queue/Horizon workers. |
+| v0.6.1 | Runtime Support | Octane Compatibility | 🟢 DONE | Shipped `v0.6.1`: Octane request/task/tick termination hooks reset tracer and context when `OBESERVA_OCTANE_ISOLATION` is enabled. |
+| v0.6.1 | Runtime Support | RoadRunner Compatibility | 🟢 DONE | Shipped `v0.6.1`: optional RoadRunner worker termination hooks when packages are present. |
+| v0.6.1 | Runtime Support | Swoole Awareness | 🟢 DONE | Shipped `v0.6.1`: covered via Octane Swoole backend termination hooks. |
 | v0.7.0 | Developer Experience | Telescope Integration | 🟡 IN-PROGRESS | Code merged; release follows v0.6.1. `PublishTraceToTelescope`, optional `laravel/telescope` publisher. |
 | v0.7.0 | Developer Experience | Debug Toolbar | 🟡 IN-PROGRESS | Code merged; release follows v0.6.1. `DebugToolbarMiddleware` with span tree and propagation summary. |
 | v0.7.1 | Developer Experience | Testing Utilities | 🟡 IN-PROGRESS | Shipped: `FakeTracer`, `assertSpanRecorded()`, nested span support (`v0.2.1`). Pending: propagation assertions, snapshot helpers. |
