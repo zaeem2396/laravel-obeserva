@@ -27,7 +27,7 @@ composer require scout/laravel
 - `ScoutMetadataEnricher`, `ScoutSpanMetadataMapper`, `ScoutRuntimeDiagnostics`
 - `ContainerScoutApmClient` — resolves `Scoutapm\ScoutApmAgent` from the container
 
-### OpenTelemetry driver (v0.6.0)
+### OpenTelemetry driver
 
 - `OtelSpanExporter` — batched OTel span export
 - `OtelSpanConverter`, `OtelSemanticConventionMapper`, `OtelSpanKindMapper`, `OtelSpanNameNormalizer`
@@ -49,4 +49,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.5.1**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.5.1-scout-metadata.md](posts/v0.5.1-scout-metadata.md).
+Current version: **0.6.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.6.0-otel.md](posts/v0.6.0-otel.md).
