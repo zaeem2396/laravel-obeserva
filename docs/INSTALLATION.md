@@ -51,7 +51,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.0`; v0.7.0 in development). See [RELEASE.md](RELEASE.md) and the [v0.7.0 preview](posts/v0.7.0-developer-experience.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.7.0`). See [RELEASE.md](RELEASE.md) and the [v0.7.0 announcement](posts/v0.7.0-developer-experience.md).
 
 ### Scout driver
 
@@ -75,7 +75,7 @@ Optional: install `open-telemetry/opentelemetry` for OTLP export to a collector.
 
 Configuration: `config/obeserva.php` → `otel.*` (see environment variables above).
 
-### Developer experience (v0.7.0)
+### Developer experience
 
 Enable local trace inspection without changing your production driver:
 
