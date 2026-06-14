@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Nothing yet.
+
+## [0.7.0] - 2026-05-28
+
+### Added
+
 - Developer experience module (`Obeserva\DeveloperExperience`) for local trace inspection
 - Telescope integration (`OBESERVA_TELESCOPE_ENABLED`) publishes span snapshots to Laravel Telescope on terminate
 - Debug toolbar (`OBESERVA_DEBUG_TOOLBAR`) injects a local HTML trace panel into HTML responses
@@ -20,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Documentation aligned for v0.7.0 development (installation, roadmap, architecture, preview post)
+- Documentation aligned for v0.7.0 release (installation, roadmap, architecture, release post)
 
 ## [0.6.0] - 2026-06-14
 
@@ -201,7 +207,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...v0.5.0
