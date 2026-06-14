@@ -8,7 +8,7 @@
 | `src/Core` | `Obeserva\Core` | Runtime implementation |
 | `src` | `Obeserva\Laravel` | Laravel integration |
 | `src/Runtime` | `Obeserva\Laravel\Runtime` | Worker runtime detection and context isolation |
-| `src/DeveloperExperience` | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, debug toolbar *(v0.7.0, pending release)* |
+| `src/DeveloperExperience` | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, debug toolbar |
 | `src/FakeTracer.php` | `Obeserva\Testing` | Test double |
 
 ## Installation
@@ -40,7 +40,7 @@ composer require scout/laravel
 - `WorkerRuntime`, `WorkerRuntimeDetector`, `WorkerContextResetter`
 - `WorkerContextIsolation`, `IsolateWorkerContextAfterJobListener`, `IsolateLongRunningWorkerContextListener`
 
-### Developer experience (v0.7.0, pending release)
+### Developer experience
 
 - `TraceSnapshot`, `SpanSnapshotCollector`, `TraceSnapshotRegistry`
 - `TraceTreeBuilder`, `PropagationFlowInspector`
@@ -64,4 +64,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.6.1**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.6.1-worker-context.md](posts/v0.6.1-worker-context.md).
+Current version: **0.7.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md).

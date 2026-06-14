@@ -49,13 +49,13 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_WORKER_FLUSH_AFTER_JOB` | `true` | Flush completed spans after each job when worker isolation is active |
 | `OBESERVA_OCTANE_ISOLATION` | `true` | Reset tracer/context on Octane request/task/tick termination |
 | `OBESERVA_ROADRUNNER_ISOLATION` | `true` | Reset tracer/context on RoadRunner worker termination events |
-| `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Laravel Telescope on terminate *(v0.7.0)* |
+| `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Laravel Telescope on terminate |
 | `OBESERVA_DEBUG_TOOLBAR` | `APP_DEBUG && APP_ENV=local` | Inject local HTML trace toolbar into HTML responses |
 | `OBESERVA_DEBUG_TOOLBAR_PROPAGATION` | `true` | Show queue/HTTP propagation summary in the debug toolbar |
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.1`). See [RELEASE.md](RELEASE.md) and the [v0.6.1 announcement](posts/v0.6.1-worker-context.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.7.0`). See [RELEASE.md](RELEASE.md) and the [v0.7.0 announcement](posts/v0.7.0-developer-experience.md).
 
 ### Scout driver
 
@@ -92,7 +92,7 @@ Long-running queue, Horizon, Octane, and RoadRunner workers reset tracer and con
 
 Configuration: `config/obeserva.php` → `worker.*`.
 
-### Developer experience (v0.7.0, pending release)
+### Developer experience
 
 Enable local trace inspection without changing your production driver:
 
