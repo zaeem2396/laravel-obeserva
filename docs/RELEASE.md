@@ -61,6 +61,7 @@ git push origin vX.Y.Z
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.7.0` | [docs/posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md) |
 | `v0.6.1` | [docs/posts/v0.6.1-worker-context.md](posts/v0.6.1-worker-context.md) |
 | `v0.6.0` | [docs/posts/v0.6.0-otel.md](posts/v0.6.0-otel.md) |
 | `v0.5.1` | [docs/posts/v0.5.1-scout-metadata.md](posts/v0.5.1-scout-metadata.md) |
