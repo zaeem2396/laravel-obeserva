@@ -70,7 +70,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Otel Driver | `Obeserva\OtelDriver` | OpenTelemetry semantic conventions and export adapter |
 | Runtime | `Obeserva\Laravel\Runtime` | Worker runtime detection and context isolation |
 | Developer Experience | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, and debug toolbar |
-| Testing | `Obeserva\Testing` | `FakeTracer` for test assertions |
+| Testing | `Obeserva\Testing` | `FakeTracer`, propagation and snapshot assertions, `InteractsWithObeserva` trait |
 
 ## Requirements
 

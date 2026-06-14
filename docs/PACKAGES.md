@@ -9,7 +9,15 @@
 | `src` | `Obeserva\Laravel` | Laravel integration |
 | `src/Runtime` | `Obeserva\Laravel\Runtime` | Worker runtime detection and context isolation |
 | `src/DeveloperExperience` | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, debug toolbar |
-| `src/FakeTracer.php` | `Obeserva\Testing` | Test double |
+| `src/FakeTracer.php` | `Obeserva\Testing` | Test double and assertion helpers |
+
+### Testing utilities (v0.7.1)
+
+- `FakeTracer` — in-memory tracer with span and snapshot assertions
+- `TraceContextAssert` — W3C traceparent and queue payload propagation checks
+- `TraceSnapshotBuilder` — fluent `TraceSnapshot` fixtures for tests
+- `TraceSnapshotAssert` — snapshot count, attributes, hierarchy, and flow checks
+- `InteractsWithObeserva` — Laravel Testbench trait to swap the tracer in package tests
 
 ## Installation
 
