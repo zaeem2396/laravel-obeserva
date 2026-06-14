@@ -34,7 +34,7 @@ composer require scout/laravel
 - `OtelSpanConverter`, `OtelSemanticConventionMapper`, `OtelSpanKindMapper`, `OtelSpanNameNormalizer`
 - `OtelDriverFactory`, `LifecycleExporterResolver`
 
-### Developer experience (v0.7.0)
+### Developer experience
 
 - `TraceSnapshot`, `SpanSnapshotCollector`, `TraceSnapshotRegistry`
 - `TraceTreeBuilder`, `PropagationFlowInspector`
@@ -58,4 +58,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.6.0** (v0.7.0 in development). A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md).
+Current version: **0.7.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md).
