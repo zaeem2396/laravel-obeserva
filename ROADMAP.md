@@ -24,6 +24,8 @@
 | v0.5.1 | Advanced Scout metadata | 🟢 Released (all v0.5.1 rows ✅) | `v0.5.1` |
 | v0.6.0 | OpenTelemetry alignment | 🟡 In progress | — |
 
+---
+
 ## Project Vision
 
 Build a modern Laravel-native observability and instrumentation layer designed around:
