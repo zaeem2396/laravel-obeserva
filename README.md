@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.6.0`](docs/posts/v0.6.0-otel.md) (OpenTelemetry Alignment).
+**Current release:** [`v0.6.0`](docs/posts/v0.6.0-otel.md) (OpenTelemetry Alignment). **In development:** v0.7.0 — Developer Experience (Telescope & Debug Toolbar).
 
 ## Table of contents
 
@@ -37,6 +37,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Redis**: per-command spans via `CommandExecuted` events
 - **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`; advanced `scout.*` metadata when enabled
 - **OpenTelemetry** (optional): export OTel-compatible span payloads when `OBESERVA_DRIVER=otel`
+- **Developer experience** (optional): Telescope trace inspection and local debug toolbar when enabled
 
 ## Configuration
 
@@ -53,6 +54,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Redis**: enabled by `OBESERVA_REDIS_COMMAND_TRACING`
 - **Scout**: enabled by `OBESERVA_DRIVER=scout` (requires `scoutapp/scout-apm-laravel`); metadata via `OBESERVA_SCOUT_METADATA_ENABLED`
 - **OpenTelemetry**: enabled by `OBESERVA_DRIVER=otel`; semantic conventions via `OBESERVA_OTEL_SEMANTIC_CONVENTIONS`
+- **Telescope**: enabled by `OBESERVA_TELESCOPE_ENABLED` (requires `laravel/telescope`)
+- **Debug toolbar**: enabled by `OBESERVA_DEBUG_TOOLBAR` (defaults to local + `APP_DEBUG`)
 
 ## Modules
 
@@ -63,6 +66,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Laravel | `Obeserva\Laravel` | Service provider, middleware, listeners, and config integration |
 | Scout Driver | `Obeserva\ScoutDriver` | Scout APM span adapter and context bridge |
 | Otel Driver | `Obeserva\OtelDriver` | OpenTelemetry semantic conventions and export adapter |
+| Developer Experience | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, and debug toolbar |
 | Testing | `Obeserva\Testing` | `FakeTracer` for test assertions |
 
 ## Requirements
