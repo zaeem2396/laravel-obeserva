@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.5.1`](docs/posts/v0.5.1-scout-metadata.md) (Advanced Scout Metadata).
+**Current release:** [`v0.6.0`](docs/posts/v0.6.0-otel.md) (OpenTelemetry Alignment).
 
 ## Table of contents
 
@@ -36,7 +36,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Cache**: cache hit/miss/write/forget spans
 - **Redis**: per-command spans via `CommandExecuted` events
 - **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`; advanced `scout.*` metadata when enabled
-- **OpenTelemetry** (optional): export OTel-compatible span payloads when `OBESERVA_DRIVER=otel` (v0.6.0)
+- **OpenTelemetry** (optional): export OTel-compatible span payloads when `OBESERVA_DRIVER=otel`
 
 ## Configuration
 
@@ -62,7 +62,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Core | `Obeserva\Core` | Instrumentation runtime (spans, context, sampling) |
 | Laravel | `Obeserva\Laravel` | Service provider, middleware, listeners, and config integration |
 | Scout Driver | `Obeserva\ScoutDriver` | Scout APM span adapter and context bridge |
-| Otel Driver | `Obeserva\OtelDriver` | OpenTelemetry semantic conventions and export adapter (v0.6.0) |
+| Otel Driver | `Obeserva\OtelDriver` | OpenTelemetry semantic conventions and export adapter |
 | Testing | `Obeserva\Testing` | `FakeTracer` for test assertions |
 
 ## Requirements
