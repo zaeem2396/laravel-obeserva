@@ -8,4 +8,5 @@ parameters:
     excludePaths:
         - tests
         - config
+        - src/InteractsWithObeserva.php
     reportUnmatchedIgnoredErrors: true

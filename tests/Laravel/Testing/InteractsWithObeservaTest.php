@@ -37,6 +37,7 @@ final class InteractsWithObeservaTest extends TestCase
         $tracer->assertSpanCount(2);
         $tracer->assertChildSpanRecorded('http.request', 'database.query');
 
+        $this->assertCount(2, $tracer->spanSnapshots());
         TraceSnapshotAssert::assertPropagationIncludesHttpSpan($tracer->spanSnapshots());
     }
 }
