@@ -67,7 +67,7 @@ When `OBESERVA_DRIVER=otel`, completed spans are converted to OTel-compatible pa
 
 Dedicated queue and Horizon workers flush tracer state after each job via `WorkerContextResetter`. Octane and RoadRunner runtimes register optional termination listeners when present.
 
-### Developer experience (v0.7.0, pending release)
+### Developer experience
 
 Local trace inspection runs alongside the configured driver:
 
