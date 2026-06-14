@@ -8,8 +8,6 @@ use Obeserva\DeveloperExperience\TraceSnapshot;
 
 final class TraceSnapshotBuilder
 {
-    private string $name;
-
     private string $kind = 'internal';
 
     private string $traceId = 'trace-test';
@@ -30,10 +28,7 @@ final class TraceSnapshotBuilder
     /** @var list<array{name: string, attributes: array<string, mixed>}> */
     private array $events = [];
 
-    private function __construct(string $name)
-    {
-        $this->name = $name;
-    }
+    private function __construct(private readonly string $name) {}
 
     public static function make(string $name): self
     {

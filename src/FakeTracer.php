@@ -60,7 +60,7 @@ final class FakeTracer implements TracerInterface
         $factory = new SpanSnapshotFactory;
 
         return array_map(
-            static fn (Span $span): TraceSnapshot => $factory->fromSpan($span),
+            $factory->fromSpan(...),
             $this->spans,
         );
     }

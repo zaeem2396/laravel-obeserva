@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Obeserva\Testing;
 
+use Illuminate\Support\ServiceProvider;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\DeveloperExperience\TraceSnapshot;
 use Obeserva\DeveloperExperience\TraceSnapshotRegistry;
@@ -43,7 +44,7 @@ trait InteractsWithObeserva
     }
 
     /**
-     * @return array<int, class-string<\Illuminate\Support\ServiceProvider>>
+     * @return array<int, class-string<ServiceProvider>>
      */
     protected function obeservaPackageProviders(): array
     {

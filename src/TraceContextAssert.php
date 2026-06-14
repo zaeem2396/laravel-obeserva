@@ -79,7 +79,7 @@ final class TraceContextAssert
      */
     public static function assertQueuePayloadCarriesContext(
         array $payload,
-        TraceContextInterface $expected,
+        TraceContextInterface $producer,
     ): void {
         $extracted = TraceContextCarrier::extract($payload);
 
@@ -87,7 +87,21 @@ final class TraceContextAssert
             throw new AssertionFailedError('Expected queue payload to carry Obeserva trace context.');
         }
 
-        self::assertSameTraceContext($expected, $extracted);
+        if ($extracted->getTraceId() !== $producer->getTraceId()) {
+            throw new AssertionFailedError(sprintf(
+                'Expected queue payload trace id [%s], got [%s].',
+                $producer->getTraceId(),
+                $extracted->getTraceId(),
+            ));
+        }
+
+        if ($extracted->getSpanId() !== $producer->getSpanId()) {
+            throw new AssertionFailedError(sprintf(
+                'Expected queue payload span id [%s], got [%s].',
+                $producer->getSpanId(),
+                $extracted->getSpanId(),
+            ));
+        }
     }
 
     /**
