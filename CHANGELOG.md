@@ -9,7 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- Developer experience module (`Obeserva\DeveloperExperience`) for local trace inspection
+- Telescope integration (`OBESERVA_TELESCOPE_ENABLED`) publishes span snapshots to Laravel Telescope on terminate
+- Debug toolbar (`OBESERVA_DEBUG_TOOLBAR`) injects a local HTML trace panel into HTML responses
+- `CompositeSpanLifecycleExporter` chains primary driver export with development snapshot collection
+- `TraceSnapshot`, `TraceTreeBuilder`, and `PropagationFlowInspector` for hierarchical trace views
+- `SpanSnapshotCollector` records completed spans into `TraceSnapshotRegistry` during development
+- Config: `obeserva.development.*` and env vars `OBESERVA_TELESCOPE_*`, `OBESERVA_DEBUG_TOOLBAR*`
+- Tests: developer experience unit and Laravel integration coverage (77 tests total)
+
+### Changed
+
+- Documentation aligned for v0.7.0 development (installation, roadmap, architecture, preview post)
 
 ## [0.6.0] - 2026-06-14
 
