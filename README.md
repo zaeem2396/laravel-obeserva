@@ -36,6 +36,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Cache**: cache hit/miss/write/forget spans
 - **Redis**: per-command spans via `CommandExecuted` events
 - **Scout** (optional): export spans to Scout APM when `OBESERVA_DRIVER=scout`; advanced `scout.*` metadata when enabled
+- **OpenTelemetry** (optional): export OTel-compatible span payloads when `OBESERVA_DRIVER=otel` (v0.6.0)
 
 ## Configuration
 
@@ -51,6 +52,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Cache**: enabled by `OBESERVA_CACHE_ENABLED`
 - **Redis**: enabled by `OBESERVA_REDIS_COMMAND_TRACING`
 - **Scout**: enabled by `OBESERVA_DRIVER=scout` (requires `scoutapp/scout-apm-laravel`); metadata via `OBESERVA_SCOUT_METADATA_ENABLED`
+- **OpenTelemetry**: enabled by `OBESERVA_DRIVER=otel`; semantic conventions via `OBESERVA_OTEL_SEMANTIC_CONVENTIONS`
 
 ## Modules
 
@@ -60,6 +62,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Core | `Obeserva\Core` | Instrumentation runtime (spans, context, sampling) |
 | Laravel | `Obeserva\Laravel` | Service provider, middleware, listeners, and config integration |
 | Scout Driver | `Obeserva\ScoutDriver` | Scout APM span adapter and context bridge |
+| Otel Driver | `Obeserva\OtelDriver` | OpenTelemetry semantic conventions and export adapter (v0.6.0) |
 | Testing | `Obeserva\Testing` | `FakeTracer` for test assertions |
 
 ## Requirements
