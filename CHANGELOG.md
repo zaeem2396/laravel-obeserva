@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- Advanced Scout metadata enrichment (`ScoutMetadataEnricher`) — route names, queue names, Horizon worker IDs, deployment version, tenant ID, and runtime diagnostics exported as `scout.*` tags
+- `ScoutSpanMetadataMapper` maps Laravel span attributes to Scout-prefixed metadata keys
+- `ScoutRuntimeDiagnostics` captures PHP/Laravel version and environment tags on export
+- Config: `obeserva.scout.deployment_version`, `tenant_id`, `metadata_enabled`
+- Environment variables: `OBESERVA_SCOUT_DEPLOYMENT_VERSION`, `OBESERVA_SCOUT_TENANT_ID`, `OBESERVA_SCOUT_METADATA_ENABLED`
+- Tests: metadata mapper, enricher, diagnostics, and integration coverage (60 tests total)
 
 ## [0.5.0] - 2026-05-28
 

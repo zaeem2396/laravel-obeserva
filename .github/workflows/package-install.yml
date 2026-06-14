@@ -31,11 +31,14 @@ jobs:
           tools: composer:v2
 
       - name: Create fresh Laravel app
+        env:
+          # Laravel 11 has no patched release for CVE-2026-48019 yet; Composer 2.9+
+          # blocks all 11.x versions during require. Allow install smoke test only.
+          COMPOSER_NO_SECURITY_BLOCKING: ${{ matrix.laravel == '11.*' && '1' || '0' }}
         run: |
           composer create-project laravel/laravel test-app "${{ matrix.laravel }}" --prefer-dist --no-interaction
           cd test-app
-          # Use a path repository because the consolidated package lives in the repo root.
-          # VCS/file:// installs require git metadata + revision resolution and can fail in CI.
+          composer update laravel/framework --with-all-dependencies --no-interaction
           composer config repositories.obeserva path "../"
           composer config minimum-stability dev
           composer config prefer-stable true

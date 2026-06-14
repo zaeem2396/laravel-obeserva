@@ -12,6 +12,7 @@ final readonly class ScoutContextBridge
     public function __construct(
         private ScoutApmClientInterface $client,
         private ScoutConfig $config,
+        private ?ScoutMetadataEnricher $metadataEnricher = null,
     ) {}
 
     public function applyDefaultTags(): void
@@ -22,6 +23,10 @@ final readonly class ScoutContextBridge
 
         if ($this->config->applicationName !== '') {
             $this->client->tagRequest('obeserva.application', $this->config->applicationName);
+        }
+
+        foreach ($this->metadataEnricher?->runtimeTags() ?? [] as $tag => $value) {
+            $this->client->tagRequest($tag, $value);
         }
     }
 
@@ -43,6 +48,14 @@ final readonly class ScoutContextBridge
             }
 
             $this->client->addContext((string) $key, (string) $value);
+        }
+
+        foreach ($this->metadataEnricher?->spanTags($span) ?? [] as $tag => $value) {
+            $this->client->addContext($tag, $value);
+
+            if ($this->shouldTagRequest($span)) {
+                $this->client->tagRequest($tag, $value);
+            }
         }
 
         if ($this->shouldTagRequest($span)) {
