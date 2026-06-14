@@ -63,7 +63,7 @@ final readonly class OtelSpanConverter
         $filtered = [];
 
         foreach ($attributes as $key => $value) {
-            if (! is_scalar($value) || $value === null || $value === '') {
+            if (! is_scalar($value) || $value === '') {
                 continue;
             }
 
