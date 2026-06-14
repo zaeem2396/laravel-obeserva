@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- OpenTelemetry driver (`OBESERVA_DRIVER=otel`) with batched span export via `OtelSpanExporter`
+- `OtelSemanticConventionMapper` aligns HTTP, database, queue, and cache attributes to OTel semantic conventions
+- `OtelSpanConverter`, `OtelSpanNameNormalizer`, and `OtelSpanKindMapper` for OTel-compatible payloads
+- `LifecycleExporterResolver` selects Scout, OTel, or noop lifecycle exporters by driver config
+- Config: `obeserva.otel.*` and env vars `OBESERVA_OTEL_*`
+- `SpanInterface` exposes `getStartedAt()` and `getEndedAt()` for driver export timestamps
+- Tests: OTel driver unit and Laravel integration coverage (70 tests total)
 
 ## [0.5.1] - 2026-06-14
 
