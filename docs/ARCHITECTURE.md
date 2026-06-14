@@ -48,10 +48,9 @@ When `OBESERVA_DRIVER=scout`, completed spans are forwarded to Scout APM in real
 1. `ScoutSpanMapper` maps Obeserva span kinds to Scout operation names (`HTTP/*`, `External/*`, `Job/*`, etc.)
 2. `ScoutContextBridge` applies default tags and propagates trace/span metadata
 3. `ScoutSpanExporter` calls the Scout agent on span start/end and `send()` on flush
+4. `ScoutMetadataEnricher` promotes Laravel span attributes plus deployment/tenant/runtime tags to Scout context and request tags
 
 Requires optional `scoutapp/scout-apm-laravel` and a bound `Scoutapm\ScoutApmAgent`.
-
-**Advanced metadata (v0.5.1):** `ScoutMetadataEnricher` and `ScoutSpanMetadataMapper` promote Laravel span attributes (routes, queues, Horizon) plus deployment/tenant/runtime tags to Scout context and request tags.
 
 ## CI/CD
 
