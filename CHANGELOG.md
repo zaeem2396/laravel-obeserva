@@ -9,24 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
-
-## [0.7.0] - 2026-05-28
-
-### Added
-
-- Developer experience module (`Obeserva\DeveloperExperience`) for local trace inspection
-- Telescope integration (`OBESERVA_TELESCOPE_ENABLED`) publishes span snapshots to Laravel Telescope on terminate
-- Debug toolbar (`OBESERVA_DEBUG_TOOLBAR`) injects a local HTML trace panel into HTML responses
-- `CompositeSpanLifecycleExporter` chains primary driver export with development snapshot collection
-- `TraceSnapshot`, `TraceTreeBuilder`, and `PropagationFlowInspector` for hierarchical trace views
-- `SpanSnapshotCollector` records completed spans into `TraceSnapshotRegistry` during development
-- Config: `obeserva.development.*` and env vars `OBESERVA_TELESCOPE_*`, `OBESERVA_DEBUG_TOOLBAR*`
-- Tests: developer experience unit and Laravel integration coverage (77 tests total)
+- Worker context isolation for dedicated queue and Horizon workers via `WorkerContextResetter`
+- `WorkerRuntimeDetector` identifies HTTP, queue worker, Octane, and RoadRunner runtimes
+- `IsolateWorkerContextAfterJobListener` flushes tracer state after each job in long-running workers
+- Optional Octane and RoadRunner request/task termination hooks for context cleanup
+- Config: `obeserva.worker.*` and env vars `OBESERVA_WORKER_*`, `OBESERVA_OCTANE_ISOLATION`, `OBESERVA_ROADRUNNER_ISOLATION`
+- Developer experience module (`Obeserva\DeveloperExperience`) for local trace inspection *(pending v0.7.0 release)*
+- Telescope integration (`OBESERVA_TELESCOPE_ENABLED`) *(pending v0.7.0 release)*
+- Debug toolbar (`OBESERVA_DEBUG_TOOLBAR`) *(pending v0.7.0 release)*
+- `CompositeSpanLifecycleExporter`, trace snapshots, and propagation inspection *(pending v0.7.0 release)*
 
 ### Changed
 
-- Documentation aligned for v0.7.0 release (installation, roadmap, architecture, release post)
+- Documentation aligned for v0.6.1 development; v0.7.0 held until after v0.6.1 ships
 
 ## [0.6.0] - 2026-06-14
 
@@ -207,8 +202,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.7.0...HEAD
-[0.7.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.6.0...v0.7.0
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.6.0...HEAD
 [0.6.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...v0.5.0
