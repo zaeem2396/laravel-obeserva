@@ -63,7 +63,7 @@ When `OBESERVA_DRIVER=otel`, completed spans are converted to OTel-compatible pa
 
 `LifecycleExporterResolver` selects Scout, OTel, or noop exporters based on `obeserva.driver`. When development features are enabled, a `CompositeSpanLifecycleExporter` also runs `SpanSnapshotCollector` for local inspection.
 
-### Worker context isolation (v0.6.1)
+### Worker context isolation
 
 Dedicated queue and Horizon workers flush tracer state after each job via `WorkerContextResetter`. Octane and RoadRunner runtimes register optional termination listeners when present.
 

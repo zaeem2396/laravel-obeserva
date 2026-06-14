@@ -55,7 +55,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.0`; v0.6.1 in development). See [RELEASE.md](RELEASE.md) and the [v0.6.1 preview](posts/v0.6.1-worker-context.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.1`). See [RELEASE.md](RELEASE.md) and the [v0.6.1 announcement](posts/v0.6.1-worker-context.md).
 
 ### Scout driver
 
@@ -79,7 +79,7 @@ Optional: install `open-telemetry/opentelemetry` for OTLP export to a collector.
 
 Configuration: `config/obeserva.php` → `otel.*` (see environment variables above).
 
-### Worker context isolation (v0.6.1)
+### Worker context isolation
 
 Long-running queue, Horizon, Octane, and RoadRunner workers reset tracer and context state between jobs and requests so spans do not leak across worker cycles.
 
