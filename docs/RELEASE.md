@@ -44,6 +44,7 @@ git push origin vX.Y.Z
 
 | Version | Suggested GitHub release title |
 |---------|-------------------------------|
+| v0.7.1 | Obeserva v0.7.1 — Testing Utilities |
 | v0.7.0 | Obeserva v0.7.0 — Developer Experience (Telescope & Debug Toolbar) |
 | v0.6.1 | Obeserva v0.6.1 — Worker Context Isolation |
 | v0.6.0 | Obeserva v0.6.0 — OpenTelemetry Alignment |
@@ -61,6 +62,7 @@ git push origin vX.Y.Z
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.7.1` | [docs/posts/v0.7.1-testing-utilities.md](posts/v0.7.1-testing-utilities.md) |
 | `v0.7.0` | [docs/posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md) |
 | `v0.6.1` | [docs/posts/v0.6.1-worker-context.md](posts/v0.6.1-worker-context.md) |
 | `v0.6.0` | [docs/posts/v0.6.0-otel.md](posts/v0.6.0-otel.md) |

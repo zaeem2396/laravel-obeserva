@@ -72,4 +72,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.7.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md).
+Current version: **0.7.1**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.1-testing-utilities.md](posts/v0.7.1-testing-utilities.md).
