@@ -35,7 +35,7 @@ composer require scout/laravel
 - `OtelSpanConverter`, `OtelSemanticConventionMapper`, `OtelSpanKindMapper`, `OtelSpanNameNormalizer`
 - `OtelDriverFactory`, `LifecycleExporterResolver`
 
-### Worker context isolation (v0.6.1)
+### Worker context isolation
 
 - `WorkerRuntime`, `WorkerRuntimeDetector`, `WorkerContextResetter`
 - `WorkerContextIsolation`, `IsolateWorkerContextAfterJobListener`, `IsolateLongRunningWorkerContextListener`
@@ -64,4 +64,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.6.0** (v0.6.1 in development). A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.6.1-worker-context.md](posts/v0.6.1-worker-context.md).
+Current version: **0.6.1**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.6.1-worker-context.md](posts/v0.6.1-worker-context.md).

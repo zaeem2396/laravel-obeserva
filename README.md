@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.6.0`](docs/posts/v0.6.0-otel.md) (OpenTelemetry Alignment). **In development:** v0.6.1 (Worker Context Isolation), then v0.7.0 (Developer Experience).
+**Current release:** [`v0.6.1`](docs/posts/v0.6.1-worker-context.md) (Worker Context Isolation). **Next:** v0.7.0 (Developer Experience).
 
 ## Table of contents
 
