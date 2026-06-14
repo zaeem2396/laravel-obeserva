@@ -61,7 +61,18 @@ When `OBESERVA_DRIVER=otel`, completed spans are converted to OTel-compatible pa
 3. `OtelSpanConverter` builds export payloads with trace/span IDs, timestamps, and resource attributes
 4. `OtelSpanExporter` batches spans and calls `OtelExporterClientInterface::export()` on flush
 
-`LifecycleExporterResolver` selects Scout, OTel, or noop exporters based on `obeserva.driver`.
+`LifecycleExporterResolver` selects Scout, OTel, or noop exporters based on `obeserva.driver`. When development features are enabled, a `CompositeSpanLifecycleExporter` also runs `SpanSnapshotCollector` for local inspection.
+
+### Developer experience (v0.7.0)
+
+Local trace inspection runs alongside the configured driver:
+
+1. `SpanSnapshotCollector` records `TraceSnapshot` values on span end into `TraceSnapshotRegistry`
+2. `TraceTreeBuilder` and `PropagationFlowInspector` build hierarchical views and queue/HTTP propagation summaries
+3. `DebugToolbarMiddleware` injects an HTML panel into HTML responses when `OBESERVA_DEBUG_TOOLBAR` is enabled
+4. `PublishTraceToTelescope` publishes span snapshots to Laravel Telescope on terminate when `OBESERVA_TELESCOPE_ENABLED` is enabled
+
+Requires optional `laravel/telescope` for Telescope publishing; the debug toolbar has no extra dependencies.
 
 ## CI/CD
 
