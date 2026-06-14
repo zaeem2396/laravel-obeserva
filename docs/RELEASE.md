@@ -44,6 +44,7 @@ git push origin vX.Y.Z
 
 | Version | Suggested GitHub release title |
 |---------|-------------------------------|
+| v0.7.0 | Obeserva v0.7.0 — Developer Experience (Telescope & Debug Toolbar) |
 | v0.6.0 | Obeserva v0.6.0 — OpenTelemetry Alignment |
 | v0.5.1 | Obeserva v0.5.1 — Advanced Scout Metadata |
 | v0.5.0 | Obeserva v0.5.0 — Scout APM Driver |
