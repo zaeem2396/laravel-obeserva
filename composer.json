@@ -33,6 +33,7 @@
             "Obeserva\\Laravel\\": "src/",
             "Obeserva\\ScoutDriver\\": "src/ScoutDriver/",
             "Obeserva\\OtelDriver\\": "src/OtelDriver/",
+            "Obeserva\\DeveloperExperience\\": "src/DeveloperExperience/",
             "Obeserva\\Testing\\": "src/"
         }
     },
@@ -43,13 +44,15 @@
             "Obeserva\\Laravel\\Tests\\": "tests/Laravel/",
             "Obeserva\\ScoutDriver\\Tests\\": "tests/ScoutDriver/",
             "Obeserva\\OtelDriver\\Tests\\": "tests/OtelDriver/",
+            "Obeserva\\DeveloperExperience\\Tests\\": "tests/DeveloperExperience/",
             "Obeserva\\Testing\\Tests\\": "tests/Testing/"
         }
     },
     "suggest": {
         "laravel/horizon": "Required for Horizon worker instrumentation (v0.4.0+).",
         "scoutapp/scout-apm-laravel": "Required for Scout APM export when OBESERVA_DRIVER=scout (v0.5.0+).",
-        "open-telemetry/opentelemetry": "Optional OTLP export when OBESERVA_DRIVER=otel (v0.6.0+)."
+        "open-telemetry/opentelemetry": "Optional OTLP export when OBESERVA_DRIVER=otel (v0.6.0+).",
+        "laravel/telescope": "Optional trace inspection in Telescope when OBESERVA_TELESCOPE_ENABLED (v0.7.0+)."
     },
     "extra": {
         "laravel": {
