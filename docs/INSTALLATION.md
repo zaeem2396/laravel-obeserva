@@ -44,7 +44,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.5.0`). See [RELEASE.md](RELEASE.md) and the [v0.5.0 announcement](posts/v0.5.0-scout.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.5.1`). See [RELEASE.md](RELEASE.md) and the [v0.5.1 announcement](posts/v0.5.1-scout-metadata.md).
 
 ### Scout driver
 
@@ -58,7 +58,7 @@ Obeserva forwards span lifecycle events to Scout via `ScoutSpanExporter`. When t
 
 Configuration: `config/obeserva.php` → `scout.*` (see environment variables above).
 
-**Advanced metadata (v0.5.1):** When `OBESERVA_SCOUT_METADATA_ENABLED=true`, Obeserva enriches Scout with `scout.route.name`, `scout.queue.*`, `scout.horizon.*`, deployment version, tenant ID, and PHP/Laravel runtime diagnostics.
+When `OBESERVA_SCOUT_METADATA_ENABLED=true` (default), Obeserva enriches Scout with `scout.route.name`, `scout.queue.*`, `scout.horizon.*`, deployment version, tenant ID, and PHP/Laravel runtime diagnostics.
 
 ## Local development
 

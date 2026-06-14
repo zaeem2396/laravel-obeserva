@@ -9,12 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Nothing yet.
+
+## [0.5.1] - 2026-06-14
+
+### Added
+
 - Advanced Scout metadata enrichment (`ScoutMetadataEnricher`) — route names, queue names, Horizon worker IDs, deployment version, tenant ID, and runtime diagnostics exported as `scout.*` tags
 - `ScoutSpanMetadataMapper` maps Laravel span attributes to Scout-prefixed metadata keys
 - `ScoutRuntimeDiagnostics` captures PHP/Laravel version and environment tags on export
 - Config: `obeserva.scout.deployment_version`, `tenant_id`, `metadata_enabled`
 - Environment variables: `OBESERVA_SCOUT_DEPLOYMENT_VERSION`, `OBESERVA_SCOUT_TENANT_ID`, `OBESERVA_SCOUT_METADATA_ENABLED`
 - Tests: metadata mapper, enricher, diagnostics, and integration coverage (60 tests total)
+
+### Changed
+
+- Documentation aligned for v0.5.1 release (installation, roadmap, architecture, release post)
+- Package install CI: Laravel 11 smoke test workaround for CVE-2026-48019 advisory blocking
 
 ## [0.5.0] - 2026-05-28
 
@@ -163,7 +174,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHP ^8.3
 - Laravel ^11.0 \| ^12.0 \| ^13.0 (for `scout/laravel`)
 
-[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/zaeem2396/laravel-obeserva/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/zaeem2396/laravel-obeserva/releases/tag/v0.4.0
