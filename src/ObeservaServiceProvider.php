@@ -31,6 +31,18 @@ use Obeserva\Core\Context\ContextManager;
 use Obeserva\Core\Sampling\AlwaysOnSampler;
 use Obeserva\Core\Sampling\ProbabilitySampler;
 use Obeserva\Core\Tracer;
+use Obeserva\DeveloperExperience\DebugToolbar\DebugToolbarDataBuilder;
+use Obeserva\DeveloperExperience\DebugToolbar\DebugToolbarRenderer;
+use Obeserva\DeveloperExperience\PropagationFlowInspector;
+use Obeserva\DeveloperExperience\SpanSnapshotCollector;
+use Obeserva\DeveloperExperience\SpanSnapshotFactory;
+use Obeserva\DeveloperExperience\Telescope\LaravelTelescopePublisher;
+use Obeserva\DeveloperExperience\Telescope\NullTelescopePublisher;
+use Obeserva\DeveloperExperience\Telescope\PublishTraceToTelescope;
+use Obeserva\DeveloperExperience\Telescope\TelescopePublisherInterface;
+use Obeserva\DeveloperExperience\Telescope\TelescopeTraceEntryFactory;
+use Obeserva\DeveloperExperience\TraceSnapshotRegistry;
+use Obeserva\DeveloperExperience\TraceTreeBuilder;
 use Obeserva\Laravel\Database\NPlusOneDetector;
 use Obeserva\Laravel\Database\QueryCounter;
 use Obeserva\Laravel\Database\QuerySanitizer;
@@ -38,6 +50,7 @@ use Obeserva\Laravel\Driver\LifecycleExporterResolver;
 use Obeserva\Laravel\Horizon\ActiveHorizonSupervisorRegistry;
 use Obeserva\Laravel\Horizon\HorizonInstrumentation;
 use Obeserva\Laravel\Horizon\HorizonThroughputMetrics;
+use Obeserva\Laravel\Http\DebugToolbarMiddleware;
 use Obeserva\Laravel\Http\Middleware\TraceMiddlewareTiming;
 use Obeserva\Laravel\Http\RequestSpanEnricher;
 use Obeserva\Laravel\Http\TraceRequestMiddleware;
@@ -82,6 +95,8 @@ final class ObeservaServiceProvider extends ServiceProvider
 
         $this->registerDrivers();
 
+        $this->registerDevelopmentExperience();
+
         $this->app->singleton(SamplerInterface::class, function (): SamplerInterface {
             $probability = config('obeserva.sampling.probability', 1.0);
             $rate = is_numeric($probability) ? (float) $probability : 1.0;
@@ -122,7 +137,40 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerCacheInstrumentation();
         $this->registerRedisInstrumentation();
         $this->registerExceptionInstrumentation();
+        $this->registerDevelopmentExperienceBoot();
         $this->registerTerminateHook();
+    }
+
+    private function registerDevelopmentExperience(): void
+    {
+        $this->app->singleton(TraceSnapshotRegistry::class);
+        $this->app->singleton(SpanSnapshotFactory::class);
+        $this->app->singleton(SpanSnapshotCollector::class);
+        $this->app->singleton(TraceTreeBuilder::class);
+        $this->app->singleton(PropagationFlowInspector::class);
+        $this->app->singleton(DebugToolbarDataBuilder::class);
+        $this->app->singleton(DebugToolbarRenderer::class);
+        $this->app->singleton(TelescopeTraceEntryFactory::class);
+        $this->app->singleton(PublishTraceToTelescope::class);
+
+        $this->app->singleton(TelescopePublisherInterface::class, function (): TelescopePublisherInterface {
+            if (class_exists('Laravel\Telescope\Telescope')) {
+                return new LaravelTelescopePublisher;
+            }
+
+            return new NullTelescopePublisher;
+        });
+    }
+
+    private function registerDevelopmentExperienceBoot(): void
+    {
+        $this->app->booted(function (): void {
+            if (! $this->app->bound(Kernel::class)) {
+                return;
+            }
+
+            $this->app->make(Kernel::class)->pushMiddleware(DebugToolbarMiddleware::class);
+        });
     }
 
     private function registerDrivers(): void
@@ -247,6 +295,10 @@ final class ObeservaServiceProvider extends ServiceProvider
         }
 
         $this->app->terminating(function (): void {
+            if (config('obeserva.development.telescope.enabled', false)) {
+                $this->app->make(PublishTraceToTelescope::class)->handle();
+            }
+
             $this->app->make(FlushTracerOnTerminate::class)->handle();
         });
     }

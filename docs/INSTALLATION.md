@@ -45,10 +45,13 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_HORIZON_RETRY_CORRELATION` | `true` | Root trace + retry attempt attributes |
 | `OBESERVA_CACHE_ENABLED` | `true` | Cache instrumentation (Cache hit/miss/write/forget) |
 | `OBESERVA_REDIS_COMMAND_TRACING` | `true` | Redis command spans via `CommandExecuted` events |
+| `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Laravel Telescope on terminate |
+| `OBESERVA_DEBUG_TOOLBAR` | `APP_DEBUG && APP_ENV=local` | Inject local HTML trace toolbar into HTML responses |
+| `OBESERVA_DEBUG_TOOLBAR_PROPAGATION` | `true` | Show queue/HTTP propagation summary in the debug toolbar |
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.0`). See [RELEASE.md](RELEASE.md) and the [v0.6.0 announcement](posts/v0.6.0-otel.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.6.0`; v0.7.0 in development). See [RELEASE.md](RELEASE.md) and the [v0.7.0 preview](posts/v0.7.0-developer-experience.md).
 
 ### Scout driver
 
@@ -71,6 +74,25 @@ Set `OBESERVA_DRIVER=otel` for OTel-compatible span export. Spans are converted 
 Optional: install `open-telemetry/opentelemetry` for OTLP export to a collector.
 
 Configuration: `config/obeserva.php` → `otel.*` (see environment variables above).
+
+### Developer experience (v0.7.0)
+
+Enable local trace inspection without changing your production driver:
+
+```bash
+# Optional Telescope integration
+composer require laravel/telescope --dev
+```
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Telescope on terminate |
+| `OBESERVA_DEBUG_TOOLBAR` | local + `APP_DEBUG` | Inject HTML trace toolbar into responses |
+| `OBESERVA_DEBUG_TOOLBAR_PROPAGATION` | `true` | Show queue/HTTP propagation summary in toolbar |
+
+When either feature is enabled, `SpanSnapshotCollector` records completed spans via `CompositeSpanLifecycleExporter` alongside the configured driver exporter.
+
+Configuration: `config/obeserva.php` → `development.*`.
 
 ## Local development
 

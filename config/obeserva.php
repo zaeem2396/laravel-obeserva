@@ -71,4 +71,14 @@ return [
         'flush_tracer' => env('OBESERVA_FLUSH_ON_TERMINATE', true),
     ],
 
+    'development' => [
+        'telescope' => [
+            'enabled' => env('OBESERVA_TELESCOPE_ENABLED', false),
+        ],
+        'debug_toolbar' => [
+            'enabled' => env('OBESERVA_DEBUG_TOOLBAR', env('APP_DEBUG', false) && env('APP_ENV') === 'local'),
+            'show_propagation' => env('OBESERVA_DEBUG_TOOLBAR_PROPAGATION', true),
+        ],
+    ],
+
 ];

@@ -7,6 +7,7 @@
 | `src/Contracts` | `Obeserva\Contracts` | Interfaces and value objects |
 | `src/Core` | `Obeserva\Core` | Runtime implementation |
 | `src` | `Obeserva\Laravel` | Laravel integration |
+| `src/DeveloperExperience` | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, debug toolbar |
 | `src/FakeTracer.php` | `Obeserva\Testing` | Test double |
 
 ## Installation
@@ -33,6 +34,14 @@ composer require scout/laravel
 - `OtelSpanConverter`, `OtelSemanticConventionMapper`, `OtelSpanKindMapper`, `OtelSpanNameNormalizer`
 - `OtelDriverFactory`, `LifecycleExporterResolver`
 
+### Developer experience (v0.7.0)
+
+- `TraceSnapshot`, `SpanSnapshotCollector`, `TraceSnapshotRegistry`
+- `TraceTreeBuilder`, `PropagationFlowInspector`
+- `DebugToolbarMiddleware`, `DebugToolbarRenderer`, `DebugToolbarDataBuilder`
+- `PublishTraceToTelescope`, `TelescopeTraceEntryFactory`, `LaravelTelescopePublisher`
+- `CompositeSpanLifecycleExporter`
+
 ### Horizon instrumentation (v0.4.0)
 
 - `Horizon`, `HorizonInstrumentation`
@@ -49,4 +58,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.6.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.6.0-otel.md](posts/v0.6.0-otel.md).
+Current version: **0.6.0** (v0.7.0 in development). A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md).
