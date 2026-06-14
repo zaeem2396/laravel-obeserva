@@ -20,6 +20,10 @@ interface SpanInterface
 
     public function getDuration(): ?float;
 
+    public function getStartedAt(): float;
+
+    public function getEndedAt(): ?float;
+
     public function setAttribute(string $key, mixed $value): void;
 
     /**

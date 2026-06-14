@@ -80,6 +80,16 @@ final class Span implements SpanInterface
         return $this->endedAt - $this->startedAt;
     }
 
+    public function getStartedAt(): float
+    {
+        return $this->startedAt;
+    }
+
+    public function getEndedAt(): ?float
+    {
+        return $this->endedAt;
+    }
+
     public function setAttribute(string $key, mixed $value): void
     {
         $this->attributes[$key] = $value;
