@@ -131,7 +131,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.6.1 | Runtime Support | Swoole Awareness | 🟢 DONE | Shipped `v0.6.1`: covered via Octane Swoole backend termination hooks. |
 | v0.7.0 | Developer Experience | Telescope Integration | 🟢 DONE | Shipped `v0.7.0`: `PublishTraceToTelescope`, `TelescopeTraceEntryFactory`, optional `laravel/telescope` publisher; span snapshots on terminate. |
 | v0.7.0 | Developer Experience | Debug Toolbar | 🟢 DONE | Shipped `v0.7.0`: `DebugToolbarMiddleware` injects local HTML trace panel with span tree, timing, and propagation flows when `OBESERVA_DEBUG_TOOLBAR` is enabled. |
-| v0.7.1 | Developer Experience | Testing Utilities | 🟡 IN-PROGRESS | Shipped: `FakeTracer`, `assertSpanRecorded()`, nested span support (`v0.2.1`). Pending: propagation assertions, snapshot helpers. |
+| v0.7.1 | Developer Experience | Testing Utilities | 🟡 IN-PROGRESS | Shipped: `FakeTracer`, `assertSpanRecorded()`, nested spans (`v0.2.1`). Added `TraceContextAssert`, `TraceSnapshotBuilder`, `TraceSnapshotAssert`, `InteractsWithObeserva` (`v0.7.1`). |
 | v0.7.1 | Developer Experience | Benchmark Suite | 🟢 DONE | Shipped: `benchmark.yml` workflow with span overhead smoke test (`v0.1.0`). Expand with realistic Laravel workloads in future iterations. |
 | v0.8.0 | Distributed Systems | Event Propagation | 🔴 PLANNED | Propagate trace context across Laravel events, listeners, notifications, broadcasts, and asynchronous workflows. |
 | v0.8.0 | Distributed Systems | Cross-Service Correlation | 🔴 PLANNED | Support distributed correlation IDs and trace continuity for microservices and multi-service Laravel ecosystems. |

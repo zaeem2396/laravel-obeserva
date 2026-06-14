@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- Testing utilities for v0.7.1: `TraceContextAssert`, `TraceSnapshotBuilder`, `TraceSnapshotAssert`
+- Extended `FakeTracer` with span queries, attribute checks, child assertions, and `spanSnapshots()`
+- `InteractsWithObeserva` trait for Laravel package tests
+- `scripts/benchmark-instrumentation.php` with flat, nested, and snapshot benchmarks
 
 ### Changed
 
-- Nothing yet.
+- Benchmark CI workflow runs the instrumentation benchmark script instead of an inline placeholder
 
 ## [0.7.0] - 2026-05-29
 
