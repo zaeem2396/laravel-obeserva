@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Distributed systems module for v0.8.0: unified `TraceCarrierBag` and `W3cTracePropagator` for W3C trace context carriers
+- Nothing yet.
+
+### Changed
+
+- Nothing yet.
+
+## [0.8.0] - 2026-05-31
+
+### Added
+
+- Distributed systems module: unified `TraceCarrierBag` and `W3cTracePropagator` for W3C trace context carriers
 - `PropagationContextResolver` shared across queue, events, and broadcasts
 - Cross-service correlation via `CorrelationContextStorage`, incoming `X-Correlation-ID` resolution, and outbound response headers
 - Event propagation: `TracePropagatingEventDispatcher`, `EventTraceContextCarrier`, and `InteractsWithTraceContext` trait
@@ -23,6 +33,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TraceContextCarrier` and `QueuePayloadHook` delegate to shared propagation helpers and include correlation IDs
 - HTTP middleware enriches spans with `correlation.id` and echoes correlation headers on responses
 - Worker context reset clears correlation storage between jobs
+- Documentation aligned for v0.8.0 release (installation, roadmap, architecture, release post)
+
+### Security
+
+- Updated `guzzlehttp/guzzle` to 7.12.3 and `guzzlehttp/psr7` to 2.12.3 (CVE-2026-55568, CVE-2026-55766, CVE-2026-55767)
 
 ## [0.7.1] - 2026-05-30
 
