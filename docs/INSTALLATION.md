@@ -170,6 +170,23 @@ Configuration: `config/obeserva.php` → `memory.*`, `flush.*`.
 
 See [v0.8.1 announcement](posts/v0.8.1-production-engineering.md).
 
+### AI/advanced features (v0.9.0 preview)
+
+Trace summaries and slow-request causation for debugging and LLM workflows:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OBESERVA_TRACE_SUMMARIES` | `true` | Build structured trace summaries on terminate |
+| `OBESERVA_SUMMARY_TOP_SLOW_SPANS` | `5` | Number of slow spans in summaries |
+| `OBESERVA_CAUSATION_ENABLED` | `true` | Attach causation graphs to summaries |
+| `OBESERVA_SLOW_REQUEST_THRESHOLD_MS` | `1000` | Slow request threshold in milliseconds |
+
+Summaries are available from `TraceSummaryRegistry` after each request. Enable span snapshot collection via summaries, debug toolbar, or Telescope.
+
+Configuration: `config/obeserva.php` → `summaries.*`, `causation.*`.
+
+See [v0.9.0 preview post](posts/v0.9.0-ai-advanced-features.md).
+
 ## Local development
 
 ```bash

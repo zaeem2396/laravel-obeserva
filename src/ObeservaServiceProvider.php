@@ -36,6 +36,12 @@ use Obeserva\Core\Memory\MemoryPressureMonitor;
 use Obeserva\Core\Sampling\AlwaysOnSampler;
 use Obeserva\Core\Sampling\ProbabilitySampler;
 use Obeserva\Core\Tracer;
+use Obeserva\DeveloperExperience\Analysis\SpanCategoryResolver;
+use Obeserva\DeveloperExperience\Analysis\TraceSummaryBuilder;
+use Obeserva\DeveloperExperience\Analysis\TraceSummaryJsonFormatter;
+use Obeserva\DeveloperExperience\Analysis\TraceSummaryRegistry;
+use Obeserva\DeveloperExperience\Causation\CausationGraphBuilder;
+use Obeserva\DeveloperExperience\Causation\SlowRequestAnalyzer;
 use Obeserva\DeveloperExperience\DebugToolbar\DebugToolbarDataBuilder;
 use Obeserva\DeveloperExperience\DebugToolbar\DebugToolbarRenderer;
 use Obeserva\DeveloperExperience\PropagationFlowInspector;
@@ -65,6 +71,7 @@ use Obeserva\Laravel\Http\DebugToolbarMiddleware;
 use Obeserva\Laravel\Http\Middleware\TraceMiddlewareTiming;
 use Obeserva\Laravel\Http\RequestSpanEnricher;
 use Obeserva\Laravel\Http\TraceRequestMiddleware;
+use Obeserva\Laravel\Listeners\BuildTraceSummaryOnTerminate;
 use Obeserva\Laravel\Listeners\FlushTracerOnTerminate;
 use Obeserva\Laravel\Listeners\Notifications\TraceNotificationListener;
 use Obeserva\Laravel\Listeners\NPlusOneDetectionListener;
@@ -191,6 +198,13 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(SpanSnapshotCollector::class);
         $this->app->singleton(TraceTreeBuilder::class);
         $this->app->singleton(PropagationFlowInspector::class);
+        $this->app->singleton(SpanCategoryResolver::class);
+        $this->app->singleton(SlowRequestAnalyzer::class);
+        $this->app->singleton(CausationGraphBuilder::class);
+        $this->app->singleton(TraceSummaryBuilder::class);
+        $this->app->singleton(TraceSummaryJsonFormatter::class);
+        $this->app->singleton(TraceSummaryRegistry::class);
+        $this->app->singleton(BuildTraceSummaryOnTerminate::class);
         $this->app->singleton(DebugToolbarDataBuilder::class);
         $this->app->singleton(DebugToolbarRenderer::class);
         $this->app->singleton(TelescopeTraceEntryFactory::class);
@@ -379,6 +393,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         }
 
         $this->app->terminating(function (): void {
+            $this->app->make(BuildTraceSummaryOnTerminate::class)->handle();
+
             if (config('obeserva.development.telescope.enabled', false)) {
                 $this->app->make(PublishTraceToTelescope::class)->handle();
             }

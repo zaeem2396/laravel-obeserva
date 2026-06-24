@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Obeserva\Laravel\Tests;
 
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Route;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\DeveloperExperience\Telescope\PublishTraceToTelescope;
@@ -27,7 +28,7 @@ final class DeveloperExperienceIntegrationTest extends TestCase
             'obeserva.http.middleware_enabled' => true,
         ]);
 
-        Route::get('/obeserva-debug-test', fn () => response('<html><body>ok</body></html>', 200, [
+        Route::get('/obeserva-debug-test', fn (): ResponseFactory|\Illuminate\Http\Response => response('<html><body>ok</body></html>', 200, [
             'Content-Type' => 'text/html',
         ]));
 
@@ -48,7 +49,7 @@ final class DeveloperExperienceIntegrationTest extends TestCase
             'obeserva.http.middleware_enabled' => true,
         ]);
 
-        Route::get('/obeserva-telescope-test', fn () => 'done');
+        Route::get('/obeserva-telescope-test', fn (): string => 'done');
 
         $this->get('/obeserva-telescope-test');
 

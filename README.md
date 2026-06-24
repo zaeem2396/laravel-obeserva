@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.8.1`](docs/posts/v0.8.1-production-engineering.md) (Production Engineering).
+**Current release:** [`v0.8.1`](docs/posts/v0.8.1-production-engineering.md) (Production Engineering). **Next:** [v0.9.0 AI/Advanced Features](docs/posts/v0.9.0-ai-advanced-features.md).
 
 ## Table of contents
 
@@ -43,6 +43,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Event propagation**: trace context on dispatched events via `InteractsWithTraceContext` and `TracePropagatingEventDispatcher`
 - **Cross-service correlation**: `X-Correlation-ID` on HTTP requests/responses and in queue/event carriers
 - **Production engineering**: bounded span buffers, memory pressure flush, and exception-safe export on shutdown
+- **Trace summaries** *(v0.9.0)*: AI-friendly structured summaries with slow-span ranking and category breakdowns
+- **Slow-request causation** *(v0.9.0)*: causal graphs linking HTTP requests to database, cache, queue, and event spans
 
 ## Configuration
 
@@ -68,6 +70,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Correlation**: enabled by `OBESERVA_CORRELATION_ENABLED`; header via `OBESERVA_CORRELATION_HEADER`
 - **Memory safety**: max completed spans via `OBESERVA_MAX_COMPLETED_SPANS`; active span depth via `OBESERVA_MAX_ACTIVE_SPAN_DEPTH`
 - **Flush safety**: shutdown flush via `OBESERVA_FLUSH_ON_SHUTDOWN`; worker-stopping flush via `OBESERVA_FLUSH_ON_WORKER_STOPPING`
+- **Trace summaries**: enabled via `OBESERVA_TRACE_SUMMARIES`; slow span limit via `OBESERVA_SUMMARY_TOP_SLOW_SPANS`
+- **Causation analysis**: enabled via `OBESERVA_CAUSATION_ENABLED`; slow threshold via `OBESERVA_SLOW_REQUEST_THRESHOLD_MS`
 
 ## Modules
 
