@@ -4,9 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.9.0` (2026-06-02) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.9.0-ai-advanced-features.md](docs/posts/v0.9.0-ai-advanced-features.md).
-
-**In development:** `v1.0.0` — [Stable Release (Preview)](docs/posts/v1.0.0-stable-release.md).
+**Current release:** `v1.0.0` (2026-06-03) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v1.0.0-stable-release.md](docs/posts/v1.0.0-stable-release.md).
 
 ---
 
@@ -31,7 +29,7 @@
 | v0.8.0 | Distributed systems | 🟢 Released (all v0.8.0 rows ✅) | `v0.8.0` |
 | v0.8.1 | Production engineering | 🟢 Released (all v0.8.1 rows ✅) | `v0.8.1` |
 | v0.9.0 | AI/advanced features | 🟢 Released (all v0.9.0 rows ✅) | `v0.9.0` |
-| v1.0.0 | Stable release | 🟡 IN-PROGRESS | — |
+| v1.0.0 | Stable release | 🟢 Released (all v1.0.0 rows ✅) | `v1.0.0` |
 
 ---
 
@@ -79,7 +77,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | Docker Integration Tests | Redis/MySQL/Horizon integration | High | 🔴 PLANNED |
 | OpenTelemetry Compliance Tests | Semantic convention validation | High | 🔴 PLANNED |
 | Security Audit Pipeline | Dependency vulnerability scanning | Critical | 🟢 DONE |
-| Documentation Validation | Ensure documentation examples work | Medium | 🟡 IN-PROGRESS (docs validation workflow shipped v1.0.0 preview) |
+| Documentation Validation | Ensure documentation examples work | Medium | 🟢 DONE (docs validation workflow shipped `v1.0.0`) |
 | Code Coverage Reporting | Coverage enforcement and trends | High | 🟢 DONE |
 | Package Install Validation | Fresh Laravel installation testing | Critical | 🟢 DONE |
 | Parallel Testing Pipeline | Concurrency and runtime testing | High | 🔴 PLANNED |
@@ -146,8 +144,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.8.1 | Production Engineering | Flush Safety | 🟢 DONE | Shipped `v0.8.1`: `TracerFlushGuard`, shutdown flush registrar, worker-stopping flush listener. |
 | v0.9.0 | AI/Advanced Features | Trace Summaries | 🟢 DONE | Shipped `v0.9.0`: `TraceSummaryBuilder`, `TraceSummaryJsonFormatter`, `TraceSummaryRegistry`; category counts and top slow spans. |
 | v0.9.0 | AI/Advanced Features | Slow Request Causation | 🟢 DONE | Shipped `v0.9.0`: `CausationGraphBuilder`, `SlowRequestAnalyzer`, root-cause span attribution for slow HTTP requests. |
-| v1.0.0 | Stable Release | Production Stabilization | 🟡 IN-PROGRESS | Finalize stable APIs, documentation, migration guarantees, performance validation, runtime reliability, and enterprise-grade package stability. |
-| v1.0.0 | Stable Release | Scout Partnership Readiness | 🟡 IN-PROGRESS | Prepare engineering-quality benchmarks, architecture diagrams, technical documentation, runtime comparisons, and feature showcases suitable for presentation to Scout engineering leadership. |
+| v1.0.0 | Stable Release | Production Stabilization | 🟢 DONE | Shipped `v1.0.0`: `PackageVersion`, `RuntimeDiagnostics`, `ConfigValidator`, `obeserva:status` command, upgrade guide, API stability policy. |
+| v1.0.0 | Stable Release | Scout Partnership Readiness | 🟢 DONE | Shipped `v1.0.0`: Scout integration guide, benchmark documentation, `scout.obeserva.version` metadata tag, docs validation CI. |
 
 ---
 

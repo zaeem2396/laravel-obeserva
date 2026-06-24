@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.9.0`](docs/posts/v0.9.0-ai-advanced-features.md) (AI/Advanced Features). **Preview:** [`v1.0.0`](docs/posts/v1.0.0-stable-release.md) (Stable Release).
+**Current release:** [`v1.0.0`](docs/posts/v1.0.0-stable-release.md) (Stable Release).
 
 ## Table of contents
 
@@ -45,7 +45,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Production engineering**: bounded span buffers, memory pressure flush, and exception-safe export on shutdown
 - **Trace summaries**: AI-friendly structured summaries with slow-span ranking and category breakdowns
 - **Slow-request causation**: causal graphs linking HTTP requests to database, cache, queue, and event spans
-- **Runtime diagnostics** (v1.0.0 preview): `php artisan obeserva:status` for package version, driver, and feature summary
+- **Runtime diagnostics**: `php artisan obeserva:status` for package version, driver, and feature summary
 
 ## Configuration
 
@@ -73,7 +73,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Flush safety**: shutdown flush via `OBESERVA_FLUSH_ON_SHUTDOWN`; worker-stopping flush via `OBESERVA_FLUSH_ON_WORKER_STOPPING`
 - **Trace summaries**: enabled via `OBESERVA_TRACE_SUMMARIES`; slow span limit via `OBESERVA_SUMMARY_TOP_SLOW_SPANS`
 - **Causation analysis**: enabled via `OBESERVA_CAUSATION_ENABLED`; slow threshold via `OBESERVA_SLOW_REQUEST_THRESHOLD_MS`
-- **Diagnostics** (v1.0.0 preview): `php artisan obeserva:status`; strict config via `OBESERVA_CONFIG_STRICT`
+- **Diagnostics**: `php artisan obeserva:status`; strict config via `OBESERVA_CONFIG_STRICT`
 
 ## Modules
 
