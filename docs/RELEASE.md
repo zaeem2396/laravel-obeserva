@@ -44,6 +44,7 @@ git push origin vX.Y.Z
 
 | Version | Suggested GitHub release title |
 |---------|-------------------------------|
+| v0.9.0 | Obeserva v0.9.0 — AI/Advanced Features (Trace Summaries & Causation) |
 | v0.8.1 | Obeserva v0.8.1 — Production Engineering (Memory & Flush Safety) |
 | v0.8.0 | Obeserva v0.8.0 — Distributed Systems (Event Propagation & Correlation) |
 | v0.7.1 | Obeserva v0.7.1 — Testing Utilities |
@@ -64,6 +65,7 @@ git push origin vX.Y.Z
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.9.0` | [docs/posts/v0.9.0-ai-advanced-features.md](posts/v0.9.0-ai-advanced-features.md) |
 | `v0.8.1` | [docs/posts/v0.8.1-production-engineering.md](posts/v0.8.1-production-engineering.md) |
 | `v0.8.0` | [docs/posts/v0.8.0-distributed-systems.md](posts/v0.8.0-distributed-systems.md) |
 | `v0.7.1` | [docs/posts/v0.7.1-testing-utilities.md](posts/v0.7.1-testing-utilities.md) |

@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TraceSummaryAssert` testing helper and `obeservaTraceSummary()` on `InteractsWithObeserva`
 - Debug toolbar and Telescope entries include `trace_summary` when summaries are enabled
 - Config: `obeserva.summaries.*`, `obeserva.causation.*`
-- Tests: summary builder, causation graph, slow request analysis, terminate integration (112 tests total)
+- Tests: summary builder, causation graph, slow request analysis, terminate integration (110 tests total)
 
 ### Changed
 
