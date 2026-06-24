@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- AI/advanced features (v0.9.0): `TraceSummary` and `TraceSummaryBuilder` for structured, LLM-friendly trace summaries
+- Nothing yet.
+
+### Changed
+
+- Nothing yet.
+
+## [0.9.0] - 2026-06-02
+
+### Added
+
+- AI/advanced features: `TraceSummary` and `TraceSummaryBuilder` for structured, LLM-friendly trace summaries
 - `SpanCategoryResolver` categorizes spans (HTTP, database, cache, queue, events, and more)
 - `CausationGraph`, `CausationGraphBuilder`, and `SlowRequestAnalyzer` for slow-request root-cause attribution
 - `TraceSummaryJsonFormatter` exports summaries as JSON for debugging workflows
@@ -17,12 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TraceSummaryAssert` testing helper and `obeservaTraceSummary()` on `InteractsWithObeserva`
 - Debug toolbar and Telescope entries include `trace_summary` when summaries are enabled
 - Config: `obeserva.summaries.*`, `obeserva.causation.*`
-- Tests: summary builder, causation graph, slow request analysis, terminate integration (110 tests total)
+- Tests: summary builder, causation graph, slow request analysis, terminate integration (112 tests total)
 
 ### Changed
 
 - `LifecycleExporterResolver` collects span snapshots when `OBESERVA_TRACE_SUMMARIES` is enabled
-- Documentation preview for v0.9.0 AI/advanced features
+- Documentation aligned for v0.9.0 release (installation, roadmap, architecture, release post)
+
+### Fixed
+
+- `OBESERVA_SUMMARY_TOP_SLOW_SPANS=0` now returns empty top-slow and root-cause lists instead of forcing one span
 
 ## [0.8.1] - 2026-06-01
 
