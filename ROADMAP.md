@@ -26,6 +26,7 @@
 | v0.6.1 | Worker context isolation | 🟢 Released (all v0.6.1 rows ✅) | `v0.6.1` |
 | v0.7.0 | Developer experience | 🟢 Released (all v0.7.0 rows ✅) | `v0.7.0` |
 | v0.7.1 | Testing utilities | 🟢 Released (all v0.7.1 rows ✅) | `v0.7.1` |
+| v0.8.0 | Distributed systems | 🟡 IN-PROGRESS | — |
 
 ---
 
@@ -134,8 +135,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.7.0 | Developer Experience | Debug Toolbar | 🟢 DONE | Shipped `v0.7.0`: `DebugToolbarMiddleware` injects local HTML trace panel with span tree, timing, and propagation flows when `OBESERVA_DEBUG_TOOLBAR` is enabled. |
 | v0.7.1 | Developer Experience | Testing Utilities | 🟢 DONE | Shipped `v0.7.1`: `TraceContextAssert`, `TraceSnapshotBuilder`, `TraceSnapshotAssert`, extended `FakeTracer`, and `InteractsWithObeserva` trait. |
 | v0.7.1 | Developer Experience | Benchmark Suite | 🟢 DONE | Shipped `v0.7.1`: `scripts/benchmark-instrumentation.php` with flat, nested, and snapshot benchmarks in CI. |
-| v0.8.0 | Distributed Systems | Event Propagation | 🔴 PLANNED | Propagate trace context across Laravel events, listeners, notifications, broadcasts, and asynchronous workflows. |
-| v0.8.0 | Distributed Systems | Cross-Service Correlation | 🔴 PLANNED | Support distributed correlation IDs and trace continuity for microservices and multi-service Laravel ecosystems. |
+| v0.8.0 | Distributed Systems | Event Propagation | 🟡 IN-PROGRESS | `TracePropagatingEventDispatcher`, `EventTraceContextCarrier`, `InteractsWithTraceContext`; notification and broadcast tracing listeners. |
+| v0.8.0 | Distributed Systems | Cross-Service Correlation | 🟡 IN-PROGRESS | `CorrelationContextStorage`, `X-Correlation-ID` on HTTP and queue carriers; `correlation.id` span attributes. |
 | v0.8.1 | Production Engineering | Memory Safety | 🔴 PLANNED | Harden runtime internals against memory leaks in long-running PHP workers, Horizon workers, and Octane environments. |
 | v0.8.1 | Production Engineering | Flush Safety | 🔴 PLANNED | Guarantee safe flushing behavior during worker shutdowns, fatal exceptions, deployment restarts, and unexpected runtime termination. |
 | v0.9.0 | AI/Advanced Features | Trace Summaries | 🔴 PLANNED | Generate AI-friendly structured trace summaries optimized for debugging workflows and future LLM integrations. |

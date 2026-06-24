@@ -9,4 +9,6 @@ parameters:
         - tests
         - config
         - src/InteractsWithObeserva.php
+        - src/Events/Concerns/InteractsWithTraceContext.php
+        - src/Events/TracePropagatingEventDispatcher.php
     reportUnmatchedIgnoredErrors: true

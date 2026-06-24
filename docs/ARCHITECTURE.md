@@ -87,6 +87,17 @@ Requires optional `laravel/telescope` for Telescope publishing; the debug toolba
 3. `TraceSnapshotBuilder` and `TraceSnapshotAssert` build and verify snapshot hierarchies and flows
 4. `InteractsWithObeserva` swaps the tracer during Orchestra Testbench tests
 
+### Distributed systems (v0.8.0)
+
+Trace continuity extends beyond queue jobs into Laravel's async surfaces:
+
+1. `TraceCarrierBag` / `W3cTracePropagator` unify W3C carriers across queue, events, and broadcasts
+2. `TracePropagatingEventDispatcher` injects context and records `event.dispatch` spans for application events
+3. `TraceNotificationListener` and `TraceBroadcastListener` trace notification and broadcast workflows
+4. `CorrelationContextStorage` resolves and propagates `X-Correlation-ID` across HTTP, queue, and span attributes
+
+Application events opt in via `InteractsWithTraceContext`. Framework events under `Illuminate\*` are not instrumented.
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).

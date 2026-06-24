@@ -6,6 +6,7 @@ namespace Obeserva\Laravel\Runtime;
 
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Core\Context\ContextManager;
+use Obeserva\Laravel\Correlation\CorrelationContextStorage;
 use Obeserva\Laravel\Database\NPlusOneDetector;
 use Obeserva\Laravel\Database\QueryCounter;
 use Obeserva\Laravel\Horizon\ActiveHorizonSupervisorRegistry;
@@ -22,6 +23,7 @@ final readonly class WorkerContextResetter
         private ActiveJobSpanRegistry $jobSpanRegistry,
         private ActiveHorizonSupervisorRegistry $horizonSupervisorRegistry,
         private HorizonThroughputMetrics $horizonThroughputMetrics,
+        private CorrelationContextStorage $correlationStorage,
     ) {}
 
     public function reset(): void
@@ -33,5 +35,6 @@ final readonly class WorkerContextResetter
         $this->jobSpanRegistry->clear();
         $this->horizonSupervisorRegistry->clear();
         $this->horizonThroughputMetrics->reset();
+        $this->correlationStorage->clear();
     }
 }

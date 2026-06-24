@@ -13,6 +13,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Notifications\Events\NotificationSending;
+use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
@@ -43,10 +45,16 @@ use Obeserva\DeveloperExperience\Telescope\TelescopePublisherInterface;
 use Obeserva\DeveloperExperience\Telescope\TelescopeTraceEntryFactory;
 use Obeserva\DeveloperExperience\TraceSnapshotRegistry;
 use Obeserva\DeveloperExperience\TraceTreeBuilder;
+use Obeserva\Laravel\Broadcasting\BroadcastInstrumentation;
+use Obeserva\Laravel\Correlation\CorrelationContextStorage;
+use Obeserva\Laravel\Correlation\CorrelationIdGenerator;
+use Obeserva\Laravel\Correlation\IncomingCorrelationResolver;
+use Obeserva\Laravel\Correlation\OutgoingCorrelationHeaders;
 use Obeserva\Laravel\Database\NPlusOneDetector;
 use Obeserva\Laravel\Database\QueryCounter;
 use Obeserva\Laravel\Database\QuerySanitizer;
 use Obeserva\Laravel\Driver\LifecycleExporterResolver;
+use Obeserva\Laravel\Events\EventInstrumentation;
 use Obeserva\Laravel\Horizon\ActiveHorizonSupervisorRegistry;
 use Obeserva\Laravel\Horizon\HorizonInstrumentation;
 use Obeserva\Laravel\Horizon\HorizonThroughputMetrics;
@@ -55,6 +63,7 @@ use Obeserva\Laravel\Http\Middleware\TraceMiddlewareTiming;
 use Obeserva\Laravel\Http\RequestSpanEnricher;
 use Obeserva\Laravel\Http\TraceRequestMiddleware;
 use Obeserva\Laravel\Listeners\FlushTracerOnTerminate;
+use Obeserva\Laravel\Listeners\Notifications\TraceNotificationListener;
 use Obeserva\Laravel\Listeners\NPlusOneDetectionListener;
 use Obeserva\Laravel\Listeners\ReportExceptionListener;
 use Obeserva\Laravel\Listeners\RouteMatchedListener;
@@ -64,6 +73,7 @@ use Obeserva\Laravel\Listeners\TraceJobProcessedListener;
 use Obeserva\Laravel\Listeners\TraceJobProcessingListener;
 use Obeserva\Laravel\Listeners\TraceQueryListener;
 use Obeserva\Laravel\Listeners\TraceRedisCommandExecutedListener;
+use Obeserva\Laravel\Propagation\PropagationContextResolver;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
@@ -90,6 +100,11 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(ActiveJobSpanRegistry::class);
         $this->app->singleton(JobSpanEnricher::class);
         $this->app->singleton(QueuePayloadHook::class);
+        $this->app->singleton(PropagationContextResolver::class);
+        $this->app->singleton(CorrelationContextStorage::class);
+        $this->app->singleton(CorrelationIdGenerator::class);
+        $this->app->singleton(IncomingCorrelationResolver::class);
+        $this->app->singleton(OutgoingCorrelationHeaders::class);
         $this->app->singleton(ActiveHorizonSupervisorRegistry::class);
         $this->app->singleton(HorizonThroughputMetrics::class);
         $this->app->singleton(WorkerRuntimeDetector::class);
@@ -101,6 +116,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerDrivers();
 
         $this->registerDevelopmentExperience();
+
+        $this->registerDistributedSystems();
 
         $this->app->singleton(SamplerInterface::class, function (): SamplerInterface {
             $probability = config('obeserva.sampling.probability', 1.0);
@@ -138,6 +155,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerHttpInstrumentation();
         $this->registerDatabaseInstrumentation();
         $this->registerQueueInstrumentation();
+        $this->registerNotificationInstrumentation();
+        $this->registerBroadcastInstrumentation();
         $this->registerWorkerContextIsolation();
         $this->registerHorizonInstrumentation();
         $this->registerCacheInstrumentation();
@@ -209,6 +228,33 @@ final class ObeservaServiceProvider extends ServiceProvider
         if (config('obeserva.queue.failed_job_correlation', true)) {
             Event::listen(JobFailed::class, TraceJobFailedListener::class);
         }
+    }
+
+    private function registerDistributedSystems(): void
+    {
+        EventInstrumentation::register(
+            $this->app,
+            (bool) config('obeserva.events.propagation_enabled', true),
+            (bool) config('obeserva.events.tracing_enabled', true),
+        );
+    }
+
+    private function registerNotificationInstrumentation(): void
+    {
+        if (! config('obeserva.notifications.tracing_enabled', true)) {
+            return;
+        }
+
+        Event::listen(NotificationSending::class, TraceNotificationListener::class);
+        Event::listen(NotificationSent::class, TraceNotificationListener::class);
+    }
+
+    private function registerBroadcastInstrumentation(): void
+    {
+        BroadcastInstrumentation::register(
+            $this->app,
+            (bool) config('obeserva.broadcasts.tracing_enabled', true),
+        );
     }
 
     private function registerWorkerContextIsolation(): void
