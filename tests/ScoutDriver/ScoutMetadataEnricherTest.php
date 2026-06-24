@@ -29,6 +29,7 @@ final class ScoutMetadataEnricherTest extends TestCase
 
         $this->assertSame('2026.05.28', $tags['scout.deployment.version']);
         $this->assertSame('acme', $tags['scout.tenant.id']);
+        $this->assertSame('1.0.0', $tags['scout.obeserva.version']);
         $this->assertSame('8.3.6', $tags['scout.php.version']);
         $this->assertSame('12.0.0', $tags['scout.laravel.version']);
         $this->assertSame('false', $tags['scout.app.debug']);
