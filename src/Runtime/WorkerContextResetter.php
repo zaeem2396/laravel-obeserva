@@ -6,6 +6,7 @@ namespace Obeserva\Laravel\Runtime;
 
 use Obeserva\Core\Context\ContextManager;
 use Obeserva\Core\Flush\TracerFlushGuard;
+use Obeserva\DeveloperExperience\Analysis\TraceSummaryRegistry;
 use Obeserva\Laravel\Correlation\CorrelationContextStorage;
 use Obeserva\Laravel\Database\NPlusOneDetector;
 use Obeserva\Laravel\Database\QueryCounter;
@@ -24,6 +25,7 @@ final readonly class WorkerContextResetter
         private ActiveHorizonSupervisorRegistry $horizonSupervisorRegistry,
         private HorizonThroughputMetrics $horizonThroughputMetrics,
         private CorrelationContextStorage $correlationStorage,
+        private TraceSummaryRegistry $summaryRegistry,
     ) {}
 
     public function reset(): void
@@ -36,5 +38,6 @@ final readonly class WorkerContextResetter
         $this->horizonSupervisorRegistry->clear();
         $this->horizonThroughputMetrics->reset();
         $this->correlationStorage->clear();
+        $this->summaryRegistry->clear();
     }
 }
