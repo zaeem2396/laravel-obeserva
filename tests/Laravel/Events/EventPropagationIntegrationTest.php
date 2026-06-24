@@ -6,6 +6,7 @@ namespace Obeserva\Laravel\Tests\Events;
 
 use Illuminate\Support\Facades\Event;
 use Obeserva\Contracts\Driver\TracerInterface;
+use Obeserva\Core\Span\Span;
 use Obeserva\Core\Tracer;
 use Obeserva\Laravel\Events\Concerns\InteractsWithTraceContext;
 use Obeserva\Laravel\Events\EventTraceContextCarrier;
@@ -55,7 +56,7 @@ final class EventPropagationIntegrationTest extends TestCase
         $this->assertNotNull(EventTraceContextCarrier::extract($received));
 
         $names = array_map(
-            static fn ($span) => $span->getName(),
+            static fn (Span $span): string => $span->getName(),
             $tracer->completedSpans(),
         );
 

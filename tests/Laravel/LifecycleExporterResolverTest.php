@@ -30,6 +30,7 @@ final class LifecycleExporterResolverTest extends TestCase
         config([
             'obeserva.development.debug_toolbar.enabled' => false,
             'obeserva.development.telescope.enabled' => false,
+            'obeserva.summaries.enabled' => false,
             'obeserva.driver' => 'noop',
         ]);
 
