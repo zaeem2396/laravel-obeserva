@@ -98,6 +98,18 @@ Trace continuity extends beyond queue jobs into Laravel's async surfaces:
 
 Application events opt in via `InteractsWithTraceContext`. Framework events under `Illuminate\*` are not instrumented.
 
+### Production engineering (v0.8.1)
+
+Long-running worker safety layers sit below instrumentation:
+
+1. `CompletedSpanBufferPolicy` and `MemoryPressureMonitor` auto-flush the tracer when buffers or RSS thresholds are exceeded
+2. `ContextManager` ends orphaned spans when active nesting exceeds `OBESERVA_MAX_ACTIVE_SPAN_DEPTH`
+3. `TraceSnapshotRegistry` evicts oldest snapshots when development inspection exceeds `OBESERVA_MAX_TRACE_SNAPSHOTS`
+4. `TracerFlushGuard` ensures export failures never propagate to application code
+5. `ShutdownFlushRegistrar` and `FlushTracerOnWorkerStoppingListener` flush on PHP shutdown and queue worker stop events
+
+`WorkerContextResetter` routes all worker-cycle flushes through `TracerFlushGuard`.
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).

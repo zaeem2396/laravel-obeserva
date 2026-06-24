@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Obeserva\Laravel\Runtime;
 
-use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Core\Context\ContextManager;
+use Obeserva\Core\Flush\TracerFlushGuard;
 use Obeserva\Laravel\Correlation\CorrelationContextStorage;
 use Obeserva\Laravel\Database\NPlusOneDetector;
 use Obeserva\Laravel\Database\QueryCounter;
@@ -16,7 +16,7 @@ use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 final readonly class WorkerContextResetter
 {
     public function __construct(
-        private TracerInterface $tracer,
+        private TracerFlushGuard $flushGuard,
         private ContextManager $contextManager,
         private QueryCounter $queryCounter,
         private NPlusOneDetector $nPlusOneDetector,
@@ -28,7 +28,7 @@ final readonly class WorkerContextResetter
 
     public function reset(): void
     {
-        $this->tracer->flush();
+        $this->flushGuard->flush();
         $this->contextManager->clear();
         $this->queryCounter->reset();
         $this->nPlusOneDetector->reset();

@@ -16,6 +16,13 @@ final class ContextManager implements ActiveSpanStorageInterface, ContextStorage
     /** @var list<SpanInterface> */
     private array $activeSpans = [];
 
+    private int $maxActiveSpanDepth = 0;
+
+    public function configureMaxActiveSpanDepth(int $maxDepth): void
+    {
+        $this->maxActiveSpanDepth = max(0, $maxDepth);
+    }
+
     public function get(): ?TraceContextInterface
     {
         return $this->context;
@@ -43,6 +50,14 @@ final class ContextManager implements ActiveSpanStorageInterface, ContextStorage
 
     public function push(SpanInterface $span): void
     {
+        if ($this->maxActiveSpanDepth > 0 && count($this->activeSpans) >= $this->maxActiveSpanDepth) {
+            $orphaned = array_shift($this->activeSpans);
+
+            if (! $orphaned->isEnded()) {
+                $orphaned->end();
+            }
+        }
+
         $this->activeSpans[] = $span;
     }
 

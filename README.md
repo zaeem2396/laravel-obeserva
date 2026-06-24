@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.8.0`](docs/posts/v0.8.0-distributed-systems.md) (Distributed Systems).
+**Current release:** [`v0.8.0`](docs/posts/v0.8.0-distributed-systems.md) (Distributed Systems). **Next:** [v0.8.1 Production Engineering](docs/posts/v0.8.1-production-engineering.md).
 
 ## Table of contents
 
@@ -41,7 +41,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Developer experience** (optional): Telescope trace inspection and local debug toolbar when enabled
 - **Testing utilities**: propagation and snapshot assertions, `FakeTracer`, and `InteractsWithObeserva` for package tests
 - **Event propagation**: trace context on dispatched events via `InteractsWithTraceContext` and `TracePropagatingEventDispatcher`
-- **Cross-service correlation**: `X-Correlation-ID` on HTTP requests/responses and in queue/event carriers
+- **Production engineering** *(v0.8.1)*: bounded span buffers, memory pressure flush, and exception-safe export on shutdown
 
 ## Configuration
 
@@ -65,6 +65,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Notifications**: tracing via `OBESERVA_NOTIFICATION_TRACING`
 - **Broadcasts**: tracing via `OBESERVA_BROADCAST_TRACING`; propagation via `OBESERVA_BROADCAST_PROPAGATION`
 - **Correlation**: enabled by `OBESERVA_CORRELATION_ENABLED`; header via `OBESERVA_CORRELATION_HEADER`
+- **Memory safety**: max completed spans via `OBESERVA_MAX_COMPLETED_SPANS`; active span depth via `OBESERVA_MAX_ACTIVE_SPAN_DEPTH`
+- **Flush safety**: shutdown flush via `OBESERVA_FLUSH_ON_SHUTDOWN`; worker-stopping flush via `OBESERVA_FLUSH_ON_WORKER_STOPPING`
 
 ## Modules
 

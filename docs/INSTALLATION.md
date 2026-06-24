@@ -151,6 +151,25 @@ Configuration: `config/obeserva.php` → `events.*`, `notifications.*`, `broadca
 
 See [v0.8.0 announcement](posts/v0.8.0-distributed-systems.md).
 
+### Production engineering (v0.8.1 preview)
+
+Memory bounds and flush safety for long-running workers:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OBESERVA_MAX_COMPLETED_SPANS` | `2048` | Auto-flush tracer when completed span buffer reaches this limit (`0` disables) |
+| `OBESERVA_MAX_ACTIVE_SPAN_DEPTH` | `256` | End oldest active span when nesting exceeds this depth (`0` disables) |
+| `OBESERVA_MAX_TRACE_SNAPSHOTS` | `512` | Evict oldest trace snapshots in development registry (`0` disables) |
+| `OBESERVA_MEMORY_PRESSURE_BYTES` | `0` | Auto-flush when RSS exceeds this threshold (`0` disables) |
+| `OBESERVA_FLUSH_SAFETY` | `true` | Master toggle for production flush safety features |
+| `OBESERVA_FLUSH_GUARD_EXCEPTIONS` | `true` | Swallow exporter exceptions during flush |
+| `OBESERVA_FLUSH_ON_SHUTDOWN` | `true` | Flush tracer on PHP shutdown |
+| `OBESERVA_FLUSH_ON_WORKER_STOPPING` | `true` | Reset tracer when queue workers stop |
+
+Configuration: `config/obeserva.php` → `memory.*`, `flush.*`.
+
+See [v0.8.1 preview post](posts/v0.8.1-production-engineering.md).
+
 ## Local development
 
 ```bash
