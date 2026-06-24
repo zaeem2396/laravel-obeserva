@@ -63,7 +63,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.7.1`). See [RELEASE.md](RELEASE.md) and the [v0.7.1 announcement](posts/v0.7.1-testing-utilities.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.8.0`). See [RELEASE.md](RELEASE.md) and the [v0.8.0 announcement](posts/v0.8.0-distributed-systems.md).
 
 ### Scout driver
 
@@ -149,7 +149,7 @@ Add `InteractsWithTraceContext` to application events that should carry trace co
 
 Configuration: `config/obeserva.php` → `events.*`, `notifications.*`, `broadcasts.*`, `correlation.*`.
 
-See [v0.8.0 preview post](posts/v0.8.0-distributed-systems.md).
+See [v0.8.0 announcement](posts/v0.8.0-distributed-systems.md).
 
 ## Local development
 
