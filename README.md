@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.8.0`](docs/posts/v0.8.0-distributed-systems.md) (Distributed Systems). **Next:** [v0.8.1 Production Engineering](docs/posts/v0.8.1-production-engineering.md).
+**Current release:** [`v0.8.1`](docs/posts/v0.8.1-production-engineering.md) (Production Engineering).
 
 ## Table of contents
 
@@ -41,7 +41,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Developer experience** (optional): Telescope trace inspection and local debug toolbar when enabled
 - **Testing utilities**: propagation and snapshot assertions, `FakeTracer`, and `InteractsWithObeserva` for package tests
 - **Event propagation**: trace context on dispatched events via `InteractsWithTraceContext` and `TracePropagatingEventDispatcher`
-- **Production engineering** *(v0.8.1)*: bounded span buffers, memory pressure flush, and exception-safe export on shutdown
+- **Cross-service correlation**: `X-Correlation-ID` on HTTP requests/responses and in queue/event carriers
+- **Production engineering**: bounded span buffers, memory pressure flush, and exception-safe export on shutdown
 
 ## Configuration
 
