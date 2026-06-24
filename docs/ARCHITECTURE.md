@@ -110,6 +110,18 @@ Long-running worker safety layers sit below instrumentation:
 
 `WorkerContextResetter` routes all worker-cycle flushes through `TracerFlushGuard`.
 
+### AI/advanced features (v0.9.0)
+
+Structured debugging and causation layers sit above span snapshots:
+
+1. `SpanCategoryResolver` classifies spans into HTTP, database, cache, queue, event, and other categories
+2. `TraceSummaryBuilder` produces compact summaries with category counts, top slow spans, and propagation metadata
+3. `SlowRequestAnalyzer` flags slow HTTP requests and ranks root-cause child spans
+4. `CausationGraphBuilder` emits parent-child graphs with `root_cause_span_ids`
+5. `BuildTraceSummaryOnTerminate` stores summaries in `TraceSummaryRegistry` for toolbar, Telescope, and tests
+
+`TraceSummaryJsonFormatter` exports summaries as JSON for external tooling and LLM workflows.
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).

@@ -9,11 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- AI/advanced features (v0.9.0): `TraceSummary` and `TraceSummaryBuilder` for structured, LLM-friendly trace summaries
+- `SpanCategoryResolver` categorizes spans (HTTP, database, cache, queue, events, and more)
+- `CausationGraph`, `CausationGraphBuilder`, and `SlowRequestAnalyzer` for slow-request root-cause attribution
+- `TraceSummaryJsonFormatter` exports summaries as JSON for debugging workflows
+- `BuildTraceSummaryOnTerminate` stores per-request summaries in `TraceSummaryRegistry`
+- `TraceSummaryAssert` testing helper and `obeservaTraceSummary()` on `InteractsWithObeserva`
+- Debug toolbar and Telescope entries include `trace_summary` when summaries are enabled
+- Config: `obeserva.summaries.*`, `obeserva.causation.*`
+- Tests: summary builder, causation graph, slow request analysis, terminate integration (110 tests total)
 
 ### Changed
 
-- Nothing yet.
+- `LifecycleExporterResolver` collects span snapshots when `OBESERVA_TRACE_SUMMARIES` is enabled
+- Documentation preview for v0.9.0 AI/advanced features
 
 ## [0.8.1] - 2026-06-01
 
