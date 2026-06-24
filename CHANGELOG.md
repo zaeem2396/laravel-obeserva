@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Octane isolation integration test coverage
 - Documentation: upgrade guide, API stability policy, Scout integration, benchmarks, v1.0.0 preview post
 - CI: docs validation workflow (`scripts/validate-docs-examples.php`)
+- Tests: stability diagnostics, config validation, status command, Octane isolation (120 tests total)
 
 ### Changed
 
