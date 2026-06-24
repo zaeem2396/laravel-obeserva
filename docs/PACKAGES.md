@@ -28,6 +28,12 @@
 - `TraceBroadcastListener`, `BroadcastInstrumentation` — broadcast tracing and propagation
 - `CorrelationContextStorage`, `IncomingCorrelationResolver`, `OutgoingCorrelationHeaders` — cross-service correlation
 
+### Production engineering (v0.8.1)
+
+- `CompletedSpanBufferPolicy`, `MemoryPressureMonitor` — bounded buffers and RSS-triggered auto-flush
+- `TracerFlushGuard` — exception-safe tracer flush
+- `ShutdownFlushRegistrar`, `FlushTracerOnWorkerStoppingListener`, `ProductionFlushSafety` — shutdown and worker-stop flush
+
 ## Installation
 
 ```bash
