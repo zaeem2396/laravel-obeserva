@@ -1,0 +1,22 @@
+name: Docs validation
+
+on:
+  push:
+    branches: [main, 'feature/**', 'release/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Validate documentation
+        run: php scripts/validate-docs-examples.php
