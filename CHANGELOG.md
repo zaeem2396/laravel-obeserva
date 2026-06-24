@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Production engineering (v0.8.1): `CompletedSpanBufferPolicy` auto-flushes when completed span buffer exceeds `OBESERVA_MAX_COMPLETED_SPANS`
+- Nothing yet.
+
+### Changed
+
+- Nothing yet.
+
+## [0.8.1] - 2026-06-01
+
+### Added
+
+- Production engineering: `CompletedSpanBufferPolicy` auto-flushes when completed span buffer exceeds `OBESERVA_MAX_COMPLETED_SPANS`
 - `MemoryPressureMonitor` triggers tracer flush when RSS exceeds `OBESERVA_MEMORY_PRESSURE_BYTES`
 - Bounded `TraceSnapshotRegistry` evicts oldest snapshots at `OBESERVA_MAX_TRACE_SNAPSHOTS`
 - Active span depth guard on `ContextManager` (`OBESERVA_MAX_ACTIVE_SPAN_DEPTH`) ends orphaned spans when stack overflows
@@ -21,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `WorkerContextResetter` flushes via `TracerFlushGuard` instead of calling the tracer directly
-- Documentation preview for v0.8.1 production engineering
+- Documentation aligned for v0.8.1 release (installation, roadmap, architecture, release post)
 
 ## [0.8.0] - 2026-05-31
 
