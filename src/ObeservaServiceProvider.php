@@ -55,6 +55,7 @@ use Obeserva\DeveloperExperience\Telescope\TelescopeTraceEntryFactory;
 use Obeserva\DeveloperExperience\TraceSnapshotRegistry;
 use Obeserva\DeveloperExperience\TraceTreeBuilder;
 use Obeserva\Laravel\Broadcasting\BroadcastInstrumentation;
+use Obeserva\Laravel\Console\ObeservaStatusCommand;
 use Obeserva\Laravel\Correlation\CorrelationContextStorage;
 use Obeserva\Laravel\Correlation\CorrelationIdGenerator;
 use Obeserva\Laravel\Correlation\IncomingCorrelationResolver;
@@ -92,6 +93,8 @@ use Obeserva\Laravel\Runtime\ShutdownFlushRegistrar;
 use Obeserva\Laravel\Runtime\WorkerContextIsolation;
 use Obeserva\Laravel\Runtime\WorkerContextResetter;
 use Obeserva\Laravel\Runtime\WorkerRuntimeDetector;
+use Obeserva\Laravel\Support\ConfigValidator;
+use Obeserva\Laravel\Support\RuntimeDiagnosticsBuilder;
 use Obeserva\OtelDriver\OtelDriverFactory;
 use Obeserva\ScoutDriver\ContainerScoutApmClient;
 use Obeserva\ScoutDriver\ScoutApmClientInterface;
@@ -120,6 +123,8 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(ActiveHorizonSupervisorRegistry::class);
         $this->app->singleton(HorizonThroughputMetrics::class);
         $this->app->singleton(WorkerRuntimeDetector::class);
+        $this->app->singleton(RuntimeDiagnosticsBuilder::class);
+        $this->app->singleton(ConfigValidator::class);
         $this->app->singleton(TracerFlushGuard::class, fn (Application $app): TracerFlushGuard => new TracerFlushGuard(
             $app->make(TracerInterface::class),
             (bool) config('obeserva.flush.guard_exceptions', true),
@@ -172,6 +177,10 @@ final class ObeservaServiceProvider extends ServiceProvider
             return;
         }
 
+        $this->app->make(ConfigValidator::class)->assertValid(
+            (bool) config('obeserva.validation.strict', false),
+        );
+
         $this->publishes([
             __DIR__.'/../config/obeserva.php' => config_path('obeserva.php'),
         ], 'obeserva-config');
@@ -188,6 +197,7 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerRedisInstrumentation();
         $this->registerExceptionInstrumentation();
         $this->registerDevelopmentExperienceBoot();
+        $this->registerDiagnostics();
         $this->registerTerminateHook();
     }
 
@@ -384,6 +394,21 @@ final class ObeservaServiceProvider extends ServiceProvider
                 $listener->report($exception);
             });
         });
+    }
+
+    private function registerDiagnostics(): void
+    {
+        if (! (bool) config('obeserva.diagnostics.status_command', true)) {
+            return;
+        }
+
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->commands([
+            ObeservaStatusCommand::class,
+        ]);
     }
 
     private function registerTerminateHook(): void
