@@ -63,7 +63,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.8.1`). See [RELEASE.md](RELEASE.md) and the [v0.8.1 announcement](posts/v0.8.1-production-engineering.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.9.0`). See [RELEASE.md](RELEASE.md) and the [v0.9.0 announcement](posts/v0.9.0-ai-advanced-features.md).
 
 ### Scout driver
 
@@ -170,7 +170,7 @@ Configuration: `config/obeserva.php` → `memory.*`, `flush.*`.
 
 See [v0.8.1 announcement](posts/v0.8.1-production-engineering.md).
 
-### AI/advanced features (v0.9.0 preview)
+### AI/advanced features (v0.9.0)
 
 Trace summaries and slow-request causation for debugging and LLM workflows:
 
@@ -185,7 +185,7 @@ Summaries are available from `TraceSummaryRegistry` after each request. Enable s
 
 Configuration: `config/obeserva.php` → `summaries.*`, `causation.*`.
 
-See [v0.9.0 preview post](posts/v0.9.0-ai-advanced-features.md).
+See [v0.9.0 announcement](posts/v0.9.0-ai-advanced-features.md).
 
 ## Local development
 
