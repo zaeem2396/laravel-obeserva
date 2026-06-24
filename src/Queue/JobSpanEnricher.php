@@ -34,5 +34,11 @@ final class JobSpanEnricher
         if (is_array($carrier) && isset($carrier['trace_id']) && is_string($carrier['trace_id'])) {
             $span->setAttribute('trace.parent_trace_id', $carrier['trace_id']);
         }
+
+        $correlationId = TraceContextCarrier::extractCorrelationId($payload);
+
+        if ($correlationId !== null) {
+            $span->setAttribute('correlation.id', $correlationId);
+        }
     }
 }

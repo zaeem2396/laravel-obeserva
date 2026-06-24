@@ -9,11 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- Distributed systems module for v0.8.0: unified `TraceCarrierBag` and `W3cTracePropagator` for W3C trace context carriers
+- `PropagationContextResolver` shared across queue, events, and broadcasts
+- Cross-service correlation via `CorrelationContextStorage`, incoming `X-Correlation-ID` resolution, and outbound response headers
+- Event propagation: `TracePropagatingEventDispatcher`, `EventTraceContextCarrier`, and `InteractsWithTraceContext` trait
+- Notification tracing spans (`notification.send` / `notification.sent`) via `TraceNotificationListener`
+- Broadcast tracing and propagation via `TraceBroadcastListener` and `BroadcastInstrumentation`
+- Config: `obeserva.events.*`, `obeserva.notifications.*`, `obeserva.broadcasts.*`, `obeserva.correlation.*`
+- Tests: propagation, correlation, and event integration coverage (98 tests total)
 
 ### Changed
 
-- Nothing yet.
+- `TraceContextCarrier` and `QueuePayloadHook` delegate to shared propagation helpers and include correlation IDs
+- HTTP middleware enriches spans with `correlation.id` and echoes correlation headers on responses
+- Worker context reset clears correlation storage between jobs
 
 ## [0.7.1] - 2026-05-30
 

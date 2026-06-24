@@ -88,4 +88,24 @@ return [
         ],
     ],
 
+    'events' => [
+        'propagation_enabled' => env('OBESERVA_EVENT_PROPAGATION', true),
+        'tracing_enabled' => env('OBESERVA_EVENT_TRACING', true),
+    ],
+
+    'notifications' => [
+        'tracing_enabled' => env('OBESERVA_NOTIFICATION_TRACING', true),
+    ],
+
+    'broadcasts' => [
+        'tracing_enabled' => env('OBESERVA_BROADCAST_TRACING', true),
+        'propagation_enabled' => env('OBESERVA_BROADCAST_PROPAGATION', true),
+    ],
+
+    'correlation' => [
+        'enabled' => env('OBESERVA_CORRELATION_ENABLED', true),
+        'header' => env('OBESERVA_CORRELATION_HEADER', 'X-Correlation-ID'),
+        'propagate_outbound' => env('OBESERVA_CORRELATION_PROPAGATE', true),
+    ],
+
 ];
