@@ -52,6 +52,14 @@ php artisan vendor:publish --tag=obeserva-config
 | `OBESERVA_TELESCOPE_ENABLED` | `false` | Publish span snapshots to Laravel Telescope on terminate |
 | `OBESERVA_DEBUG_TOOLBAR` | `APP_DEBUG && APP_ENV=local` | Inject local HTML trace toolbar into HTML responses |
 | `OBESERVA_DEBUG_TOOLBAR_PROPAGATION` | `true` | Show queue/HTTP propagation summary in the debug toolbar |
+| `OBESERVA_EVENT_PROPAGATION` | `true` | Inject trace context into dispatched application events |
+| `OBESERVA_EVENT_TRACING` | `true` | Record spans for application event dispatch |
+| `OBESERVA_NOTIFICATION_TRACING` | `true` | Record notification send/sent spans |
+| `OBESERVA_BROADCAST_TRACING` | `true` | Record broadcast dispatch spans |
+| `OBESERVA_BROADCAST_PROPAGATION` | `true` | Inject trace context into broadcastable events |
+| `OBESERVA_CORRELATION_ENABLED` | `true` | Resolve and propagate correlation IDs |
+| `OBESERVA_CORRELATION_HEADER` | `X-Correlation-ID` | HTTP header for correlation IDs |
+| `OBESERVA_CORRELATION_PROPAGATE` | `true` | Echo correlation ID on HTTP responses |
 
 ## Releases
 
@@ -121,6 +129,27 @@ Obeserva includes PHPUnit helpers under `Obeserva\Testing` for asserting spans, 
 - `InteractsWithObeserva` — Laravel Testbench trait to swap the tracer
 
 See [Modules](PACKAGES.md#testing-utilities-v071) for details.
+
+### Distributed systems (v0.8.0)
+
+Event propagation, notification/broadcast tracing, and cross-service correlation:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OBESERVA_EVENT_PROPAGATION` | `true` | Inject trace context into application events |
+| `OBESERVA_EVENT_TRACING` | `true` | Record `event.dispatch` spans |
+| `OBESERVA_NOTIFICATION_TRACING` | `true` | Record notification spans |
+| `OBESERVA_BROADCAST_TRACING` | `true` | Record broadcast dispatch spans |
+| `OBESERVA_BROADCAST_PROPAGATION` | `true` | Propagate context into broadcastable events |
+| `OBESERVA_CORRELATION_ENABLED` | `true` | Enable `X-Correlation-ID` resolution |
+| `OBESERVA_CORRELATION_HEADER` | `X-Correlation-ID` | Correlation HTTP header name |
+| `OBESERVA_CORRELATION_PROPAGATE` | `true` | Echo correlation ID on responses |
+
+Add `InteractsWithTraceContext` to application events that should carry trace context across listeners and queued workflows.
+
+Configuration: `config/obeserva.php` → `events.*`, `notifications.*`, `broadcasts.*`, `correlation.*`.
+
+See [v0.8.0 preview post](posts/v0.8.0-distributed-systems.md).
 
 ## Local development
 

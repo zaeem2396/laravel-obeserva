@@ -19,6 +19,15 @@
 - `TraceSnapshotAssert` — snapshot count, attributes, hierarchy, and flow checks
 - `InteractsWithObeserva` — Laravel Testbench trait to swap the tracer in package tests
 
+### Distributed systems (v0.8.0)
+
+- `TraceCarrierBag`, `W3cTracePropagator` — unified W3C trace carriers
+- `PropagationContextResolver` — resolves active trace context and correlation IDs
+- `TracePropagatingEventDispatcher`, `EventTraceContextCarrier`, `InteractsWithTraceContext` — event propagation
+- `TraceNotificationListener` — notification send/sent spans
+- `TraceBroadcastListener`, `BroadcastInstrumentation` — broadcast tracing and propagation
+- `CorrelationContextStorage`, `IncomingCorrelationResolver`, `OutgoingCorrelationHeaders` — cross-service correlation
+
 ## Installation
 
 ```bash

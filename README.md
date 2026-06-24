@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.7.1`](docs/posts/v0.7.1-testing-utilities.md) (Testing Utilities).
+**Current release:** [`v0.7.1`](docs/posts/v0.7.1-testing-utilities.md) (Testing Utilities). **Next:** [v0.8.0 Distributed Systems](docs/posts/v0.8.0-distributed-systems.md).
 
 ## Table of contents
 
@@ -40,6 +40,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Worker context isolation**: safe tracer reset between jobs in queue, Horizon, Octane, and RoadRunner workers
 - **Developer experience** (optional): Telescope trace inspection and local debug toolbar when enabled
 - **Testing utilities**: propagation and snapshot assertions, `FakeTracer`, and `InteractsWithObeserva` for package tests
+- **Event propagation** *(v0.8.0)*: trace context on dispatched events via `InteractsWithTraceContext` and `TracePropagatingEventDispatcher`
+- **Cross-service correlation** *(v0.8.0)*: `X-Correlation-ID` on HTTP requests/responses and in queue/event carriers
 
 ## Configuration
 
@@ -72,6 +74,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 | Runtime | `Obeserva\Laravel\Runtime` | Worker runtime detection and context isolation |
 | Developer Experience | `Obeserva\DeveloperExperience` | Trace snapshots, Telescope publisher, and debug toolbar |
 | Testing | `Obeserva\Testing` | `FakeTracer`, propagation and snapshot assertions, `InteractsWithObeserva` trait |
+| Events | `Obeserva\Laravel\Events` | Event dispatch propagation and tracing *(v0.8.0)* |
+| Correlation | `Obeserva\Laravel\Correlation` | Cross-service correlation ID storage and HTTP headers *(v0.8.0)* |
 
 ## Requirements
 
