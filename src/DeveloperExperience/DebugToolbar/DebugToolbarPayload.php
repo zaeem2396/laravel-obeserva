@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Obeserva\DeveloperExperience\DebugToolbar;
 
+use Obeserva\DeveloperExperience\Analysis\TraceSummary;
 use Obeserva\DeveloperExperience\PropagationFlowSummary;
 use Obeserva\DeveloperExperience\TraceTreeNode;
 
@@ -17,6 +18,7 @@ final readonly class DebugToolbarPayload
         public float $totalDurationMs,
         public PropagationFlowSummary $propagation,
         public array $traceTree,
+        public ?TraceSummary $traceSummary = null,
     ) {}
 
     /**
@@ -24,7 +26,7 @@ final readonly class DebugToolbarPayload
      */
     public function toArray(): array
     {
-        return [
+        $payload = [
             'span_count' => $this->spanCount,
             'total_duration_ms' => $this->totalDurationMs,
             'propagation' => $this->propagation->toArray(),
@@ -33,5 +35,11 @@ final readonly class DebugToolbarPayload
                 $this->traceTree,
             ),
         ];
+
+        if ($this->traceSummary instanceof TraceSummary) {
+            $payload['trace_summary'] = $this->traceSummary->toArray();
+        }
+
+        return $payload;
     }
 }
