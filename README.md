@@ -6,7 +6,7 @@
 
 Laravel-native observability and instrumentation runtime with OpenTelemetry-aligned abstractions and deep Laravel runtime awareness.
 
-**Current release:** [`v0.8.1`](docs/posts/v0.8.1-production-engineering.md) (Production Engineering). **Next:** [v0.9.0 AI/Advanced Features](docs/posts/v0.9.0-ai-advanced-features.md).
+**Current release:** [`v0.9.0`](docs/posts/v0.9.0-ai-advanced-features.md) (AI/Advanced Features).
 
 ## Table of contents
 
@@ -43,8 +43,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for configuration and environme
 - **Event propagation**: trace context on dispatched events via `InteractsWithTraceContext` and `TracePropagatingEventDispatcher`
 - **Cross-service correlation**: `X-Correlation-ID` on HTTP requests/responses and in queue/event carriers
 - **Production engineering**: bounded span buffers, memory pressure flush, and exception-safe export on shutdown
-- **Trace summaries** *(v0.9.0)*: AI-friendly structured summaries with slow-span ranking and category breakdowns
-- **Slow-request causation** *(v0.9.0)*: causal graphs linking HTTP requests to database, cache, queue, and event spans
+- **Trace summaries**: AI-friendly structured summaries with slow-span ranking and category breakdowns
+- **Slow-request causation**: causal graphs linking HTTP requests to database, cache, queue, and event spans
 
 ## Configuration
 

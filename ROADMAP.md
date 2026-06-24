@@ -4,7 +4,7 @@
 
 **Install:** `composer require scout/laravel`
 
-**Current release:** `v0.8.1` (2026-06-01) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.8.1-production-engineering.md](docs/posts/v0.8.1-production-engineering.md).
+**Current release:** `v0.9.0` (2026-06-02) — see [CHANGELOG.md](CHANGELOG.md) and [docs/posts/v0.9.0-ai-advanced-features.md](docs/posts/v0.9.0-ai-advanced-features.md).
 
 ---
 
@@ -28,7 +28,7 @@
 | v0.7.1 | Testing utilities | 🟢 Released (all v0.7.1 rows ✅) | `v0.7.1` |
 | v0.8.0 | Distributed systems | 🟢 Released (all v0.8.0 rows ✅) | `v0.8.0` |
 | v0.8.1 | Production engineering | 🟢 Released (all v0.8.1 rows ✅) | `v0.8.1` |
-| v0.9.0 | AI/advanced features | 🟡 IN-PROGRESS | — |
+| v0.9.0 | AI/advanced features | 🟢 Released (all v0.9.0 rows ✅) | `v0.9.0` |
 
 ---
 
@@ -141,8 +141,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.8.0 | Distributed Systems | Cross-Service Correlation | 🟢 DONE | Shipped `v0.8.0`: `CorrelationContextStorage`, `X-Correlation-ID` on HTTP and queue carriers; `correlation.id` span attributes. |
 | v0.8.1 | Production Engineering | Memory Safety | 🟢 DONE | Shipped `v0.8.1`: bounded completed-span buffer, trace snapshot eviction, active span depth guard, memory pressure auto-flush. |
 | v0.8.1 | Production Engineering | Flush Safety | 🟢 DONE | Shipped `v0.8.1`: `TracerFlushGuard`, shutdown flush registrar, worker-stopping flush listener. |
-| v0.9.0 | AI/Advanced Features | Trace Summaries | 🟡 IN-PROGRESS | `TraceSummaryBuilder`, `TraceSummaryJsonFormatter`, `TraceSummaryRegistry`; category counts and top slow spans. |
-| v0.9.0 | AI/Advanced Features | Slow Request Causation | 🟡 IN-PROGRESS | `CausationGraphBuilder`, `SlowRequestAnalyzer`, root-cause span attribution for slow HTTP requests. |
+| v0.9.0 | AI/Advanced Features | Trace Summaries | 🟢 DONE | Shipped `v0.9.0`: `TraceSummaryBuilder`, `TraceSummaryJsonFormatter`, `TraceSummaryRegistry`; category counts and top slow spans. |
+| v0.9.0 | AI/Advanced Features | Slow Request Causation | 🟢 DONE | Shipped `v0.9.0`: `CausationGraphBuilder`, `SlowRequestAnalyzer`, root-cause span attribution for slow HTTP requests. |
 | v1.0.0 | Stable Release | Production Stabilization | 🔴 PLANNED | Finalize stable APIs, documentation, migration guarantees, performance validation, runtime reliability, and enterprise-grade package stability. |
 | v1.0.0 | Stable Release | Scout Partnership Readiness | 🔴 PLANNED | Prepare engineering-quality benchmarks, architecture diagrams, technical documentation, runtime comparisons, and feature showcases suitable for presentation to Scout engineering leadership. |
 
