@@ -14,6 +14,8 @@ use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Contracts\Trace\SpanIds;
 use Obeserva\Contracts\Trace\TraceContext;
 use Obeserva\Contracts\Trace\TraceContextInterface;
+use Obeserva\Core\Memory\CompletedSpanBufferPolicy;
+use Obeserva\Core\Memory\MemoryPressureMonitor;
 use Obeserva\Core\Span\NoopSpan;
 use Obeserva\Core\Span\Span;
 use Obeserva\Core\Span\SpanScope;
@@ -28,6 +30,8 @@ final class Tracer implements TracerInterface
         private readonly ?ContextStorageInterface $contextStorage = null,
         private readonly ?ActiveSpanStorageInterface $activeSpanStorage = null,
         private readonly ?SpanLifecycleExporterInterface $lifecycleExporter = null,
+        private readonly ?CompletedSpanBufferPolicy $bufferPolicy = null,
+        private readonly ?MemoryPressureMonitor $memoryPressureMonitor = null,
     ) {}
 
     public function startSpan(string $name, SpanKind $kind = SpanKind::Internal): SpanInterface
@@ -46,6 +50,10 @@ final class Tracer implements TracerInterface
             $this->activeSpanStorage?->pop();
             $this->lifecycleExporter?->onSpanEnded($ended);
             $this->completedSpans[] = $ended;
+
+            if ($this->shouldAutoFlush()) {
+                $this->flush();
+            }
         });
 
         $this->contextStorage?->set(new TraceContext(
@@ -81,6 +89,17 @@ final class Tracer implements TracerInterface
     {
         $this->lifecycleExporter?->flush();
         $this->completedSpans = [];
+    }
+
+    private function shouldAutoFlush(): bool
+    {
+        $completedCount = count($this->completedSpans);
+
+        if ($this->bufferPolicy?->shouldFlush($completedCount) === true) {
+            return true;
+        }
+
+        return $this->memoryPressureMonitor?->isUnderPressure() ?? false;
     }
 
     private function resolveTraceId(): string
