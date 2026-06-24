@@ -9,8 +9,16 @@ final class TraceSnapshotRegistry
     /** @var list<TraceSnapshot> */
     private array $snapshots = [];
 
+    public function __construct(
+        private readonly int $maxSnapshots = 0,
+    ) {}
+
     public function record(TraceSnapshot $snapshot): void
     {
+        if ($this->maxSnapshots > 0 && count($this->snapshots) >= $this->maxSnapshots) {
+            array_shift($this->snapshots);
+        }
+
         $this->snapshots[] = $snapshot;
     }
 
