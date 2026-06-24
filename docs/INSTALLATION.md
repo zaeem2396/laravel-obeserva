@@ -63,7 +63,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.8.0`). See [RELEASE.md](RELEASE.md) and the [v0.8.0 announcement](posts/v0.8.0-distributed-systems.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.8.1`). See [RELEASE.md](RELEASE.md) and the [v0.8.1 announcement](posts/v0.8.1-production-engineering.md).
 
 ### Scout driver
 
@@ -151,7 +151,7 @@ Configuration: `config/obeserva.php` → `events.*`, `notifications.*`, `broadca
 
 See [v0.8.0 announcement](posts/v0.8.0-distributed-systems.md).
 
-### Production engineering (v0.8.1 preview)
+### Production engineering (v0.8.1)
 
 Memory bounds and flush safety for long-running workers:
 
@@ -168,7 +168,7 @@ Memory bounds and flush safety for long-running workers:
 
 Configuration: `config/obeserva.php` → `memory.*`, `flush.*`.
 
-See [v0.8.1 preview post](posts/v0.8.1-production-engineering.md).
+See [v0.8.1 announcement](posts/v0.8.1-production-engineering.md).
 
 ## Local development
 
