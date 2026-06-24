@@ -9,11 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet.
+- Production stabilization: `PackageVersion` constant (`1.0.0`) for diagnostics and Scout metadata
+- `RuntimeDiagnostics`, `RuntimeDiagnosticsBuilder`, and `php artisan obeserva:status` command with `--json` output
+- `ConfigValidator` with optional strict boot validation via `OBESERVA_CONFIG_STRICT`
+- Scout export tag `scout.obeserva.version` via `ScoutMetadataEnricher`
+- Octane isolation integration test coverage
+- Documentation: upgrade guide, API stability policy, Scout integration, benchmarks, v1.0.0 preview post
+- CI: docs validation workflow (`scripts/validate-docs-examples.php`)
+- Tests: stability diagnostics, config validation, status command, Octane isolation (120 tests total)
 
 ### Changed
 
-- Nothing yet.
+- Documentation preview for v1.0.0 stable release (installation, roadmap, architecture, release post)
 
 ## [0.9.0] - 2026-06-02
 

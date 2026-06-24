@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Obeserva\ScoutDriver;
 
 use Obeserva\Contracts\Span\SpanInterface;
+use Obeserva\Laravel\Support\PackageVersion;
 
 final readonly class ScoutMetadataEnricher
 {
@@ -24,6 +25,7 @@ final readonly class ScoutMetadataEnricher
         }
 
         $tags = $this->diagnostics->toTags();
+        $tags['scout.obeserva.version'] = PackageVersion::version();
 
         if ($this->config->deploymentVersion !== '') {
             $tags['scout.deployment.version'] = $this->config->deploymentVersion;
