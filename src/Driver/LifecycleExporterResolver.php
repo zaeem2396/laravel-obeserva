@@ -41,6 +41,7 @@ final readonly class LifecycleExporterResolver
     private function developmentCollectionEnabled(): bool
     {
         return (bool) config('obeserva.development.telescope.enabled', false)
-            || (bool) config('obeserva.development.debug_toolbar.enabled', false);
+            || (bool) config('obeserva.development.debug_toolbar.enabled', false)
+            || (bool) config('obeserva.summaries.enabled', true);
     }
 }

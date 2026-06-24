@@ -34,6 +34,13 @@
 - `TracerFlushGuard` — exception-safe tracer flush
 - `ShutdownFlushRegistrar`, `FlushTracerOnWorkerStoppingListener`, `ProductionFlushSafety` — shutdown and worker-stop flush
 
+### AI/advanced features (v0.9.0)
+
+- `SpanCategoryResolver`, `TraceSummary`, `TraceSummaryBuilder`, `TraceSummaryJsonFormatter` — structured trace summaries
+- `CausationGraph`, `CausationGraphBuilder`, `SlowRequestAnalyzer` — slow-request root-cause graphs
+- `TraceSummaryRegistry`, `BuildTraceSummaryOnTerminate` — per-request summary storage
+- `TraceSummaryAssert` — PHPUnit assertions for summary flows
+
 ## Installation
 
 ```bash

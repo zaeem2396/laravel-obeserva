@@ -6,6 +6,8 @@ namespace Obeserva\Testing;
 
 use Illuminate\Support\ServiceProvider;
 use Obeserva\Contracts\Driver\TracerInterface;
+use Obeserva\DeveloperExperience\Analysis\TraceSummary;
+use Obeserva\DeveloperExperience\Analysis\TraceSummaryRegistry;
 use Obeserva\DeveloperExperience\TraceSnapshot;
 use Obeserva\DeveloperExperience\TraceSnapshotRegistry;
 use Obeserva\Laravel\ObeservaServiceProvider;
@@ -31,6 +33,11 @@ trait InteractsWithObeserva
     protected function obeservaTraceSnapshots(): array
     {
         return $this->app->make(TraceSnapshotRegistry::class)->all();
+    }
+
+    protected function obeservaTraceSummary(): ?TraceSummary
+    {
+        return $this->app->make(TraceSummaryRegistry::class)->latest();
     }
 
     protected function configureObeservaTesting(): void

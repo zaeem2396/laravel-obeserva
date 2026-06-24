@@ -122,4 +122,14 @@ return [
         'on_worker_stopping' => env('OBESERVA_FLUSH_ON_WORKER_STOPPING', true),
     ],
 
+    'summaries' => [
+        'enabled' => env('OBESERVA_TRACE_SUMMARIES', true),
+        'top_slow_spans' => (int) env('OBESERVA_SUMMARY_TOP_SLOW_SPANS', 5),
+    ],
+
+    'causation' => [
+        'enabled' => env('OBESERVA_CAUSATION_ENABLED', true),
+        'slow_request_threshold_ms' => (float) env('OBESERVA_SLOW_REQUEST_THRESHOLD_MS', 1000),
+    ],
+
 ];
