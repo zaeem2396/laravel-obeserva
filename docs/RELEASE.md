@@ -44,6 +44,7 @@ git push origin vX.Y.Z
 
 | Version | Suggested GitHub release title |
 |---------|-------------------------------|
+| v0.8.1 | Obeserva v0.8.1 — Production Engineering (Memory & Flush Safety) |
 | v0.8.0 | Obeserva v0.8.0 — Distributed Systems (Event Propagation & Correlation) |
 | v0.7.1 | Obeserva v0.7.1 — Testing Utilities |
 | v0.7.0 | Obeserva v0.7.0 — Developer Experience (Telescope & Debug Toolbar) |
@@ -63,6 +64,7 @@ git push origin vX.Y.Z
 
 | Tag | Announcement |
 |-----|--------------|
+| `v0.8.1` | [docs/posts/v0.8.1-production-engineering.md](posts/v0.8.1-production-engineering.md) |
 | `v0.8.0` | [docs/posts/v0.8.0-distributed-systems.md](posts/v0.8.0-distributed-systems.md) |
 | `v0.7.1` | [docs/posts/v0.7.1-testing-utilities.md](posts/v0.7.1-testing-utilities.md) |
 | `v0.7.0` | [docs/posts/v0.7.0-developer-experience.md](posts/v0.7.0-developer-experience.md) |
