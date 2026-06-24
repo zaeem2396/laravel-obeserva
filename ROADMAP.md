@@ -27,6 +27,7 @@
 | v0.7.0 | Developer experience | 🟢 Released (all v0.7.0 rows ✅) | `v0.7.0` |
 | v0.7.1 | Testing utilities | 🟢 Released (all v0.7.1 rows ✅) | `v0.7.1` |
 | v0.8.0 | Distributed systems | 🟢 Released (all v0.8.0 rows ✅) | `v0.8.0` |
+| v0.8.1 | Production engineering | 🟡 IN-PROGRESS | — |
 
 ---
 
@@ -70,7 +71,7 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | Horizon Runtime Tests | Horizon worker lifecycle validation | High | 🟢 DONE (supervisor loop + metrics tests shipped `v0.4.0`; full Redis/Horizon CI job: v0.6.x) |
 | Octane Runtime Tests | Long-running worker validation | High | 🔴 PLANNED |
 | Benchmark Pipeline | Instrumentation overhead testing | Critical | 🟢 DONE |
-| Memory Leak Detection | Long-running process safety | High | 🔴 PLANNED |
+| Memory Leak Detection | Long-running process safety | High | 🟡 IN-PROGRESS (v0.8.1 bounded buffers and pressure flush) |
 | Docker Integration Tests | Redis/MySQL/Horizon integration | High | 🔴 PLANNED |
 | OpenTelemetry Compliance Tests | Semantic convention validation | High | 🔴 PLANNED |
 | Security Audit Pipeline | Dependency vulnerability scanning | Critical | 🟢 DONE |
@@ -137,8 +138,8 @@ The primary goal is to create an instrumentation architecture sophisticated enou
 | v0.7.1 | Developer Experience | Benchmark Suite | 🟢 DONE | Shipped `v0.7.1`: `scripts/benchmark-instrumentation.php` with flat, nested, and snapshot benchmarks in CI. |
 | v0.8.0 | Distributed Systems | Event Propagation | 🟢 DONE | Shipped `v0.8.0`: `TracePropagatingEventDispatcher`, `EventTraceContextCarrier`, `InteractsWithTraceContext`; notification and broadcast tracing listeners. |
 | v0.8.0 | Distributed Systems | Cross-Service Correlation | 🟢 DONE | Shipped `v0.8.0`: `CorrelationContextStorage`, `X-Correlation-ID` on HTTP and queue carriers; `correlation.id` span attributes. |
-| v0.8.1 | Production Engineering | Memory Safety | 🔴 PLANNED | Harden runtime internals against memory leaks in long-running PHP workers, Horizon workers, and Octane environments. |
-| v0.8.1 | Production Engineering | Flush Safety | 🔴 PLANNED | Guarantee safe flushing behavior during worker shutdowns, fatal exceptions, deployment restarts, and unexpected runtime termination. |
+| v0.8.1 | Production Engineering | Memory Safety | 🟡 IN-PROGRESS | Bounded completed-span buffer, trace snapshot eviction, active span depth guard, memory pressure auto-flush. |
+| v0.8.1 | Production Engineering | Flush Safety | 🟡 IN-PROGRESS | `TracerFlushGuard`, shutdown flush registrar, worker-stopping flush listener. |
 | v0.9.0 | AI/Advanced Features | Trace Summaries | 🔴 PLANNED | Generate AI-friendly structured trace summaries optimized for debugging workflows and future LLM integrations. |
 | v0.9.0 | AI/Advanced Features | Slow Request Causation | 🔴 PLANNED | Build causal relationship graphs between requests, database queries, jobs, events, and cache operations. |
 | v1.0.0 | Stable Release | Production Stabilization | 🔴 PLANNED | Finalize stable APIs, documentation, migration guarantees, performance validation, runtime reliability, and enterprise-grade package stability. |
