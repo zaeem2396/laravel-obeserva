@@ -54,4 +54,33 @@ final class TraceSummaryBuilderTest extends TestCase
         $this->assertNotNull($summary->causationGraph);
         $this->assertStringContainsString('"is_slow_request": true', (new TraceSummaryJsonFormatter)->format($summary));
     }
+
+    public function test_zero_top_slow_spans_limit_returns_empty_list(): void
+    {
+        $snapshots = [
+            TraceSnapshotBuilder::make('GET users.index')
+                ->kind('server')
+                ->attribute('http.method', 'GET')
+                ->duration(1.5)
+                ->spanId('http')
+                ->build(),
+            TraceSnapshotBuilder::make('db.select')
+                ->parentSpanId('http')
+                ->spanId('db-slow')
+                ->duration(0.9)
+                ->build(),
+        ];
+
+        $builder = new TraceSummaryBuilder(
+            new SpanCategoryResolver,
+            new PropagationFlowInspector,
+            new SlowRequestAnalyzer(new SpanCategoryResolver),
+            new CausationGraphBuilder(new SpanCategoryResolver),
+        );
+
+        $summary = $builder->build($snapshots, slowRequestThresholdMs: 1000.0, topSlowSpans: 0);
+
+        $this->assertSame([], $summary->topSlowSpans);
+        $this->assertSame([], $summary->rootCauseSpanIds);
+    }
 }

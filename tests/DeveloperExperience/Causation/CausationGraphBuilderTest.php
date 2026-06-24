@@ -56,4 +56,25 @@ final class SlowRequestAnalyzerTest extends TestCase
         $this->assertTrue($analyzer->isSlowRequest($snapshots, 1000.0));
         $this->assertSame(['db'], $analyzer->rootCauseSpanIds($snapshots, 1000.0, 1));
     }
+
+    public function test_zero_limit_returns_no_root_cause_span_ids(): void
+    {
+        $snapshots = [
+            TraceSnapshotBuilder::make('GET /api')
+                ->kind('server')
+                ->attribute('http.duration_ms', 2000)
+                ->duration(2.0)
+                ->spanId('http')
+                ->build(),
+            TraceSnapshotBuilder::make('db.select')
+                ->parentSpanId('http')
+                ->spanId('db')
+                ->duration(1.2)
+                ->build(),
+        ];
+
+        $analyzer = new SlowRequestAnalyzer(new SpanCategoryResolver);
+
+        $this->assertSame([], $analyzer->rootCauseSpanIds($snapshots, 1000.0, 0));
+    }
 }
