@@ -132,4 +132,12 @@ return [
         'slow_request_threshold_ms' => (float) env('OBESERVA_SLOW_REQUEST_THRESHOLD_MS', 1000),
     ],
 
+    'diagnostics' => [
+        'status_command' => env('OBESERVA_STATUS_COMMAND', true),
+    ],
+
+    'validation' => [
+        'strict' => env('OBESERVA_CONFIG_STRICT', false),
+    ],
+
 ];
