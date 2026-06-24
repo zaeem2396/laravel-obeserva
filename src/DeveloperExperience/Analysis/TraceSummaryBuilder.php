@@ -103,7 +103,11 @@ final readonly class TraceSummaryBuilder
             static fn (array $left, array $right): int => $right['duration_ms'] <=> $left['duration_ms'],
         );
 
-        return array_slice($ranked, 0, max(1, $limit));
+        if ($limit <= 0) {
+            return [];
+        }
+
+        return array_slice($ranked, 0, $limit);
     }
 
     /**

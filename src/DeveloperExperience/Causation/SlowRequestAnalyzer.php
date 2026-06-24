@@ -52,9 +52,13 @@ final readonly class SlowRequestAnalyzer
             static fn (array $left, array $right): int => $right['duration_ms'] <=> $left['duration_ms'],
         );
 
+        if ($limit <= 0) {
+            return [];
+        }
+
         return array_map(
             static fn (array $candidate): string => $candidate['span_id'],
-            array_slice($candidates, 0, max(1, $limit)),
+            array_slice($candidates, 0, $limit),
         );
     }
 
