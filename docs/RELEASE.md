@@ -66,6 +66,7 @@ git push origin vX.Y.Z
 
 | Tag | Announcement |
 |-----|--------------|
+| `v1.0.0` | [docs/posts/v1.0.0-stable-release.md](posts/v1.0.0-stable-release.md) |
 | `v0.9.0` | [docs/posts/v0.9.0-ai-advanced-features.md](posts/v0.9.0-ai-advanced-features.md) |
 | `v0.8.1` | [docs/posts/v0.8.1-production-engineering.md](posts/v0.8.1-production-engineering.md) |
 | `v0.8.0` | [docs/posts/v0.8.0-distributed-systems.md](posts/v0.8.0-distributed-systems.md) |

@@ -122,6 +122,17 @@ Structured debugging and causation layers sit above span snapshots:
 
 `TraceSummaryJsonFormatter` exports summaries as JSON for external tooling and LLM workflows.
 
+### Stable release (v1.0.0)
+
+Production stabilization and operational diagnostics:
+
+1. `PackageVersion` exposes the semver package version for diagnostics and Scout metadata
+2. `RuntimeDiagnosticsBuilder` snapshots driver, features, memory bounds, and worker runtime
+3. `ConfigValidator` validates driver and sampling configuration at boot (optional strict mode)
+4. `ObeservaStatusCommand` (`php artisan obeserva:status`) surfaces runtime diagnostics in the console or JSON
+
+See [API stability](API_STABILITY.md) and [upgrade guide](UPGRADE.md) for 1.x semver guarantees.
+
 ## CI/CD
 
 All quality gates run from the package root. See [CI.md](CI.md).

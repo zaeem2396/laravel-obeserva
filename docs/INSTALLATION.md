@@ -63,7 +63,7 @@ php artisan vendor:publish --tag=obeserva-config
 
 ## Releases
 
-Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v0.9.0`). See [RELEASE.md](RELEASE.md) and the [v0.9.0 announcement](posts/v0.9.0-ai-advanced-features.md).
+Stable versions are tagged on GitHub as `vX.Y.Z` (latest: `v1.0.0`). See [RELEASE.md](RELEASE.md) and the [v1.0.0 announcement](posts/v1.0.0-stable-release.md).
 
 ### Scout driver
 
@@ -187,7 +187,7 @@ Configuration: `config/obeserva.php` → `summaries.*`, `causation.*`.
 
 See [v0.9.0 announcement](posts/v0.9.0-ai-advanced-features.md).
 
-### Stable release (v1.0.0 preview)
+### Stable release (v1.0.0)
 
 Production stabilization, diagnostics, and API stability:
 
@@ -203,7 +203,7 @@ php artisan obeserva:status --json
 
 Configuration: `config/obeserva.php` → `diagnostics.*`, `validation.*`.
 
-See [v1.0.0 preview](posts/v1.0.0-stable-release.md), [upgrade guide](UPGRADE.md), and [API stability](API_STABILITY.md).
+See [v1.0.0 announcement](posts/v1.0.0-stable-release.md), [upgrade guide](UPGRADE.md), and [API stability](API_STABILITY.md).
 
 ## Local development
 
