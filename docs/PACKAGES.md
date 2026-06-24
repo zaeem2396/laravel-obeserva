@@ -41,6 +41,13 @@
 - `TraceSummaryRegistry`, `BuildTraceSummaryOnTerminate` — per-request summary storage
 - `TraceSummaryAssert` — PHPUnit assertions for summary flows
 
+### Stable release (v1.0.0 preview)
+
+- `PackageVersion` — semver package version constant
+- `RuntimeDiagnostics`, `RuntimeDiagnosticsBuilder` — runtime configuration snapshot
+- `ConfigValidator` — boot-time configuration validation
+- `ObeservaStatusCommand` — `php artisan obeserva:status` diagnostics command
+
 ## Installation
 
 ```bash
@@ -94,4 +101,4 @@ composer require scout/laravel
 
 ## Releases
 
-Current version: **0.9.0**. A single package tag (`vX.Y.Z`) is published for each release. See [RELEASE.md](RELEASE.md) and [posts/v0.9.0-ai-advanced-features.md](posts/v0.9.0-ai-advanced-features.md).
+Current version: **0.9.0** (stable). **v1.0.0** in preview — see [posts/v1.0.0-stable-release.md](posts/v1.0.0-stable-release.md).
