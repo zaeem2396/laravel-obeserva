@@ -187,6 +187,24 @@ Configuration: `config/obeserva.php` → `summaries.*`, `causation.*`.
 
 See [v0.9.0 announcement](posts/v0.9.0-ai-advanced-features.md).
 
+### Stable release (v1.0.0 preview)
+
+Production stabilization, diagnostics, and API stability:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OBESERVA_STATUS_COMMAND` | `true` | Register `php artisan obeserva:status` |
+| `OBESERVA_CONFIG_STRICT` | `false` | Throw on invalid configuration at boot |
+
+```bash
+php artisan obeserva:status
+php artisan obeserva:status --json
+```
+
+Configuration: `config/obeserva.php` → `diagnostics.*`, `validation.*`.
+
+See [v1.0.0 preview](posts/v1.0.0-stable-release.md), [upgrade guide](UPGRADE.md), and [API stability](API_STABILITY.md).
+
 ## Local development
 
 ```bash

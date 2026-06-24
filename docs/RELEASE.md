@@ -45,6 +45,7 @@ git push origin vX.Y.Z
 | Version | Suggested GitHub release title |
 |---------|-------------------------------|
 | v0.9.0 | Obeserva v0.9.0 — AI/Advanced Features (Trace Summaries & Causation) |
+| v1.0.0 | Obeserva v1.0.0 — Stable Release (Production Stabilization) |
 | v0.8.1 | Obeserva v0.8.1 — Production Engineering (Memory & Flush Safety) |
 | v0.8.0 | Obeserva v0.8.0 — Distributed Systems (Event Propagation & Correlation) |
 | v0.7.1 | Obeserva v0.7.1 — Testing Utilities |
