@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 use Obeserva\Contracts\Span\SpanKind;
 use Obeserva\Core\Context\ContextManager;
+use Obeserva\Core\Memory\CompletedSpanBufferPolicy;
 use Obeserva\Core\Sampling\AlwaysOnSampler;
 use Obeserva\Core\Tracer;
 use Obeserva\DeveloperExperience\SpanSnapshotFactory;
@@ -53,7 +54,26 @@ bench('1k span snapshots', static function () use ($tracer, $factory): void {
     }
 });
 
+$bufferedTracer = new Tracer(
+    new AlwaysOnSampler,
+    $context,
+    $context,
+    bufferPolicy: new CompletedSpanBufferPolicy(100),
+);
+
+bench('500 spans with buffer auto-flush (limit 100)', static function () use ($bufferedTracer): void {
+    for ($i = 0; $i < 500; $i++) {
+        $span = $bufferedTracer->startSpan('bench.buffered', SpanKind::Internal);
+        $span->end();
+    }
+});
+
 echo sprintf(
     "Completed spans: %d\n",
     count($tracer->completedSpans()),
+);
+
+echo sprintf(
+    "Buffered tracer completed spans: %d\n",
+    count($bufferedTracer->completedSpans()),
 );
