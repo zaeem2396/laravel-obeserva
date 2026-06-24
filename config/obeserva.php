@@ -108,4 +108,18 @@ return [
         'propagate_outbound' => env('OBESERVA_CORRELATION_PROPAGATE', true),
     ],
 
+    'memory' => [
+        'max_completed_spans' => (int) env('OBESERVA_MAX_COMPLETED_SPANS', 2048),
+        'max_active_span_depth' => (int) env('OBESERVA_MAX_ACTIVE_SPAN_DEPTH', 256),
+        'max_trace_snapshots' => (int) env('OBESERVA_MAX_TRACE_SNAPSHOTS', 512),
+        'pressure_threshold_bytes' => (int) env('OBESERVA_MEMORY_PRESSURE_BYTES', 0),
+    ],
+
+    'flush' => [
+        'enabled' => env('OBESERVA_FLUSH_SAFETY', true),
+        'guard_exceptions' => env('OBESERVA_FLUSH_GUARD_EXCEPTIONS', true),
+        'on_shutdown' => env('OBESERVA_FLUSH_ON_SHUTDOWN', true),
+        'on_worker_stopping' => env('OBESERVA_FLUSH_ON_WORKER_STOPPING', true),
+    ],
+
 ];

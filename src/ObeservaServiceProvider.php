@@ -30,6 +30,9 @@ use Obeserva\Contracts\Driver\SamplerInterface;
 use Obeserva\Contracts\Driver\SpanLifecycleExporterInterface;
 use Obeserva\Contracts\Driver\TracerInterface;
 use Obeserva\Core\Context\ContextManager;
+use Obeserva\Core\Flush\TracerFlushGuard;
+use Obeserva\Core\Memory\CompletedSpanBufferPolicy;
+use Obeserva\Core\Memory\MemoryPressureMonitor;
 use Obeserva\Core\Sampling\AlwaysOnSampler;
 use Obeserva\Core\Sampling\ProbabilitySampler;
 use Obeserva\Core\Tracer;
@@ -77,6 +80,8 @@ use Obeserva\Laravel\Propagation\PropagationContextResolver;
 use Obeserva\Laravel\Queue\ActiveJobSpanRegistry;
 use Obeserva\Laravel\Queue\JobSpanEnricher;
 use Obeserva\Laravel\Queue\QueuePayloadHook;
+use Obeserva\Laravel\Runtime\ProductionFlushSafety;
+use Obeserva\Laravel\Runtime\ShutdownFlushRegistrar;
 use Obeserva\Laravel\Runtime\WorkerContextIsolation;
 use Obeserva\Laravel\Runtime\WorkerContextResetter;
 use Obeserva\Laravel\Runtime\WorkerRuntimeDetector;
@@ -108,8 +113,18 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->app->singleton(ActiveHorizonSupervisorRegistry::class);
         $this->app->singleton(HorizonThroughputMetrics::class);
         $this->app->singleton(WorkerRuntimeDetector::class);
+        $this->app->singleton(TracerFlushGuard::class, fn (Application $app): TracerFlushGuard => new TracerFlushGuard(
+            $app->make(TracerInterface::class),
+            (bool) config('obeserva.flush.guard_exceptions', true),
+        ));
+        $this->app->singleton(ShutdownFlushRegistrar::class);
         $this->app->singleton(WorkerContextResetter::class);
-        $this->app->singleton(ContextManager::class);
+        $this->app->singleton(ContextManager::class, function (): ContextManager {
+            $manager = new ContextManager;
+            $manager->configureMaxActiveSpanDepth($this->configInt('obeserva.memory.max_active_span_depth', 256));
+
+            return $manager;
+        });
         $this->app->singleton(ContextStorageInterface::class, ContextManager::class);
         $this->app->singleton(ActiveSpanStorageInterface::class, ContextManager::class);
 
@@ -136,6 +151,8 @@ final class ObeservaServiceProvider extends ServiceProvider
                 $context,
                 $context,
                 $app->make(SpanLifecycleExporterInterface::class),
+                new CompletedSpanBufferPolicy($this->configInt('obeserva.memory.max_completed_spans', 2048)),
+                new MemoryPressureMonitor($this->configInt('obeserva.memory.pressure_threshold_bytes', 0)),
             );
         });
 
@@ -158,6 +175,7 @@ final class ObeservaServiceProvider extends ServiceProvider
         $this->registerNotificationInstrumentation();
         $this->registerBroadcastInstrumentation();
         $this->registerWorkerContextIsolation();
+        $this->registerProductionFlushSafety();
         $this->registerHorizonInstrumentation();
         $this->registerCacheInstrumentation();
         $this->registerRedisInstrumentation();
@@ -168,7 +186,7 @@ final class ObeservaServiceProvider extends ServiceProvider
 
     private function registerDevelopmentExperience(): void
     {
-        $this->app->singleton(TraceSnapshotRegistry::class);
+        $this->app->singleton(TraceSnapshotRegistry::class, fn (): TraceSnapshotRegistry => new TraceSnapshotRegistry($this->configInt('obeserva.memory.max_trace_snapshots', 512)));
         $this->app->singleton(SpanSnapshotFactory::class);
         $this->app->singleton(SpanSnapshotCollector::class);
         $this->app->singleton(TraceTreeBuilder::class);
@@ -264,6 +282,11 @@ final class ObeservaServiceProvider extends ServiceProvider
         }
 
         WorkerContextIsolation::register();
+    }
+
+    private function registerProductionFlushSafety(): void
+    {
+        ProductionFlushSafety::register($this->app);
     }
 
     private function registerHorizonInstrumentation(): void
@@ -362,5 +385,12 @@ final class ObeservaServiceProvider extends ServiceProvider
 
             $this->app->make(FlushTracerOnTerminate::class)->handle();
         });
+    }
+
+    private function configInt(string $key, int $default): int
+    {
+        $value = config($key, $default);
+
+        return is_numeric($value) ? (int) $value : $default;
     }
 }
